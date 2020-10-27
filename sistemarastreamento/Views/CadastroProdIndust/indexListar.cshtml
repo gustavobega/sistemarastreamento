@@ -1,0 +1,72 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextaccessor
+@{ ViewData["Title"] = "indexListar";
+   Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+@section js {
+
+    <script src="~/views/CadastroProdIndust/indexListar.js"></script>
+    <script>
+        $(".dropdown").click(function () {
+            if ($(".dropdown ul").hasClass("active"))
+                $(".dropdown ul").removeClass("active");
+            else
+                $(".dropdown ul").addClass("active");
+        });
+
+        $(".dropdown ul li").click(function () {
+            var text = $(this).text();
+            $(".default_option").text(text);
+            $(".default_option ul").removeClass("active");
+        });
+    </script>
+}
+
+@section css {
+
+    <link href="~/css/style-listar.css" rel="stylesheet" />
+}
+
+<section>
+
+    <div class="wrapper">
+        <div class="search_box">
+            <div class="dropdown">
+                <div class="default_option">Descrição</div>
+                <ul>
+                    <li>Descrição</li>
+                    <li>Código</li>
+                </ul>
+            </div>
+            <div class="search_field">
+                <input type="text" class="input" id="produto" placeholder="Buscar">
+                <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value))"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-box" id="table">
+        <div class="table-row table-head">
+            <div class="table-cell first-cell">
+                <p>Id</p>
+            </div>
+            <div class="table-cell">
+                <p>Código de Referência</p>
+            </div>
+            <div class="table-cell">
+                <p>Descrição</p>
+            </div>
+            <div class="table-cell last-cell">
+                <p>Açoes</p>
+            </div>
+        </div>
+
+        <div class="table-row">
+            <div class="table-cell first-cell">
+                <p>aguardando à consulta...</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>

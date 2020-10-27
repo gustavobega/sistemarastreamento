@@ -1,0 +1,112 @@
+﻿@{ ViewData["Title"] = "Tela Lançamento";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section css {
+    <link href="~/css/style-cadastro.css" rel="stylesheet" />
+    <link href="~/lib/fancybox-master/dist/jquery.fancybox.css" rel="stylesheet" />
+}
+
+@section js {
+    <script src="~/views/LancamentoDist/index.js"></script>
+    <script src="~/lib/fancybox-master/dist/jquery.fancybox.js"></script>
+    <script>
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+            const dropZoneElement = inputElement.closest(".drop-zone");
+
+            //quando clicar abre para procurar nas pastas
+            dropZoneElement.addEventListener("click", (e) => {
+                inputElement.click();
+            });
+
+            //carregar o arquivo clicando apos selecionar
+            inputElement.addEventListener("change", (e) => {
+                if (inputElement.files.length) {
+                    updateThumbnail(dropZoneElement, inputElement.files[0]);
+                    index.btnImportar();
+                }
+            });
+
+            //na hora de arrastar o arquivo quando o arquivo estiver no campo delimitado
+            dropZoneElement.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropZoneElement.classList.add("drop-zone--over");
+            });
+
+            ["dragleave", "dragend"].forEach((type) => {
+                dropZoneElement.addEventListener(type, (e) => {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            dropZoneElement.addEventListener("drop", (e) => {
+                e.preventDefault();
+
+                //verifica se foi colocado o arquivo (em relação a parte de arrastar)
+                if (e.dataTransfer.files.length) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                    index.btnImportar();
+                }
+
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        function updateThumbnail(dropZoneElement, file) {
+            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+            // First time - remove the prompt
+            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            }
+
+            // First time - there is no thumbnail element, so lets create it
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("drop-zone__thumb");
+                dropZoneElement.appendChild(thumbnailElement);
+            }
+
+            thumbnailElement.dataset.label = file.name;
+
+            // Show thumbnail for image files
+            if (file.type.startsWith("image/")) {
+                const reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                };
+            } else {
+                thumbnailElement.style.backgroundImage = null;
+            }
+        }
+    </script>
+}
+
+<section>
+
+    <div class="wrapper">
+        <div class="title">
+            Lançamento
+            <a class="align-content-end" href="/LancamentoDist/indexListar">
+                <i class="fa fa-fw fa-cogs"></i>
+            </a>
+        </div>
+
+        <div class="drop-zone">
+            <span class="drop-zone__prompt">Arraste ou Clique para Carregar o Arquivo XML</span>
+            <input type="file" name="xmlFile" id="xml" class="drop-zone__input">
+        </div>
+
+        <br />
+        <div id="carrega"></div>
+        <div class="inputfield sucess" id="sucess" style="display: none;"></div>
+        <div class="inputfield error" id="error" style="display: none;"></div>
+        <div class="inputfield info" id="info" style="display: none;"></div>
+
+        <div id="visualizador" class="view"></div>
+
+    </div>
+
+</section>

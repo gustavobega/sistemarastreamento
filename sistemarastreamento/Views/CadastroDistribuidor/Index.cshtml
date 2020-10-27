@@ -1,0 +1,110 @@
+﻿@{ ViewData["Title"] = "Tela Login";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section js {
+
+    <script src="~/views/CadastroDistribuidor/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+    <script src="~/lib/fancybox-master/dist/jquery.fancybox.js"></script>
+}
+
+@section css {
+    <link href="~/css/style-cadastro.css" rel="stylesheet" />
+    <link href="~/lib/fancybox-master/dist/jquery.fancybox.css" rel="stylesheet" />
+}
+
+<section>
+
+    <input type="hidden" id="hfIdEditar" value="@ViewBag.IdEditar" />
+    <div class="wrapper">
+        <div class="title">
+            Cadastro de Distribuidor
+            <a class="align-content-end" href="/CadastroDistribuidor/indexListar">
+                <i class="fa fa-fw fa-cogs"></i>
+            </a>
+        </div>
+
+        <div class="form">
+            <div class="inputfield">
+                <label>CNPJ</label>
+                <input type="text" id="cnpj" class="input" onkeypress="$(this).mask('00.000.000/0000-00')">
+            </div>
+            <div class="inputfield">
+                <label>Inscrição Estadual</label>
+                <input type="text" id="ie" class="input" onkeypress="$(this).mask('00.000.0000-0')">
+            </div>
+            <div class="inputfield">
+                <label>Nome da Indústria</label>
+                <input type="text" id="nome" class="input">
+            </div>
+            <div class="inputfield">
+                <label>Representante</label>
+                <input type="text" id="representante" class="input">
+            </div>
+            <div class="inputfield">
+                <label>Telefone</label>
+                <input type="text" class="input" id="telefone" onkeypress="$(this).mask('(00) 0000-00009')">
+            </div>
+            <div class="inputfield">
+                <label>UF</label>
+                <div class="custom_select">
+                    <select class="form-control" id="selUF" onchange="index.buscarCidades(this.value)"></select>
+                </div>
+            </div>
+            <div class="inputfield">
+                <label>Cidade</label>
+                <div class="custom_select">
+                    <select class="form-control" id="selCidade"></select>
+                </div>
+            </div>
+            <div class="inputfield">
+                <label>Rua</label>
+                <input type="text" class="input" id="rua">
+            </div>
+            <div class="inputfield">
+                <label>Número</label>
+                <input type="text" class="input" id="numero" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            </div>
+            <div class="inputfield">
+                <label>Bairro</label>
+                <input type="text" class="input" id="bairro">
+            </div>
+
+            <div class="inputfield">
+                <label>E-mail</label>
+                <input type="text" class="input" id="email">
+            </div>
+            <div class="inputfield">
+                <label>Perfil de Acesso</label>
+                <input type="text" class="input" id="perfilNome" disabled>
+                <a class="pesquisarPerfil" data-fancybox data-type="iframe" data-src="/CadastroIndustria/IndexObterPerfis" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+            <input type="hidden" id="hfperfilId" value="0" />
+
+            <div class="inputfield">
+                <label>Senha</label>
+                <input type="password" class="input" id="senha">
+            </div>
+            <div class="inputfield">
+                <label>Confirmar Senha</label>
+                <input type="password" class="input" id="senhaConf">
+            </div>
+            <div class="inputfield sucess" id="sucess" style="display: none;"></div>
+            <div class="inputfield error" id="error" style="display: none;"></div>
+            <div class="inputfield terms">
+                <label class="check">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <p>Agreed to terms and conditions</p>
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="Cadastrar" class="btn" id="btnCadastrar" onclick="index.btnCadastrar()">
+            </div>
+        </div>
+    </div>
+
+</section>

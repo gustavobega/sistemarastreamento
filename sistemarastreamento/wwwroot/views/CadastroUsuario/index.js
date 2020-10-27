@@ -1,0 +1,9 @@
+﻿var index = {
+
+    btnLogar: function () {
+
+
+
+    }
+
+}

@@ -1,0 +1,61 @@
+﻿@{ ViewData["Title"] = "Visualizar Nota Fiscal";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml"; }
+
+@section js {
+    <script src="~/views/LancamentoIndust/indexVisualizar.js"></script>
+}
+
+@section css {
+
+    <style>
+        body {
+            max-width: 800px;
+            height: 550px;
+        }
+    </style>
+    <link href="~/css/style-visualizar.css" rel="stylesheet" />
+}
+
+<section>
+    <input type="hidden" id="hfIdNota" value="@ViewBag.IdNota" />
+    <div class="container">
+        <nav>Dados da Nota Fiscal</nav>
+        <main>
+            <table id="tbItens">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Lote</th>
+                        <th>Quantidade</th>
+                        <th>Valor Unit.</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyItens">
+                    <!--Aqui... carregado por ajax-->
+                </tbody>
+            </table>
+            <hr />
+        </main>
+        <div id="sidebar">
+            <label for="data">Data</label>
+            <input class="form-control" value="@ViewBag.data" disabled />
+
+            <label for="numero">Número</label>
+            <input class="form-control" value="@ViewBag.numero" disabled />
+
+            <label for="serie">Série</label>
+            <input class="form-control" value="@ViewBag.serie" disabled />
+        </div>
+        <div id="content1">
+            <label for="chave">Chave</label>
+            <input class="form-control" value="@ViewBag.chave" disabled />
+        </div>
+        <div id="content2">
+            <label for="valor_nf">Valor Nota Fiscal</label>
+            <input class="form-control" value="@ViewBag.valor_nf" disabled />
+        </div>
+    </div>
+
+</section>

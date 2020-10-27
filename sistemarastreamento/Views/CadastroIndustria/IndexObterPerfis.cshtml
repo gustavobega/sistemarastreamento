@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Pesquisar Perfil";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+@section js {
+    <script src="~/views/CadastroIndustria/indexObterPerfis.js"></script>
+}
+
+@section css {
+    <style>
+        body {
+            max-width: 800px;
+            height: 400px;
+        }
+    </style>
+    <link href="~/css/style-visualizar.css" rel="stylesheet" />
+}
+
+<section>
+    <div class="container">
+        <nav>
+            Pesquisar Perfis
+        </nav>
+        <main>
+            <table id="tbPerfis" style="display:none">
+                <thead>
+                    <tr>
+                        <th>Função</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyPerfis">
+                    <!--Aqui... carregado por ajax-->
+                </tbody>
+            </table>
+        </main>
+        <div id="sidebar">
+            
+            <input type="search" name="nome"
+                    class="searchterm"
+                    id="nome" placeholder="Perfil" />
+            <button type="submit" class="searchbtn" id="btnPesquisar" onclick="indexObterPerfis.btnPesquisarOnClick()">
+                <i class="fa fa-search"></i>
+            </button>
+        </div> 
+    </div>
+
+</section>
+

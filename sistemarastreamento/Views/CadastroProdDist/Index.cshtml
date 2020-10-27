@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Tela Cadastro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+    <link href="~/css/style-cadastro.css" rel="stylesheet" />
+}
+
+@section js {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="~/views/CadastroProdDist/index.js"></script>
+}
+
+<section>
+    <input type="hidden" id="hfIdEditar" value="@ViewBag.IdEditar" />
+
+    <div class="wrapper">
+        <div class="title">
+            Produto
+            <a class="align-content-end" href="/CadastroProdDist/indexListar">
+                <i class="fa fa-fw fa-cogs"></i>
+            </a>
+        </div>
+
+        <div class="form">
+            <div class="inputfield">
+                <label>Código de Referência</label>
+                <input type="text" id="cod_ref" class="input" onfocus="index.limpaInfo()">
+                <a class="pesquisarPerfil" href="javascript:index.buscaProdIndustria()">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+
+            <div class="inputfield sucess" id="sucess2" style="display: none;"></div>
+            <div class="inputfield error" id="error2" style="display: none;"></div>
+
+            <div class="inputfield">
+                <label>Código</label>
+                <input type="text" id="codigo" class="input">
+            </div>
+            <div class="inputfield">
+                <label>Lote</label>
+                <input type="text" id="lote" class="input">
+            </div>
+            <div class="inputfield">
+                <label>Saldo</label>
+                <input type="text" id="saldo" class="input">
+            </div>
+
+            <div class="inputfield sucess" id="sucess" style="display: none;"></div>
+            <div class="inputfield error" id="error" style="display: none;"></div>
+
+            <div class="inputfield">
+                <input type="submit" value="Cadastrar" class="btn" id="btnCadastrar" onclick="index.btnCadastrar()">
+            </div>
+        </div>
+    </div>
+
+</section>

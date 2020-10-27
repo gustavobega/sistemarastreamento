@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Data;
+
+namespace sistemarastreamento.CamadaNegocio
+{
+    public class ProdDistCamadaNegocio
+    {
+        public bool Criar(Models.ProdutoDist prodemp)
+        {
+            bool operacao;
+
+            DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
+            operacao = pbd.Criar(prodemp);
+
+            return operacao;
+        }
+
+        public DataTable Pesquisar(string descricao, int id_dist, string tipo)
+        {
+            DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
+            if (descricao == null)
+                descricao = "";
+            else
+                descricao = descricao.ToLower();
+
+            //if (nome.Length > 3)
+            return pbd.Pesquisar(descricao, id_dist, tipo);
+            //else return new List<Models.Empresa>();
+        }
+
+        public Models.ProdutoDist Obter(int id)
+        {
+            DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
+            return pbd.Obter(id);
+        }
+
+        public Models.ProdutoDist ObterProd(string cod_dist_prod)
+        {
+            DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
+            return pbd.ObterProd(cod_dist_prod);
+        }
+
+        public bool Excluir(string cod_ref)
+        {
+            DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
+            return pbd.Excluir(cod_ref);
+        }
+    }
+}

@@ -1,0 +1,80 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextaccessor
+@{
+    ViewData["Title"] = "indexListar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section js {
+    <script src="~/views/LancamentoDist/indexListar.js"></script>
+    <script src="~/lib/fancybox-master/dist/jquery.fancybox.js"></script>
+    <script>
+        $(".dropdown").click(function () {
+            if ($(".dropdown ul").hasClass("active"))
+                $(".dropdown ul").removeClass("active");
+            else
+                $(".dropdown ul").addClass("active");
+        });
+
+        $(".dropdown ul li").click(function () {
+            var text = $(this).text();
+            $(".default_option").text(text);
+            $(".default_option ul").removeClass("active");
+        });
+    </script>
+}
+
+@section css {
+
+    <link href="~/css/style-listar.css" rel="stylesheet" />
+    <link href="~/lib/fancybox-master/dist/jquery.fancybox.css" rel="stylesheet" />
+}
+
+<section>
+
+    <div class="wrapper">
+        <div class="search_box">
+            <div class="dropdown">
+                <div class="default_option">Número</div>
+                <ul>
+                    <li>Número</li>
+                    <li>Data</li>
+                </ul>
+            </div>
+            <div class="search_field">
+                <input type="text" class="input" id="numero" placeholder="Buscar">
+                <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value), @Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[3].Value))"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-box" id="table">
+        <div class="table-row table-head">
+            <div class="table-cell first-cell">
+                <p>Id</p>
+            </div>
+            <div class="table-cell">
+                <p>Data</p>
+            </div>
+            <div class="table-cell">
+                <p>Número</p>
+            </div>
+            <div class="table-cell">
+                <p>Série</p>
+            </div>
+            <div class="table-cell">
+                <p>Valor da Nota</p>
+            </div>
+            <div class="table-cell last-cell headacoes">
+                <p>Açoes</p>
+            </div>
+        </div>
+
+        <div class="table-row">
+            <div class="table-cell first-cell">
+                <p>aguardando à consulta...</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>

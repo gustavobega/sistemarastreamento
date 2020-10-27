@@ -1,0 +1,41 @@
+﻿@{ 
+    ViewData["Title"] = "Tela Login";
+                Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+@section css {
+    <link href="~/css/style-login.css" rel="stylesheet" />
+}
+
+@section js {
+    <script src="~/views/Login/index.js"></script>
+}
+
+<section>
+
+    <div class="login-box">
+        <h1>Login</h1>
+
+        <div class="textbox">
+            <select id="tipo">
+                <option>Indústria</option>
+                <option>Distribuidor</option>
+            </select>
+        </div>
+
+        <div class="textbox">
+            <i class="fas fa-user"></i>
+            <input type="text" id="email" placeholder="usuário">
+        </div>
+
+        <div class="textbox">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="senha" placeholder="senha">
+        </div>
+        <div class="buttonload">
+            <img class="loading" src="~/img/loading.gif" id="input_img" style="display: none;"/>
+            <input type="button" class="btn" id="btnLogar" value="Logar" onclick="index.btnLogar()">
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,199 @@
+﻿@{ ViewData["Title"] = "Visualizar Nota Fiscal";
+                Layout = "~/Views/Shared/_LayoutModal.cshtml"; }
+
+@section js {
+    <script src="~/views/LancamentoDist/indexVisualizar.js"></script>
+}
+
+@section css {
+
+    <style>
+        body {
+            max-width: 800px;
+            height: 550px;
+        }
+    </style>
+    <link href="~/css/style-visualizar.css" rel="stylesheet" />
+}
+
+<section>
+
+    <input type="hidden" id="hfIdNota" value="@ViewBag.IdNota" />
+    <div class="container">
+        <nav>
+            Dados da Nota Fiscal
+        </nav>
+        <main>
+            <table id="tbItens">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Lote</th>
+                        <th>Quantidade</th>
+                        <th>Valor Unit.</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyItens">
+                    <!--Aqui... carregado por ajax-->
+                </tbody>
+            </table>
+            <hr />
+        </main>
+        <div id="sidebar">
+            <label for="data">Data</label>
+            <input class="form-control" value="@ViewBag.data" disabled />
+
+            <label for="numero">Número</label>
+            <input class="form-control" value="@ViewBag.numero" disabled />
+
+            <label for="serie">Série</label>
+            <input class="form-control" value="@ViewBag.serie" disabled />
+
+            <label for="paciente">Paciente</label>
+            <input class="form-control" id="paciente" value="@ViewBag.paciente" disabled />
+
+            <label for="datacirurgia">Data Cirurgia</label>
+            <input class="form-control" id="data_cirurgia" value="@ViewBag.data_cirurgia" disabled />
+
+            <label for="medico">Médico</label>
+            <input class="form-control" id="medico" value="@ViewBag.medico" disabled />
+
+            <label for="convenio">Convênio</label>
+            <input class="form-control" id="convenio" value="@ViewBag.convenio" disabled />
+
+            <label for="hospital">Hospital</label>
+            <input class="form-control" id="hospital" value="@ViewBag.hospital" disabled />
+        </div>
+        <div id="content1">
+            <label for="chave">Chave</label>
+            <input class="form-control" value="@ViewBag.chave" disabled />
+            <div class="warning" id="warning" style="display: none;"></div>
+            <div class="info" id="info" style="display: none;"></div>
+        </div>
+        <div id="content2">
+            <label for="valor_nf">Valor Nota Fiscal</label>
+            <input class="form-control" value="@ViewBag.valor_nf" disabled />
+
+            <div id="botaosalvar" style="display: none;">
+                <input type="button" class="btn" value="Salvar" id="btnSalvar" onclick="index.btnSalvar()" />
+            </div>
+
+            <div id="btnCancelar" style="display: none;">
+                <a class="iconepesq2" id="btnCancelar" href="javascript:index.btnCancelar()"><img class="fa fa-fw fa-times" /></a>
+            </div>
+
+            <div class="error" id="error" style="display: none;"></div>
+            <div class="sucess" id="sucess" style="display: none;"></div>
+        </div>
+
+    </div>
+
+    <!--<div class="container-fluid">
+        <br />
+        <div class="section-header">
+            <h3>Dados da Nota Fiscal</h3>
+        </div>
+        <hr class="light" />
+
+        <form>
+            <input type="hidden" id="hfIdNota" value="@ViewBag.IdNota" />
+
+            <div id="MsgAlerta" class="alert alert-warning text-center" role="alert"></div>
+
+            <div id="MsgInformacao" class="alert alert-info" role="alert" style="display: none"></div>
+
+            <div class="form-row justify-content-md-center">
+
+                <div class="form-group col-md-4">
+                    <label for="paciente">Paciente</label>
+                    <input class="form-control" id="paciente" value="@ViewBag.paciente" disabled />
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="datacirurgia">Data Cirurgia</label>
+                    <input class="form-control" id="data_cirurgia" value="@ViewBag.data_cirurgia" disabled />
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="medico">Médico</label>
+                    <input class="form-control" id="medico" value="@ViewBag.medico" disabled />
+                </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+                <div class="form-group col-md-3">
+                    <label for="convenio">Convênio</label>
+                    <input class="form-control" id="convenio" value="@ViewBag.convenio" disabled />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="hospital">Hospital</label>
+                    <input class="form-control" id="hospital" value="@ViewBag.hospital" disabled />
+                </div>
+            </div>
+
+            <div id="MsgErro" class="alert alert-danger text-center" role="alert" style="display: none;"></div>
+
+            <div class="flexContainer2">
+                <div class="left2 text-center" id="botaosalvar" style="display: none">
+                    <input type="button" class="btn btn-primary" value="Salvar" id="btnSalvar" onclick="index.btnSalvar()" />
+                </div>
+                <div class="right2" id="btnCancelar" style="padding: 7px; display: none">
+                    <a class="iconepesq2" id="btnCancelar" href="javascript:index.btnCancelar()"><img class="fa fa-fw fa-times" /></a>
+                </div>
+            </div>
+
+            <hr class="light" />
+            <div class="form-row justify-content-md-center">
+                <div class="form-group col-md-3">
+                    <label for="data">Data</label>
+                    <input class="form-control" value="@ViewBag.data" disabled />
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="numero">Número</label>
+                    <input class="form-control" value="@ViewBag.numero" disabled />
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="serie">Série</label>
+                    <input class="form-control" value="@ViewBag.serie" disabled />
+                </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+
+                <div class="form-group col-md-6">
+                    <label for="chave">Chave</label>
+                    <input class="form-control" value="@ViewBag.chave" disabled />
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="valor_nf">Valor Nota Fiscal</label>
+                    <input class="form-control" value="@ViewBag.valor_nf" disabled />
+                </div>
+            </div>
+            <hr class="light" />
+            <div class="section-header">
+                <h4>Itens da Nota</h4>
+            </div>
+            <hr class="light" />
+            <div class="table-responsive-md">
+                <table class="table ls-table" id="tbItens" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Lote</th>
+                            <th>Quantidade</th>
+                            <th>Valor Unit.</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyItens">
+                        -Aqui... carregado por ajax
+    </tbody>
+    </table>
+    </div>
+    </form>
+
+    <br />
+    </div>
+    -->
+</section>

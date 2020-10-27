@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Visualizar Indústria";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+@section css {
+    <style>
+        body {
+            max-width: 800px;
+            height: 550px;
+        }
+    </style>
+    <link href="~/css/style-visualizar.css" rel="stylesheet" />
+}
+
+<section>
+    <div class="container">
+        <nav>Dados da Indústria</nav>
+        <main>
+            <label for="cnpj">CNPJ</label>
+            <input class="form-control" value="@ViewBag.cnpj" disabled />
+
+            <label for="ie">Inscrição Estadual</label>
+            <input class="form-control" value="@ViewBag.ie" disabled />
+
+            <label for="nome">Nome Indústria</label>
+            <input class="form-control" value="@ViewBag.nome" disabled />
+
+            <label for="representante">Representante</label>
+            <input class="form-control" value="@ViewBag.representante" disabled />
+
+            <label for="telefone">Telefone</label>
+            <input class="form-control" value="@ViewBag.telefone" disabled />
+            <hr />
+        </main>
+        <div id="sidebar">
+            <label for="email">Perfil</label>
+            <input class="form-control" value="@ViewBag.perfil" disabled />
+
+            <label for="email">E-mail</label>
+            <input class="form-control" value="@ViewBag.email" disabled />
+        </div>
+        <div id="content1">
+            <label for="rua">Rua</label>
+            <input class="form-control" value="@ViewBag.rua" disabled />
+
+            <label for="numero">Número</label>
+            <input class="form-control" value="@ViewBag.numero" disabled />
+
+            <label for="bairro">Bairro</label>
+            <input class="form-control" value="@ViewBag.bairro" disabled />
+        </div>
+        <div id="content2">
+            <label for="selUF">UF</label>
+            <input class="form-control" value="@ViewBag.uf" disabled />
+
+            <label for="selCidade">Cidade</label>
+            <input class="form-control" value="@ViewBag.cidade" disabled />
+
+        </div>
+    </div>
+    
+</section>
