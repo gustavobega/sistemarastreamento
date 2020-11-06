@@ -3,8 +3,7 @@
     obterInfoNota: function () {
 
         id_nota = document.getElementById("hfIdNota").value;
-        var tbodyItens = document.getElementById("tbodyItens");
-        tbodyItens.innerHTML = `<tr><td colspan="3"><img src=\"/img/ajax-loader.gif"\ /> carregando...</td></tr>`
+        var tbodyItens = document.getElementById("table");
 
         var config = {
             method: "GET",
@@ -21,25 +20,38 @@
                 return obj;
             })
             .then(function (dadosObj) {
-                document.getElementById("tbItens").style.display = "table";
 
                 var linhas = "";
                 var obj = JSON.parse(dadosObj);
                 for (var i = 0; i < obj.length; i++) {
 
                     var template =
-                        `<tr>
-                            <td>${obj[i].cod_ref}</td>
-                            <td>${obj[i].descricao}</td>
-                            <td>${obj[i].lote}</td>
-                            <td>${obj[i].qtde}</td>
-                            <td>R$${obj[i].valor_unit}</td> `
+                        `
+                        <div class="table-row">
+                            <div class="table-cell first-cell">
+                                <p>${obj[i].cod_ref}</p>
+                            </div>
+                            <div class="table-cell">
+                                <p>${obj[i].descricao}</p>
+                            </div>
+                            <div class="table-cell">
+                                <p>${obj[i].lote}</p>
+                            </div>
+                            <div class="table-cell">
+                                <p>${obj[i].qtde}</p>
+                            </div>
 
-                    template += "</td> </tr>";
+                            <div class="table-cell last-cell">
+                                <p>R$${obj[i].valor_unit}</p>
+                            </div>
+
+                        </div>
+                        `
 
                     linhas += template;
+
                 }
-                tbodyItens.innerHTML = linhas;
+                tbodyItens.innerHTML += linhas;
 
             })
             .catch(function () {

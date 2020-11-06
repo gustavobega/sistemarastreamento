@@ -12,39 +12,47 @@
     <style>
         body {
             max-width: 800px;
-            height: 400px;
+            height: 500px;
         }
     </style>
     <link href="~/css/style-visualizar.css" rel="stylesheet" />
 }
 
 <section>
-    <div class="container">
-        <nav>
-            Pesquisar Perfis
-        </nav>
-        <main>
-            <table id="tbPerfis" style="display:none">
-                <thead>
-                    <tr>
-                        <th>Função</th>
-                        <th>Descrição</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyPerfis">
-                    <!--Aqui... carregado por ajax-->
-                </tbody>
-            </table>
-        </main>
-        <div id="sidebar">
-            
-            <input type="search" name="nome"
-                    class="searchterm"
-                    id="nome" placeholder="Perfil" />
-            <button type="submit" class="searchbtn" id="btnPesquisar" onclick="indexObterPerfis.btnPesquisarOnClick()">
+    <h1>Pesquisar Perfis</h1>
+    <hr />
+
+    <div class="pesquisar">
+        
+        <input type="text" name="nome" id="nome" placeholder="Perfil" />
+        
+        <div class="icone-pesquisa">
+            <a id="btnPesquisar" onclick="indexObterPerfis.btnPesquisarOnClick()">
                 <i class="fa fa-search"></i>
-            </button>
-        </div> 
+            </a>
+        </div>
+        
+    </div>
+
+    <div class="table-box" id="table">
+        <div class="table-row table-head">
+            <div class="table-cell first-cell">
+                <p>Função</p>
+            </div>
+            <div class="table-cell">
+                <p>Descrição</p>
+            </div>
+            <div class="table-cell last-cell">
+                <p>Ação</p>
+            </div>
+        </div>
+
+        <div class="table-row">
+            <div class="table-cell first-cell">
+                <p>aguardando à consulta...</p>
+            </div>
+        </div>
+
     </div>
 
 </section>

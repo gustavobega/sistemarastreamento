@@ -1,41 +1,79 @@
-﻿@{ 
-    ViewData["Title"] = "Tela Login";
-                Layout = "~/Views/Shared/_Layout.cshtml"; 
-}
+﻿@{ ViewData["Title"] = "Tela Login";
+    Layout = null; 
+  }
 
-@section css {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"></script>
     <link href="~/css/style-login.css" rel="stylesheet" />
-}
-
-@section js {
-    <script src="~/views/Login/index.js"></script>
-}
-
-<section>
-
-    <div class="login-box">
-        <h1>Login</h1>
-
-        <div class="textbox">
-            <select id="tipo">
-                <option>Indústria</option>
-                <option>Distribuidor</option>
-            </select>
+</head>
+<body>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form class="sign-in-form">
+                    <h2 class="title">Logar</h2>
+                    <select class="tipo" id="tipo">
+                        <option>Indústria</option>
+                        <option>Distribuidor</option>
+                    </select>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="email" placeholder="E-mail" />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="senha" placeholder="Senha" />
+                    </div>
+                    <div class="error" id="error" style="display: none;"></div>
+                    <div class="botaoEntrar">
+                        <input type="button" value="Entrar" class="btn solid" id="btnLogar" onclick="index.btnLogar()" />
+                        <img class="loading-login" id="gif-login" src="~/img/loading-login.gif" style="width: 50px; height: 45px; display: none;"/>
+                    </div>    
+                </form>
+                <form action="#" class="sign-up-form">
+                    <h2 class="title">Rastro+</h2>
+                    <p>Sitema dedicado a sua indústria ou distribuidora, fazendo com que seu planejamento e tomada de decições seja de forma prática e precisa! Com o sistema você poderá:</p>
+                    <input type="button" class="btntipo" value="Gerenciar Produtos" />
+                    <input type="button" class="btntipo" value="Gerenciar Lançamentos" />
+                    <input type="button" class="btntipo" value="Rastrear Produto" />
+                    <input type="button" class="btntipo" value="Relatórios" />
+                </form>
+            </div>
         </div>
 
-        <div class="textbox">
-            <i class="fas fa-user"></i>
-            <input type="text" id="email" placeholder="usuário">
-        </div>
-
-        <div class="textbox">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="senha" placeholder="senha">
-        </div>
-        <div class="buttonload">
-            <img class="loading" src="~/img/loading.gif" id="input_img" style="display: none;"/>
-            <input type="button" class="btn" id="btnLogar" value="Logar" onclick="index.btnLogar()">
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Rastro+</h3>
+                    <p>
+                        Para conhecer melhor o sistema clica no botão abaixo!
+                    </p>
+                    <button class="btn transparent" id="sign-up-btn">
+                        Info
+                    </button>
+                </div>
+                <img src="img/log.svg" class="image" alt="" />
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Um de nós ?</h3>
+                    <p>
+                        Volte para a tela de login clicando no botão abaixo!
+                    </p>
+                    <button class="btn transparent" id="sign-in-btn">
+                        Logar
+                    </button>
+                </div>
+                <img src="img/register.svg" class="image" alt="" />
+            </div>
         </div>
     </div>
 
-</section>
+    <script src="~/views/Login/index.js"></script>
+</body>
+</html>

@@ -154,45 +154,44 @@
 .wrapper .form .inputfield:last-child{
   margin-bottom: 0;
 }
-
+/*aqui*/
 .wrapper .form .inputfield .pesquisarPerfil {
     position: absolute;
     margin-left: 415px;
 }
-i {
+.fa-cogs, .fa-search {
     color: #4682B4;
 }
 
 .error {
-    height: 35px;
+    height: 100%;
+    padding: 5px;
     background: #ffbfaa;
     color: black;
     text-align: center;
-    justify-content: center;
-    padding-top: 4px;
     border: 1px solid #cccccc;
     border-radius: 2px;
     box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
 }
 
 .sucess {
-    height: 35px;
+    height: 100%;
+    padding: 5px;
     background: #98fb98;
     color: black;
     text-align: center;
     justify-content: center;
-    padding-top: 4px;
     border: 1px solid #cccccc;
     box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
 }
 
 .warning {
-    height: 35px;
+    height: 100%;
+    padding: 5px;
     background: yellow;
     color: white;
     text-align: center;
     justify-content: center;
-    padding-top: 4px;
     box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
 }
 

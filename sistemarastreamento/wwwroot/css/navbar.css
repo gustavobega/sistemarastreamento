@@ -108,13 +108,13 @@ nav input {
     bottom: 2px;
 }
 
-.fa-home, .fa-folder-plus, .fa-rocket, .fa-newspaper, .fa-search-location, .fa-sign-out-alt, .fa-box, .fa-building, .fa-truck, .fa-sign-in-alt, .fa-user-tie {
+.fa-home, .fa-folder-plus, .fa-rocket, .fa-newspaper, .fa-search-location, .fa-sign-out-alt, .fa-box, .fa-building, .fa-truck, .fa-sign-in-alt, .fa-user-tie, .fa-file {
     color: white;
     position: relative;
     margin-right: 5px;
 }
 @media all and (max-width: 968px) {
-    nav ul{
+  nav ul{
     margin-right: 0px;
     float: left;
   }
@@ -207,9 +207,6 @@ p{
 
 footer {
     display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
     display: flex;
     flex-flow: row wrap;
     padding: 50px;

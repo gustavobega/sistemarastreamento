@@ -243,3 +243,11 @@
     }
 
 }
+
+document.getElementById("numero")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            indexListar.btnPesquisarOnClick();
+        }
+    });

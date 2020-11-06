@@ -196,3 +196,11 @@
     }
 
 }
+
+document.getElementById("produto")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            indexListar.btnPesquisarOnClick();
+        }
+    });

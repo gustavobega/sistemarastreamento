@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
-using DevExpress.AspNetCore;
 
 namespace sistemarastreamento
 {
@@ -73,7 +72,6 @@ namespace sistemarastreamento
             services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllers().AddXmlDataContractSerializerFormatters();
-            services.AddDevExpressControls();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,20 +88,10 @@ namespace sistemarastreamento
                 app.UseHsts();
             }
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
-
-                RequestPath = "/node_modules"
-
-            });
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseCookiePolicy();
-            app.UseDevExpressControls();
             app.UseRouting();
 
             app.UseAuthentication();
@@ -112,8 +100,8 @@ namespace sistemarastreamento
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Default}/{action=Index}/{id?}");
+                    name: "login",
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

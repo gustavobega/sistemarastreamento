@@ -1,83 +1,204 @@
-﻿:root {
-    --main-radius:5px;
-    --main-padding:5px;
-}
+﻿@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
 
 * {
-    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
 }
 
-.container {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.2fr 1.5fr 1.2fr 0.8fr;
-    grid-template-areas: "nav nav nav nav" "sidebar main main main" "sidebar content1 content1 content2";
-    grid-gap: 0.2rem;
-    font-size: 18px;
+h1 {
     text-align: center;
-}
-
-nav {
-    font-size: 28px;
-    font-weight: 600;
     color: #4682B4;
-    grid-area: nav;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
+    margin: 5px;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    grid-area: main;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-}
-
-table {
+h2 {
     text-align: left;
+    border: 1px solid #aaa;
+    margin: 5px;
 }
 
-#sidebar {
+hr {
+    margin: 0 10px 0 10px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+
+.flex > div {
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.dados {
     display: flex;
     flex-direction: column;
-    grid-area: sidebar;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
 }
 
-#content1 {
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-    grid-area: content1;
-}
-
-#content2 {
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--main-radius);
-    padding-top: var(--main-padding);
-    grid-area: content2;
-}
-
-.form-control {
+input {
     height: 25px;
-    border-radius: var(--main-radius);
+    padding: 5px;
+    font-size: 15px;
 }
 
-table {
+label {
+    font-weight: 600;
+    padding: 0 0 4px 5px;
+    background: #4682B4;
+    color: white;
+}
+
+.error {
+    height: 100%;
+    padding: 5px;
+    background: #ffbfaa;
+    color: black;
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
+}
+
+.warning {
+    height: 100%;
+    padding: 5px;
+    background: #ffff80;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
+    margin-bottom: 10px;
+}
+
+.btn {
+    width: 150px;
+    background-color: #4682B4;
+    border: none;
+    outline: none;
+    height: 30px;
+    border-radius: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn:hover{
+    background-color: #4682B4;
+}
+
+.iconepesq2 {
+    color: #5092c8;
+}
+
+.opcoes {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Tabela itens da nota*/
+.table-box {
+    margin: 0 auto;
+}
+
+.table-box p {
     font-size: 13px;
 }
 
-@media only screen and (max-width: 550px) {
-    .container {
-        grid-template-columns: 1fr;
-        grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
-        grid-template-areas: "nav" "sidebar" "main" "content1" "content2"
-    }
+.table-row {
+    display: table;
+    width: 97%;
+    margin: 10px auto;
+    background: transparent;
+    padding: 12px 0;
+    color: #555;
+    font-size: 13px;
+    box-shadow: 0 1px 4px 0px rgba(0,0,50,0.3);
+}
 
+.table-head {
+    background: #4682B4;
+    box-shadow: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.table-head .table-cell {
+    border-right: none;
+}
+
+.table-cell {
+    display: table-cell;
+    width: 20%;
+    text-align: center;
+    padding: 4px 0;
+    border-right: 1px solid #d6d4d4;
+    vertical-align: middle;
+}
+
+.first-cell {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.last-cell {
+    border-right: none;
+}
+
+/*Tela pesquisar perfil*/
+.pesquisar {
+    position: relative;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 12px;
+}
+
+.pesquisar input {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #d5dbd9;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.pesquisar .icone-pesquisa {
+    position: absolute;
+    margin-left: 170px;
+}
+
+.pesquisar input:focus {
+    border: 1px solid #4682B4;
+}
+
+#btnPesquisar {
+    cursor: pointer;
+    color: #4682B4;
+    font-size: 18px;
+}
+
+.fa-check-circle {
+    color: #4682B4;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .table-row {
+        font-size: 11px;
+    }
 }

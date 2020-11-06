@@ -277,7 +277,7 @@ namespace sistemarastreamento.Controllers
             ViewBag.numero = nota.Numero;
             ViewBag.serie = nota.Serie;
             ViewBag.chave = nota.Chave;
-            ViewBag.valor_nf = nota.Valor_nf;
+            ViewBag.valor_nf = "R$" + nota.Valor_nf;
 
             return View();
         }

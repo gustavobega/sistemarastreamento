@@ -1,16 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Relatorio\RelVendaIndust.repx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Relatorio\RelVendaIndust.repx" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\bug_report.md" />
@@ -51,19 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="20.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="MySql.Data" Version="8.0.22" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Relatorio\RelVendaIndust.cs">
-      <DependentUpon>RelVendaIndust.repx</DependentUpon>
-    </Compile>
-    <Compile Update="Relatorio\RelVendaIndust.Designer.cs">
-      <DependentUpon>RelVendaIndust.repx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>

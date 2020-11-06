@@ -15,7 +15,10 @@ namespace sistemarastreamento.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.User.Claims.Count() > 0)
+                return Redirect("/Default");
+            else
+                return View();
         }
 
         public IActionResult Validar([FromBody] Dictionary<string, string> dados)
@@ -113,7 +116,7 @@ namespace sistemarastreamento.Controllers
             //excluindo a cookie
             Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync(HttpContext);
 
-            return Redirect("/Default/index");
+            return Redirect("/Login");
         }
 
     }

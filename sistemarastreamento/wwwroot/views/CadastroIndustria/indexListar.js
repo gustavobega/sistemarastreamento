@@ -207,5 +207,12 @@
             });
         //<td><a href="javascript:indexListar.excluir(${dadosObj[i].id})">Excluir</a></td> 
     }
-
 }
+
+document.getElementById("industria")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            indexListar.btnPesquisarOnClick();
+        }
+    });

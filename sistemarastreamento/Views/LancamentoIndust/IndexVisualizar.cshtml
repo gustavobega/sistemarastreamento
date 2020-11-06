@@ -6,7 +6,6 @@
 }
 
 @section css {
-
     <style>
         body {
             max-width: 800px;
@@ -18,44 +17,59 @@
 
 <section>
     <input type="hidden" id="hfIdNota" value="@ViewBag.IdNota" />
-    <div class="container">
-        <nav>Dados da Nota Fiscal</nav>
-        <main>
-            <table id="tbItens">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Lote</th>
-                        <th>Quantidade</th>
-                        <th>Valor Unit.</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyItens">
-                    <!--Aqui... carregado por ajax-->
-                </tbody>
-            </table>
-            <hr />
-        </main>
-        <div id="sidebar">
-            <label for="data">Data</label>
-            <input class="form-control" value="@ViewBag.data" disabled />
+    <h1>Dados da Nota Fiscal</h1>
+    <hr />
+    <section class="flex">
 
-            <label for="numero">Número</label>
-            <input class="form-control" value="@ViewBag.numero" disabled />
+        <div class="dados">
+            <label>Número</label>
+            <input value="@ViewBag.numero" disabled />
+        </div>
 
-            <label for="serie">Série</label>
-            <input class="form-control" value="@ViewBag.serie" disabled />
+        <div class="dados">
+            <label>Série</label>
+            <input value="@ViewBag.serie" disabled />
         </div>
-        <div id="content1">
-            <label for="chave">Chave</label>
-            <input class="form-control" value="@ViewBag.chave" disabled />
+
+        <div class="dados">
+            <label>Data</label>
+            <input value="@ViewBag.data" disabled />
         </div>
-        <div id="content2">
-            <label for="valor_nf">Valor Nota Fiscal</label>
-            <input class="form-control" value="@ViewBag.valor_nf" disabled />
+
+        <div class="dados">
+            <label>Chave</label>
+            <input value="@ViewBag.chave" disabled />
         </div>
+
+        <div class="dados">
+            <label>Valor Nota Fiscal</label>
+            <input value="@ViewBag.valor_nf" disabled />
+        </div>
+
+    </section>
+    <hr />
+    <h1>Itens da Nota</h1>
+    <hr />
+
+    <div class="table-box" id="table">
+        <div class="table-row table-head">
+            <div class="table-cell first-cell">
+                <p>Código</p>
+            </div>
+            <div class="table-cell first-cell">
+                <p>Descrição</p>
+            </div>
+            <div class="table-cell">
+                <p>Lote</p>
+            </div>
+            <div class="table-cell">
+                <p>Qtd</p>
+            </div>
+            <div class="table-cell last-cell">
+                <p>Valor Unit.</p>
+            </div>
+        </div>
+
     </div>
 
 </section>

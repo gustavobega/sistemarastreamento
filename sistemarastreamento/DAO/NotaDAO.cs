@@ -176,6 +176,54 @@ namespace sistemarastreamento.DAO
             return notas;
         }
 
+        public List<int> getQtdNotaMesIndustria(int id_indust, string ano)
+        {
+            var qtdNotas = new List<int>();
+            string select = "";
+
+            for (int i = 0; i < 12; i++)
+                qtdNotas.Add(0);
+
+            DataTable dt = null;
+
+            select = "SELECT data FROM nota_fiscal WHERE Year(data) = " + ano + " and id_indust = " + id_indust;
+            dt = _bd.ExecutarSelect(select);
+
+            for (int i = 0;i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                int mes  = Convert.ToDateTime(dr["data"]).Month;
+
+                qtdNotas[mes - 1]++; 
+            }
+
+            return qtdNotas;
+        }
+
+        public List<int> getQtdNotaMesDistribuidor(int id_dist, string ano)
+        {
+            var qtdNotas = new List<int>();
+            string select = "";
+
+            for (int i = 0; i < 12; i++)
+                qtdNotas.Add(0);
+
+            DataTable dt = null;
+
+            select = "SELECT data FROM nota_fiscal WHERE Year(data) = " + ano + " and id_dist = " + id_dist;
+            dt = _bd.ExecutarSelect(select);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                int mes = Convert.ToDateTime(dr["data"]).Month;
+
+                qtdNotas[mes - 1]++;
+            }
+
+            return qtdNotas;
+        }
+
         public bool Excluir(int id)
         {
             string select = @"delete  

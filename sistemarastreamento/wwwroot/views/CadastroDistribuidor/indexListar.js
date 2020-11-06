@@ -63,7 +63,7 @@
                 alert("Deu erro.")
             })
     },
-
+    
     btnPesquisarOnClick: function (perfil) {
 
         document.getElementById("iconsearch").disabled = true;
@@ -212,3 +212,11 @@
     }
 
 }
+
+document.getElementById("distribuidor")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            indexListar.btnPesquisarOnClick();
+        }
+    });

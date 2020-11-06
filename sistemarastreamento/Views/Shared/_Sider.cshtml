@@ -1,0 +1,116 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextaccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/sider.css">
+    <!-- BOX ICONS CSS-->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    @RenderSection("css", false)
+</head>
+
+<body id="body">
+    <div class="l-navbar" id="navbar">
+        <nav class="nav">
+            <div>
+                <a href="/Default" class="nav__logo">
+                    <img src="~/img/logo.png" alt="" class="nav__logo-icon">
+                    <span class="nav__logo-text">Rastro+</span>
+                </a>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-chevron-right'></i>
+                </div>
+
+                <ul class="nav__list">
+                    <a href="/Default" class="nav__link active">
+                        <i class='bx bxs-home nav__icon'></i>
+                        <span class="nav__text">Home</span>
+                    </a>
+
+                    @{ if (httpContextaccessor.HttpContext.User.Claims.Count() > 0)
+                        {
+                            if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
+                            {
+                                <a href="/Relatorio/RelatorioVendaIndust" class="nav__link">
+                                    <i class='bx bxs-report nav__icon'></i>
+                                    <span class="nav__text">Vendas</span>
+                                </a>
+
+                                <a href="/Relatorio/RelatorioEstoqueDist" class="nav__link">
+                                    <i class='bx bxs-report nav__icon'></i>
+                                    <span class="nav__text">Estoque</span>
+                                </a>
+
+                            }
+                            else
+                            {
+                                <a href="/Relatorio/RelatorioVendaDist" class="nav__link">
+                                    <i class='bx bxs-report nav__icon'></i>
+                                    <span class="nav__text">Vendas</span>
+                                </a>
+                                <a href="/Relatorio/RelatorioEstoqueDist" class="nav__link">
+                                    <i class='bx bxs-report nav__icon'></i>
+                                    <span class="nav__text">Estoque</span>
+                                </a>
+
+                            }
+
+                        }
+                    }
+
+                </ul>
+            </div>
+            <a href="/Login/Sair" class="nav__link">
+                <i class='bx bx-log-out-circle nav__icon'></i>
+                <span class="nav__text">Sair</span>
+            </a>
+        </nav>
+    </div>
+
+    <section id="introSimples"></section>
+
+    <main id="main">
+
+        @RenderBody()
+
+    </main>
+
+    <script>
+        // SHOW MENU
+        const showMenu = (toggleId, navbarId, bodyId) => {
+            const toggle = document.getElementById(toggleId),
+                navbar = document.getElementById(navbarId),
+                bodypadding = document.getElementById(bodyId)
+
+            if (toggle && navbar) {
+                toggle.addEventListener('click', () => {
+                    // APARECER MENU
+                    navbar.classList.toggle('show')
+                    // ROTATE TOGGLE
+                    toggle.classList.toggle('rotate')
+                    // PADDING BODY
+                    bodypadding.classList.toggle('expander')
+                })
+            }
+        }
+        showMenu('nav-toggle', 'navbar', 'body')
+
+        // LINK ACTIVE COLOR
+        const linkColor = document.querySelectorAll('.nav__link');
+        function colorLink() {
+            linkColor.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        }
+
+        linkColor.forEach(l => l.addEventListener('click', colorLink));
+    </script>
+
+    @RenderSection("Scripts", required: false)
+    @RenderSection("js", false)
+
+</body>
+
+</html>

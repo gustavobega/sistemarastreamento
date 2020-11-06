@@ -1,43 +1,43 @@
-﻿.infoText {
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    font-weight: 600;
-    font-size: 26px;
-    background: #24547d;
+﻿#info-grafico {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-img {
-    max-width: 100%;
-    display: block;
+.dados {
+    margin-top: 10px;
+    padding-top: 10px;
 }
 
-.grid3 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 10px;
+.dados .info {
+    float: left;
+    margin-left: 30px;
+    color: #4682B4;
+    text-decoration: underline;
 }
 
-.grid3-item {
-  display: grid;
+.dados .ano {
+    float: right;
 }
 
-.grid3-item img {
-  grid-column: 1;
-  grid-row: 1/3;
-  align-self: end;
+.dados .ano input {
+    width: 70px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #d5dbd9;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.grid3-item p {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px;
-  color: white;
-  grid-column: 1;
-  grid-row: 2;
-  align-self: end;
+.dados .ano input:focus {
+    border: 1px solid #4682B4;
 }
+
+@media screen and (max-width: 968px) {
+    #info-grafico {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+

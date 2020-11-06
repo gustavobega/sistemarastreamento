@@ -184,3 +184,11 @@ if (document.getElementById("hfIdEditar") != null) {
         index.obterDadosEditar(document.getElementById("hfIdEditar").value)
     }
 }
+
+document.getElementById("cod_ref")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            index.buscaProdIndustria();
+        }
+    });

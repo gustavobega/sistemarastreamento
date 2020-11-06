@@ -2,11 +2,30 @@
 
     btnPesquisarOnClick: function () {
 
-        document.getElementById("tbPerfis").style.display = "table";
-
-        var tbodyPerfis = document.getElementById("tbodyPerfis");
-        tbodyPerfis.innerHTML = `<tr><td colspan="3"><img src=\"/img/ajax-loader.gif"\ /> carregando...</td></tr>`
+        var tbodyPerfis = document.getElementById("table");
+     
         document.getElementById("btnPesquisar").disabled = "disabled";
+
+        tbodyPerfis.innerHTML = `
+                                   <div class="table-row table-head">
+                                        <div class="table-cell first-cell">
+                                            <p>Função</p>
+                                        </div>
+                                        <div class="table-cell">
+                                            <p>Descrição</p>
+                                        </div>
+                                        <div class="table-cell last-cell headacoes">
+                                            <p>Ação</p>
+                                        </div>
+                                    </div>
+                                    `
+        tbodyPerfis.innerHTML += `
+                                    <div class="table-row">
+                                        <div class="table-cell first-cell">
+                                            <p><img src=\"/img/ajax-loader.gif"\/>carregando...</p>
+                                        </div>
+                                    </div>
+                                    `
 
         var config = {
             method: "GET",
@@ -25,31 +44,86 @@
             })
             .then(function (dadosObj) {
 
-                var linhas = "";
+                var linhas = `
+                            <div class="table-row table-head">
+                                <div class="table-cell first-cell">
+                                    <p>Função</p>
+                                </div>
+                                <div class="table-cell">
+                                    <p>Descrição</p>
+                                </div>
+                                <div class="table-cell last-cell headacoes">
+                                    <p>Ação</p>
+                                </div>
+                            </div>
+                            `;
+
                 for (var i = 0; i < dadosObj.length; i++) {
 
                     var template =
-                        `<tr data-id="${dadosObj[i].id}">
-                            <td>${dadosObj[i].nome}</td>
-                            <td>${dadosObj[i].descricao}</td>                  
-                            <td>
-					            <a href="javascript:;" onclick="indexObterPerfis.selecionar(${dadosObj[i].id},'${dadosObj[i].nome}')" style="text-decoration:none">
+                        `
+                        <div class="table-row">
+                            <div class="table-cell first-cell">
+                                <p>${dadosObj[i].nome}</p>
+                            </div>
+                            <div class="table-cell">
+                                <p>${dadosObj[i].descricao}</p>
+                            </div>
+                            <div class="table-cell last-cell acoes">
+                                <a href="javascript:;" onclick="indexObterPerfis.selecionar(${dadosObj[i].id},'${dadosObj[i].nome}')" style="text-decoration:none">
                                     <img class="fa fa-fw fa-check-circle" />
                                 </a>
-                            </td>  
-                         </tr>`
+                            </div>
+                        </div>
+                        `
+
                     linhas += template;
                 }
 
-                if (linhas == "") {
+                if (dadosObj.length == 0) {
 
-                    linhas = `<tr><td colspan="3">Sem resultado.</td></tr>`
+                    linhas = `
+                            <div class="table-row table-head">
+                                <div class="table-cell first-cell">
+                                    <p>Função</p>
+                                </div>
+                                <div class="table-cell">
+                                    <p>Descrição</p>
+                                </div>
+                                <div class="table-cell last-cell headacoes">
+                                    <p>Ação</p>
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="table-cell first-cell">
+                                        <p>sem resultados.</p>
+                                </div>
+                            </div>
+                            `
                 }
 
                 tbodyPerfis.innerHTML = linhas;
             })
             .catch(function () {
-                tbodyPerfis.innerHTML = `<tr><td colspan="3">Deu erro...</td></tr>`
+                tbodyPerfis.innerHTML = "";
+                tbodyPerfis.innerHTML += `
+                                        <div class="table-row table-head">
+                                            <div class="table-cell first-cell">
+                                                <p>Função</p>
+                                            </div>
+                                            <div class="table-cell">
+                                                <p>Descrição</p>
+                                            </div>
+                                            <div class="table-cell last-cell headacoes">
+                                                <p>Ação</p>
+                                            </div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="table-cell first-cell">
+                                                    <p>deu erro.</p>
+                                            </div>
+                                        </div>
+                                            `
             })
             .finally(function () {
 
@@ -63,3 +137,11 @@
     }
 
 }
+
+document.getElementById("nome")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            indexObterPerfis.btnPesquisarOnClick();
+        }
+    });

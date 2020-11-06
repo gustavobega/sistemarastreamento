@@ -49,7 +49,7 @@
             credentials: 'include', //inclui cookies
         };
 
-        fetch("/CadastroDistribuidor/Alterar?id=" + id, config)
+        fetch("/CadastroIndustria/Alterar?id=" + id, config)
             .then(function (dadosJson) {
                 var obj = dadosJson.json(); //deserializando
                 return obj;
@@ -243,3 +243,11 @@
     }
 
 }
+
+document.getElementById("numero")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            indexListar.btnPesquisarOnClick();
+        }
+    });
