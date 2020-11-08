@@ -143,6 +143,11 @@
     .wrapper .search_box .search_field .fas{
       top: 5px;
     }
+
+    #iconsearch {
+        font-size: 15px;
+        padding-top: 3px;
+    }
 }
 
 /*table*/

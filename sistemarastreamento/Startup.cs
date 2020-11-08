@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.FileProviders;
+using Rotativa.AspNetCore;
 
 namespace sistemarastreamento
 {
@@ -75,7 +75,7 @@ namespace sistemarastreamento
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.AspNetCore.Hosting.IHostingEnvironment env2)
         {
             if (env.IsDevelopment())
             {
@@ -96,6 +96,8 @@ namespace sistemarastreamento
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            RotativaConfiguration.Setup(env2);
 
             app.UseEndpoints(endpoints =>
             {

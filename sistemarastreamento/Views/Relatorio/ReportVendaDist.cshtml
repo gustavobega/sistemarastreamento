@@ -1,0 +1,76 @@
+﻿@model System.Data.DataTable
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Relatório</title>
+
+    <link href="~/css/style-relatorio.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Relatório de Vendas</h1>
+    <hr />
+    @{
+        int i = 0;
+        while (i < Model.Rows.Count)
+        {
+            <div class="dadosNota">
+
+                <div class="info">
+                    <p><strong>Número:</strong> @Model.Rows[i]["numero"]</p>
+                    <p><strong>Série:</strong> @Model.Rows[i]["serie"]</p>
+                    <p><strong>Chave:</strong> @Model.Rows[i]["chave"]</p>
+                    <p><strong>Data:</strong> @Model.Rows[i]["data"]</p>
+                    <p><strong>Hospital:</strong> @Model.Rows[i]["hospital"]</p>
+                    <p><strong>Convênio:</strong> @Model.Rows[i]["convenio"]</p>
+                    <p><strong>Paciente:</strong> @Model.Rows[i]["paciente"]</p>
+                    <p><strong>Médico:</strong> @Model.Rows[i]["medico"]</p>
+                </div>
+                <div class="total">
+                    <p><strong>Total: </strong>R$@Model.Rows[i]["valor_nf"]</p>
+                </div>
+
+            </div>
+
+            <table>
+                <tr>
+
+                    <th>Código</th>
+
+                    <th>Descrição</th>
+
+                    <th>Lote</th>
+
+                    <th>Qtd </th>
+
+                    <th>Valor_Unit.</th>
+
+                </tr>
+
+                @{
+                    int j = i;
+                    string numero = Model.Rows[i]["numero"].ToString();
+                    while (j < Model.Rows.Count && Model.Rows[j]["numero"].ToString() == numero)
+                    {
+                        System.Data.DataRow dr = Model.Rows[j];
+                        <tr>
+                            <td>@dr["cod_ref"]</td>
+                            <td class="descricao">@dr["descricao"]</td>
+                            <td>@dr["lote"]</td>
+                            <td>@dr["qtde"]</td>
+                            <td>R$@dr["valor_unit"]</td>
+                        </tr>
+                        j++;
+                    }
+                    i = j;
+                }
+
+            </table>
+            <div class="espaco"></div>
+        }
+    }
+
+
+</body>
+</html>

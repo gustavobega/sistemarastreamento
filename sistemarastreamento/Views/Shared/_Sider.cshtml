@@ -4,7 +4,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="~/css/sider.css">
+
     <!-- BOX ICONS CSS-->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
@@ -30,34 +34,49 @@
                         <span class="nav__text">Home</span>
                     </a>
 
-                    @{ if (httpContextaccessor.HttpContext.User.Claims.Count() > 0)
+                    @{
+                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
                         {
-                            if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                            {
-                                <a href="/Relatorio/RelatorioVendaIndust" class="nav__link">
-                                    <i class='bx bxs-report nav__icon'></i>
-                                    <span class="nav__text">Vendas</span>
-                                </a>
+                            <a href="/CadastroProdIndust/indexListar" class="nav__link">
+                                <i class='bx bx-search-alt nav__icon'></i>
+                                <span class="nav__text">Produto</span>
+                            </a>
 
-                                <a href="/Relatorio/RelatorioEstoqueDist" class="nav__link">
-                                    <i class='bx bxs-report nav__icon'></i>
-                                    <span class="nav__text">Estoque</span>
-                                </a>
+                        }
+                        else
+                        {
+                            <a href="/CadastroProdDist/indexListar" class="nav__link">
+                                <i class='bx bx-search-alt nav__icon'></i>
+                                <span class="nav__text">Produto</span>
+                            </a>
+                        }
+                    }
 
-                            }
-                            else
-                            {
-                                <a href="/Relatorio/RelatorioVendaDist" class="nav__link">
-                                    <i class='bx bxs-report nav__icon'></i>
-                                    <span class="nav__text">Vendas</span>
-                                </a>
-                                <a href="/Relatorio/RelatorioEstoqueDist" class="nav__link">
-                                    <i class='bx bxs-report nav__icon'></i>
-                                    <span class="nav__text">Estoque</span>
-                                </a>
+                    <a href="/CadastroIndustria/indexListar" class="nav__link">
+                        <i class='bx bx-search-alt nav__icon'></i>
+                        <span class="nav__text">Indústria</span>
+                    </a>
 
-                            }
+                    <a href="/CadastroDistribuidor/indexListar" class="nav__link">
+                        <i class='bx bx-search-alt nav__icon'></i>
+                        <span class="nav__text">Distribuidor</span>
+                    </a>
 
+                    @{
+                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
+                        {
+                            <a href="/LancamentoIndust/indexListar" class="nav__link">
+                                <i class='bx bx-search-alt nav__icon'></i>
+                                <span class="nav__text">Lançamento</span>
+                            </a>
+
+                        }
+                        else
+                        {
+                            <a href="/LancamentoDist/indexListar" class="nav__link">
+                                <i class='bx bx-search-alt nav__icon'></i>
+                                <span class="nav__text">Lançamento</span>
+                            </a>
                         }
                     }
 

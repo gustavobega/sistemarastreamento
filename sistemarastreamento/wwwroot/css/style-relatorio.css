@@ -1,0 +1,68 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+h1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+.dadosNota {
+    margin: 20px 0 20px 0;
+    display: inline-block;
+    width: 100%;
+}
+
+.info {
+    width: 60%;
+    float: left;
+    font-size: 20px;
+}
+
+.total {  
+    text-align: right;
+    padding: 25px;
+    display: flex;
+    font-size: 28px;
+}
+
+table {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+td, th {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+th {
+    background-color: #4682B4;
+    color: #fafafa;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+tr {
+    width: 100%;
+    background-color: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.espaco {
+    width: 100%;
+    padding-bottom: 100px;
+}

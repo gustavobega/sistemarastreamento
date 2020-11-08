@@ -32,23 +32,15 @@
                 <a href="#"><i class="fas fa-folder-plus"></i>Cadastros<i class="fas fa-sort-down"></i></a>
                 <input type="checkbox" id="btn-1">
                 <ul id="habilitaCad">
-                    @{ if (httpContextaccessor.HttpContext.User.Claims.Count() > 0)
+                    @{ 
+                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
                         {
-                            if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                            {
-                                <li><a href="/CadastroProdIndust"><i class="fas fa-box"></i>Produto</a></li>
-
-                            }
-                            else
-                            {
-                                <li><a href="/CadastroProdDist"><i class="fas fa-box"></i>Produto</a></li>
-
-                            }
+                            <li><a href="/CadastroProdIndust"><i class="fas fa-box"></i>Produto</a></li>
 
                         }
                         else
                         {
-                            <li><a href="/Login"><i class="fas fa-box"></i>Produto</a></li>
+                            <li><a href="/CadastroProdDist"><i class="fas fa-box"></i>Produto</a></li>
 
                         }
                     }
@@ -57,61 +49,46 @@
                 </ul>
             </li>
 
-            @{ if (httpContextaccessor.HttpContext.User.Claims.Count() > 0)
+            @{ 
+                if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
                 {
-                    if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                    {
-                        <li><a href="/LancamentoIndust"><i class="fas fa-rocket"></i>Lançamentos</a></li>
-                        <li onclick="openRel();">
-                            <label for="btn-2" class="show"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></label>
-                            <a href="#"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></a>
-                            <input type="checkbox" id="btn-2">
-                            <ul id="habilitaRel">
-                                <li><a href="/Relatorio/RelatorioVendaIndust"><i class="fas fa-file"></i>Vendas</a></li>
-                                <li><a href="/Relatorio/RelatorioEstoqueDist"><i class="fas fa-file"></i>Estoque</a></li>
-                            </ul>
-                        </li>
-                    }
-                    else
-                    {
-                        <li><a href="/LancamentoDist"><i class="fas fa-rocket"></i>Lançamentos</a></li>
-                        <li onclick="openRel();">
-                            <label for="btn-2" class="show"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></label>
-                            <a href="#"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></a>
-                            <input type="checkbox" id="btn-2">
-                            <ul id="habilitaRel">
-                                <li><a href="/Relatorio/RelatorioVendaDist"><i class="fas fa-file"></i>Vendas</a></li>
-                                <li><a href="/Relatorio/RelatorioEstoqueDist"><i class="fas fa-file"></i>Estoque</a></li>
-                            </ul>
-                        </li>
-                    }
+                    <li><a href="/LancamentoIndust"><i class="fas fa-rocket"></i>Lançamentos</a></li>
+                    <li onclick="openRel();">
+                        <label for="btn-2" class="show"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></label>
+                        <a href="#"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></a>
+                        <input type="checkbox" id="btn-2">
+                        <ul id="habilitaRel">
+                            <li><a href="/Relatorio/ReportVendaIndust"><i class="fas fa-file"></i>Vendas</a></li>
+                        </ul>
+                    </li>
                 }
                 else
                 {
-                    <li><a href="/Login"><i class="fas fa-rocket"></i>Lançamentos</a></li>
-                    <li><a href="/Login"><i class="fas fa-newspaper"></i>Relatórios</a></li>
+                    <li><a href="/LancamentoDist"><i class="fas fa-rocket"></i>Lançamentos</a></li>
+                    <li onclick="openRel();">
+                        <label for="btn-2" class="show"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></label>
+                        <a href="#"><i class="fas fa-newspaper"></i>Relatórios <i class="fas fa-sort-down"></i></a>
+                        <input type="checkbox" id="btn-2">
+                        <ul id="habilitaRel">
+                            <li><a href="/Relatorio/ReportVendaDist"><i class="fas fa-file"></i>Vendas</a></li>
+                            <li><a href="/Relatorio/ReportEstoqueDist"><i class="fas fa-file"></i>Estoque</a></li>
+                        </ul>
+                    </li>
                 }
+
             }
 
             <li><a href="#"><i class="fas fa-search-location"></i>Rastrear</a></li>
 
-            @{ if (httpContextaccessor.HttpContext.User.Claims.Count() > 0)
-                {
-                    <li onclick="openUser();">
-                        <label for="btn-3" class="show"><i class="fas fa-user-tie"></i>@httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value <i class="fas fa-sort-down"></i></label>
-                        <a href="#"><i class="fas fa-user-tie"></i>@httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value<i class="fas fa-sort-down"></i></a>
-                        <input type="checkbox" id="btn-3">
-                        <ul id="habilitaUser">
-                            <li><a href="/Login/Sair"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
-                        </ul>
-                    </li>
-
-                }
-                else
-                {
-                    <li><a href="/Login" class="ativa"><i class="fas fa-sign-in-alt"></i>Entrar</a></li>
-
-                }
+            @{ 
+                <li onclick="openUser();">
+                    <label for="btn-3" class="show"><i class="fas fa-user-tie"></i>@httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value <i class="fas fa-sort-down"></i></label>
+                    <a href="#"><i class="fas fa-user-tie"></i>@httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value<i class="fas fa-sort-down"></i></a>
+                    <input type="checkbox" id="btn-3">
+                    <ul id="habilitaUser">
+                        <li><a href="/Login/Sair"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
+                    </ul>
+                </li>   
             }
 
         </ul>
