@@ -53,7 +53,8 @@ namespace sistemarastreamento.Controllers
                     new Claim("usuarioId", usuarioOk.Id.ToString()),
                     new Claim("usuarioTipo", usuarioOk.Tipo.ToString()),
                     new Claim("usuarioPerfil", usuarioOk.Perfil.ToString()),
-                    new Claim("usuarioTipoId", id.ToString())
+                    new Claim("usuarioTipoId", id.ToString()),
+                    new Claim("usuarioEmail", usuarioOk.Email)
                 };
 
                 var identificacao = new ClaimsIdentity(usuarioClaims, "Identificação do Usuario");

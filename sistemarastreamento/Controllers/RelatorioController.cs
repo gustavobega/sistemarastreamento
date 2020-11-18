@@ -43,6 +43,28 @@ namespace sistemarastreamento.Controllers
             return pdfResult;
         }
 
+        public IActionResult ReportProdIndust()
+        {
+            List<Models.ProdutoIndust> dados = relProdIndust();
+            var pdfResult = new ViewAsPdf("ReportProdIndust", dados)
+            {
+                CustomSwitches = "--footer-center \"  Data: " + DateTime.Now.Date.ToString("dd/MM/yyyy") + "  Página: [page]/[toPage]\"" + " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\""
+            };
+
+            return pdfResult;
+        }
+
+        public IActionResult ReportDistribuidor()
+        {
+            var dados = relDistribuidor();
+            var pdfResult = new ViewAsPdf("ReportDistribuidor", dados)
+            {
+                CustomSwitches = "--footer-center \"  Data: " + DateTime.Now.Date.ToString("dd/MM/yyyy") + "  Página: [page]/[toPage]\"" + " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\""
+            };
+
+            return pdfResult;
+        }
+
         public DataTable relVendaIndust()
         {
             var id_indust = HttpContext.User.Claims.ToList()[3].Value;
@@ -71,6 +93,23 @@ namespace sistemarastreamento.Controllers
 
             return dt;
 
+        }
+
+        public List<Models.ProdutoIndust> relProdIndust()
+        {
+            var id_indust = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
+            DAO.ProdutoIndustDAO pibd = new DAO.ProdutoIndustDAO();
+            List<Models.ProdutoIndust> produtos = pibd.getProdutos(id_indust);
+
+            return produtos;
+        }
+
+        public List<Models.Distribuidor> relDistribuidor()
+        {
+            DAO.DistribuidorDAO dbd = new DAO.DistribuidorDAO();
+            List<Models.Distribuidor> distribuidores = dbd.getDistribuidores();
+
+            return distribuidores;
         }
     }
 }

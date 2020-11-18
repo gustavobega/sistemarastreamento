@@ -1,0 +1,161 @@
+﻿section {
+    margin: 10px 0;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: #4682B4;
+    font-size: 17px;
+}
+
+.title i {
+    padding-right: 10px;
+    font-size: 29px;
+    color: #4682B4;
+}
+
+h5 {
+    color: #4682B4;
+    padding: 10px;
+}
+
+.flexbox {
+    max-width: 1220px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 30px 90px;
+    flex-wrap: wrap;
+}
+
+.area-principal {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 220px;
+    border: 2px solid #4682B4;
+    margin: 0 auto;
+}
+
+.area-principal h1 {
+    margin-bottom: 10px;
+    background: #4682B4;
+    color: white;
+}
+
+.tudo {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    margin-left: 22px;
+    margin-right: 22px;
+    flex-wrap: wrap;
+}
+
+.input-pesquisa {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.area-principal .search {
+    width: 220px;
+    height: 30px;
+    outline: 0;
+    border: 1px solid #4682B4;
+    padding: 10px;
+}
+
+.input-hospital {
+    width: 445px;
+    height: 30px;
+    outline: 0;
+    border: 1px solid #4682B4;
+    padding: 10px;
+}
+
+.area-principal .btn {
+    margin-top: 15px;
+    width: 445px;
+    height: 30px;
+    background: #4682B4;
+    color: white;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    transition: background-color 500ms linear;
+}
+
+.area-principal .btn:hover {
+    background: #5092c8;
+}
+
+.botaoBuscar {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.loading-login {
+    position: absolute;
+    margin-right: 385px;
+    margin-top: 15px;
+}
+
+.area-dados {
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 350px;
+    margin: 0 auto;
+    border: 1px inset rgba(0,0,0,0.125);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
+}
+
+.area-dados h2 {
+    padding: 0 5px;
+    font-weight: 600;
+    color: #4682B4;
+    text-decoration: underline;
+}
+
+.area-dados p {
+    padding: 0 5px;
+    font-size: 13px;
+}
+
+.descricao {
+    text-align: center;
+}
+
+.error {
+    height: 35px;
+    padding: 5px;
+    margin-top: 30px;
+    background: #ffbfaa;
+    color: black;
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
+}
+
+.sucess {
+    height: 35px;
+    padding: 5px;
+    margin-top: 30px;
+    background: #98fb98;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid #cccccc;
+    box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
+}

@@ -1,0 +1,39 @@
+﻿@model List<sistemarastreamento.Models.ProdutoIndust>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Relatório</title>
+
+    <link href="~/css/style-relatorio.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Relatório de Produtos</h1>
+    <hr />
+    <div style="padding-top: 40px;"></div>
+    <table>
+        <tr>
+
+            <th>Código</th>
+
+            <th>Descrição</th>
+
+        </tr>
+
+        @{
+            int j = 0;
+            while (j < Model.Count)
+            {
+                <tr>
+                    <td>@Model[j].Cod_ref</td>
+                    <td class="descricao">@Model[j].Descricao</td>
+                </tr>
+                j++;
+            }
+        }
+
+    </table>
+
+</body>
+</html>

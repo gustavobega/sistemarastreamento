@@ -128,5 +128,19 @@ namespace sistemarastreamento.DAO
 
             return proddist;
         }
+
+        public DataTable getEstoqueProd(int id_dist)
+        {
+
+            string select = @"SELECT cod_prod_dist, descricao, saldo FROM produto_distribuidor as pd INNER JOIN 
+                                produto_industria as pi ON pd.cod_ref = pi.cod_ref
+                                and id_dist = " + id_dist + " INNER JOIN estoque " +
+                                "as e ON pi.id = e.id_prod ORDER BY saldo LIMIT 10";
+
+            DataTable dt = _bd.ExecutarSelect(select);
+
+            return dt;
+        }
+        
     }
 }

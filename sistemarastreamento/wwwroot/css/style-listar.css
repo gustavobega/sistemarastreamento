@@ -6,19 +6,39 @@
     list-style: none;
 }
 
+.title {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: #4682B4;
+    font-size: 20px;
+}
+
+.title i {
+    padding-right: 10px;
+    font-size: 35px;
+}
+
+.title .bxs-rocket {
+    font-size: 31px;
+}
+
 .wrapper {
     height: 18vh;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
+    padding-left: 130px;
 }
 
 .wrapper .search_box{
   width: 500px;
   background: #fff;
   border-radius: 5px;
-  height: 65px;
+  height: 50px;
   display: flex;
   padding: 10px;
   box-shadow: 0 8px 6px -10px #b3c6ff;
@@ -34,13 +54,13 @@
 
 .wrapper .search_box .dropdown .default_option{
   text-transform: uppercase;
-  padding: 13px 15px;
+  padding: 6px 15px;
   font-size: 14px;
 }
 
 .wrapper .search_box .dropdown ul{
   position: absolute;
-  top: 70px;
+  top: 50px;
   left: -10px;
   background: #fff;
   width: 150px;
@@ -56,6 +76,7 @@
 
 .wrapper .search_box .dropdown ul li{
   padding-bottom: 20px;
+  color: #9fa3b1;
 }
 
 .wrapper .search_box .dropdown ul li:last-child{
@@ -69,7 +90,7 @@
 .wrapper .search_box .dropdown:before{
   content: "";
   position: absolute;
-  top: 18px;
+  top: 12px;
   right: 20px;
   border: 8px solid;
   border-color: #5078ef transparent transparent transparent;
@@ -93,9 +114,9 @@
 
 .wrapper .search_box .search_field .fas{
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
-  font-size: 22px;
+  font-size: 20px;
   color: #5078ef;
   cursor: pointer;
 }
@@ -111,7 +132,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .wrapper .search_box{
+    /*.wrapper .search_box{
       width: 300px;
       height: 40px;
       display: flex;
@@ -148,6 +169,7 @@
         font-size: 15px;
         padding-top: 3px;
     }
+    */
 }
 
 /*table*/
@@ -163,7 +185,7 @@
 .table-row {
     display: table;
     width: 80%;
-    margin: 10px auto;
+    margin: 0 auto;
     background: transparent;
     padding: 12px 0;
     color: #555;
@@ -237,7 +259,7 @@ a {
   position: absolute;
   right: 0;
   background-color: #f9f9f9;
-  min-width: 140px;
+  min-width: 138px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -247,6 +269,18 @@ a {
   padding: 8px 16px;
   text-decoration: none;
   display: block;
+  text-align: left;
+}
+
+.dropdown-content a:last-child {
+  color: red;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1;}
+
+.bx-show-alt, .bx-send, .bx-edit, .bxs-user-x, .bx-mail-send {
+    margin-right: 8px;
+    font-size: 15px;
+}
+
+

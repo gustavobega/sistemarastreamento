@@ -5,17 +5,16 @@
         document.getElementById("error").style.display = 'none';
 
         var carrega = document.getElementById("carrega");
-        
-        var file = document.getElementById("xml").files[0];
-
-        var fd = new FormData();
-        fd.append("fileXML", file);
 
         if (document.getElementById("xml").files.length == 0) {
             document.getElementById("error").innerHTML = "Selecione um Arquivo";
             document.getElementById("error").style.display = "block";
         }
         else {
+            var file = document.getElementById("xml").files[0];
+
+            var fd = new FormData();
+            fd.append("fileXML", file);
             carrega.innerHTML = `<tr><td colspan="3"><img src=\"/img/ajax-loader.gif"\ /> verificando...</td></tr>`
             var configFD = {
                 method: "POST",

@@ -1,6 +1,7 @@
 ﻿#info-grafico {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding-left: 120px;
 }
 
 .dados {
@@ -9,14 +10,15 @@
 }
 
 .dados .info {
-    float: left;
-    margin-left: 30px;
+    text-align: center;
+    padding-right: 120px;
     color: #4682B4;
     text-decoration: underline;
 }
 
 .dados .ano {
     float: right;
+    margin-right: 147px;
 }
 
 .dados .ano input {
@@ -34,10 +36,40 @@
     border: 1px solid #4682B4;
 }
 
+.tudo {
+    display: flex;
+    width: 100%;
+}
+
+.grafico {
+    width: 100%;
+}
+
+.opcoes {
+    margin: 3px 0 0 10px;
+    font-size: 20px;
+    color: #4682B4;
+    width: 156px;
+}
+
+.opcoes i{
+    color: #4682B4; 
+}
+
+.opcoes i:hover{
+    color: #38526f; 
+}
+
+.active {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 968px) {
     #info-grafico {
-        max-width: 90%;
-        margin: 0 auto;
+        padding-left: 0;
+    }
+    .dados .info {
+        font-size: 11px;
     }
 }
 

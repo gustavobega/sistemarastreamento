@@ -142,8 +142,8 @@
                                 <div class="dropdown" onclick="indexListar.block(${dadosObj[i].id})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
                                     <div class="dropdown-content" id="acoesoption${dadosObj[i].id}" style="display: none;">
-                                        <a href="/CadastroProdIndust/Editar?id=${dadosObj[i].id}">Editar</a>
-                                        <a href="javascript:indexListar.excluir(${dadosObj[i].id})" onclick="return confirm('Confirmar Exclusão?')">Excluir</a>
+                                        <a href="/CadastroProdIndust/Editar?id=${dadosObj[i].id}"><i class='bx bx-edit'></i> Editar</a>
+                                        <a href="javascript:indexListar.excluir(${dadosObj[i].id})" onclick="return confirm('Confirmar Exclusão?')"><i class='bx bxs-user-x'></i> Excluir</a>
                                   </div>
                                 </div>
                             </div>

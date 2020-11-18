@@ -73,6 +73,24 @@ namespace sistemarastreamento.DAO
 
         }
 
+        public List<Models.ProdutoIndust> getProdutos(int id_indust)
+        {
+
+            List<Models.ProdutoIndust> produtos = new List<Models.ProdutoIndust>();
+            string select =  @"select * from produto_industria where id_indust = " + id_indust;
+
+            var parametros = _bd.GerarParametros();
+            DataTable dt = _bd.ExecutarSelect(select);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                produtos.Add(Map(row));
+            }
+
+            return produtos;
+
+        }
+
         public Models.ProdutoIndust Obter(int id)
         {
             Models.ProdutoIndust prodindust = null;

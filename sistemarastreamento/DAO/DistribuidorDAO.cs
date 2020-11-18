@@ -163,6 +163,24 @@ namespace sistemarastreamento.DAO
 
         }
 
+        public List<Models.Distribuidor> getDistribuidores()
+        {
+
+            List<Models.Distribuidor> distribuidores = new List<Models.Distribuidor>();
+
+            string select = @"select * from distribuidor ";
+
+            DataTable dt = _bd.ExecutarSelect(select);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                distribuidores.Add(Map(row));
+            }
+
+            return distribuidores;
+
+        }
+
         public bool Excluir(int id)
         {
             string select = @"delete  

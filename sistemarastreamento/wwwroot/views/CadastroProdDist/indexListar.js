@@ -159,8 +159,8 @@
                                 <div class="dropdown" onclick="indexListar.block(${lista[i]['id']})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
                                     <div class="dropdown-content" id="acoesoption${lista[i]['id']}" style="display: none;">
-                                        <a href="/CadastroProdDist/Editar?id=${lista[i]['id']}">Editar</a>
-                                        <a href="javascript:indexListar.excluir(${lista[i]['id']})" onclick="return confirm('Confirmar Exclusão?')">Excluir</a>
+                                        <a href="/CadastroProdDist/Editar?id=${lista[i]['id']}"><i class='bx bx-edit'></i> Editar</a>
+                                        <a href="javascript:indexListar.excluir(${lista[i]['id']})" onclick="return confirm('Confirmar Exclusão?')"><i class='bx bxs-user-x'></i> Excluir</a>
                                   </div>
                                 </div>
                             </div>

@@ -85,7 +85,6 @@ namespace sistemarastreamento.Controllers
             Models.Distribuidor dist = new Models.Distribuidor();
             CamadaNegocio.DistribuidorCamadaNegocio dcn = new CamadaNegocio.DistribuidorCamadaNegocio();
             string cnpjdist = Convert.ToInt64(dados["cnpjdist"]).ToString(@"00\.000\.000\/0000\-00");
-            cnpjdist = "45.645.645/6456-45";
             dist = dcn.ObterCnpj(cnpjdist);
 
             List<Models.ItemNota> itens = new List<Models.ItemNota>();
@@ -154,6 +153,9 @@ namespace sistemarastreamento.Controllers
             CamadaNegocio.ItemNotaCamadaNegocio incn = new CamadaNegocio.ItemNotaCamadaNegocio();
             Models.ItemNota itemnota;
 
+            //dados para rastreamento
+            Dictionary<int, string> rastro = new Dictionary<int, string>();
+
             XmlNodeList xnList, xnList2;
 
             bool operacao,entrou;
@@ -201,6 +203,7 @@ namespace sistemarastreamento.Controllers
                 {
                     xnList = xmlDoc.GetElementsByTagName("prod");
                     xnList2 = xmlDoc.GetElementsByTagName("rastro");
+
                     for (int i = 0; i < xnList.Count; i++)
                     {
                         itemnota = new Models.ItemNota();
@@ -216,7 +219,7 @@ namespace sistemarastreamento.Controllers
 
                         itemnota.Valor_unit = GetDouble(xnList[i]["vUnTrib"].InnerText, 0d);
 
-
+                        rastro.Add(itemnota.Id_prod, itemnota.Lote);
                         operacao = incn.Criar(itemnota);
                     }
                 }
@@ -231,6 +234,10 @@ namespace sistemarastreamento.Controllers
             {
                 xnList = xmlDoc.GetElementsByTagName("dest");
                 cnpjdist = xnList[0]["CNPJ"].InnerText;
+
+                //salvar o rastreio
+                CamadaNegocio.RastroCamadaNegocio rcn = new CamadaNegocio.RastroCamadaNegocio();
+                rcn.Criar(rastro, cnpjdist, notamodelo.Cod_indust);
 
                 return (operacao, "Dados Importados!", notamodelo.Id, cnpjdist);
             }    

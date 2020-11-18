@@ -38,43 +38,31 @@
                         if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
                         {
                             <a href="/CadastroProdIndust/indexListar" class="nav__link">
-                                <i class='bx bx-search-alt nav__icon'></i>
+                                <i class='bx bxs-package nav__icon'></i>
                                 <span class="nav__text">Produto</span>
                             </a>
-
-                        }
-                        else
-                        {
-                            <a href="/CadastroProdDist/indexListar" class="nav__link">
-                                <i class='bx bx-search-alt nav__icon'></i>
-                                <span class="nav__text">Produto</span>
+                            /*<a href="/CadastroIndustria/indexListar" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__text">Indústria</span>
+                            </a>*/
+                            <a href="/CadastroDistribuidor/indexListar" class="nav__link">
+                                <i class='bx bxs-truck nav__icon'></i>
+                                <span class="nav__text">Distribuidor</span>
                             </a>
-                        }
-                    }
-
-                    <a href="/CadastroIndustria/indexListar" class="nav__link">
-                        <i class='bx bx-search-alt nav__icon'></i>
-                        <span class="nav__text">Indústria</span>
-                    </a>
-
-                    <a href="/CadastroDistribuidor/indexListar" class="nav__link">
-                        <i class='bx bx-search-alt nav__icon'></i>
-                        <span class="nav__text">Distribuidor</span>
-                    </a>
-
-                    @{
-                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                        {
                             <a href="/LancamentoIndust/indexListar" class="nav__link">
-                                <i class='bx bx-search-alt nav__icon'></i>
+                                <i class='bx bx-rocket nav__icon'></i>
                                 <span class="nav__text">Lançamento</span>
                             </a>
 
                         }
                         else
                         {
+                            <a href="/CadastroProdDist/indexListar" class="nav__link">
+                                <i class='bx bxs-package nav__icon'></i>
+                                <span class="nav__text">Produto</span>
+                            </a>
                             <a href="/LancamentoDist/indexListar" class="nav__link">
-                                <i class='bx bx-search-alt nav__icon'></i>
+                                <i class='bx bx-rocket nav__icon'></i>
                                 <span class="nav__text">Lançamento</span>
                             </a>
                         }

@@ -1,0 +1,43 @@
+﻿@{ ViewData["Title"] = "Enviar E-mail para Distribuidor";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml"; }
+
+@section css {
+    <style>
+        body {
+            max-width: 600px;
+            max-height: 500px;
+            height: 450px;
+        }
+    </style>
+    <link href="~/css/style-email.css" rel="stylesheet" />
+}
+
+@section js {
+    <script src="~/views/CadastroDistribuidor/indexEmail.js"></script>
+}
+
+<section>
+    <h1>Envio de E-Mail</h1>
+    <hr />
+    <div class="dados">
+        <div class="input-dados">
+            <label>Destino</label>
+            <input type="email" id="destino" value="@ViewBag.emaildist" />
+        </div>
+        <div class="input-dados">
+            <label>Origem</label>
+            <input type="email" id="origem" value="@ViewBag.emailindust"/>
+        </div>
+        <div class="input-dados">
+            <label>Assunto</label>
+            <input type="text" id="assunto" />
+        </div>
+        <div class="input-dados">
+            <label>Mensagem</label>
+            <textarea rows="5" id="mensagem"></textarea>
+        </div>
+
+        <input type="button" id="btnEnviar" class="btn" value="Enviar E-Mail" onclick="index.btnEnviar();" />
+    </div>
+
+</section>

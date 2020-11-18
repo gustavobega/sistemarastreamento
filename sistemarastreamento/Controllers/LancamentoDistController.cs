@@ -177,6 +177,10 @@ namespace sistemarastreamento.Controllers
 
             CamadaNegocio.EstoqueCamadaNegocio ecn = new CamadaNegocio.EstoqueCamadaNegocio();
 
+            //dados para rastreamento
+            Dictionary<string, string> rastro = new Dictionary<string, string>();
+            List<string> codProd = new List<string>();
+
             XmlNodeList xnList, xnList2;
 
             bool operacao, entrou, nosaldo;
@@ -190,6 +194,7 @@ namespace sistemarastreamento.Controllers
             for (int i = 0; i < xnList.Count; i++)
             {
                 string id_prod = xnList[i]["cProd"].InnerText;
+                codProd.Add(id_prod);
                 pd.Add(pdcn.ObterProd(id_prod));
                 if (pd[i] == null)
                 {
@@ -310,6 +315,7 @@ namespace sistemarastreamento.Controllers
 
                         itemnota.Valor_unit = GetDouble(xnList[i]["vUnTrib"].InnerText, 0d);
 
+                        rastro.Add(codProd[i], itemnota.Lote);
                         operacao = incn.Criar(itemnota);
                     }
                 }
@@ -325,7 +331,24 @@ namespace sistemarastreamento.Controllers
             else if (nosaldo)
                 return (false, msg2, notamodelo.Id, dadosadd);
             else
-                return (operacao, "Dados Importados!", notamodelo.Id, dadosadd); 
+            {
+                xnList = xmlDoc.GetElementsByTagName("dest");
+                Models.Destino destino = new Models.Destino();
+                destino.Nome = xnList[0]["xNome"].InnerText;
+
+                xnList = xmlDoc.GetElementsByTagName("enderDest");
+                destino.Rua = xnList[0]["xLgr"].InnerText;
+                destino.Numero = Convert.ToInt32(xnList[0]["nro"].InnerText);
+                destino.Bairro = xnList[0]["xBairro"].InnerText;
+                destino.Cidade = xnList[0]["xMun"].InnerText;
+                destino.Estado = xnList[0]["UF"].InnerText;
+                destino.Cep = xnList[0]["CEP"].InnerText;
+
+                destino.salvar(rastro);
+
+                return (operacao, "Dados Importados!", notamodelo.Id, dadosadd);
+            }
+                 
         }
 
         public IActionResult IndexVisualizar(int id)

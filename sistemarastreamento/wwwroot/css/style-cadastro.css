@@ -161,6 +161,11 @@
 }
 .fa-cogs, .fa-search {
     color: #4682B4;
+    transition: color 400ms linear;
+}
+
+.fa-cogs:hover {
+    color: #5092c8;
 }
 
 .error {
@@ -193,6 +198,12 @@
     text-align: center;
     justify-content: center;
     box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
+}
+
+.wrapper .title .fa-box, .wrapper .title .fa-truck, .wrapper .title .fa-rocket, .wrapper .title .fa-building {
+    color: #4682B4;
+    padding-right: 5px;
+    position: relative;
 }
 
 @media (max-width:420px) {

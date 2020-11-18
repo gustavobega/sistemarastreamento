@@ -1,8 +1,11 @@
-﻿@{ ViewData["Title"] = "Tela Default";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextaccessor
+
+@{ ViewData["Title"] = "Tela Default";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @section css {
     <link href="~/css/style-default.css" rel="stylesheet" />
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 }
 
 @section js {
@@ -11,15 +14,47 @@
 }
 
 <section id="info-grafico">
-    <div class="dados">
+    <div class="dados" id="dados">
         <div class="info">
-            <h4>Quantidade de Notas Importadas</h4>
+            <h1>Quantidade de Notas Importadas</h1>
         </div>
+    
         <div class="ano">
             <label>Ano</label>
-            <input type="number" id="ano" value="2020"/>
+            <input type="number" id="ano" value="2020" />
         </div>
-        
+
     </div>
-    <canvas id="grafico" width="400" height="150"></canvas>
+
+    <div class="dados" id="dadosEstoque" style="display:none;">
+        <div class="info estoque">
+            <h1>Menores quantidade de estoque por produto</h1>
+        </div>
+    </div>
+    <br />
+    <div class="tudo">
+
+        <div class="grafico">
+            <canvas id="graficoAno" width="400" height="150"></canvas>
+            <canvas id="graficoEstoque" width="400" height="150"></canvas>
+        </div>
+        <div class="opcoes">
+            
+            <a href="javascript:index.geraGraficoAno()">
+                <i class='bx bx-line-chart-down' id="notas">Notas</i>
+            </a>
+
+            @{ if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Distribuidor")
+               {
+                    
+                    <a href="javascript:index.geraGraficoEstoque()">
+                        <i class='bx bx-task-x' id="estoque">Estoque</i>
+                    </a>
+
+                }
+             }
+
+        </div>
+    </div>
+
 </section>

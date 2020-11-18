@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
 
 namespace sistemarastreamento.Controllers
 {
@@ -77,7 +78,8 @@ namespace sistemarastreamento.Controllers
                     nome = d.Nome,
                     cnpj = d.CNPJ,
                     telefone = d.Telefone,
-                    representante = d.Representante
+                    representante = d.Representante,
+                    Email = d.Email
                 };
 
                 distribuidoresLimpos.Add(distribuidorLimpo);
@@ -100,7 +102,7 @@ namespace sistemarastreamento.Controllers
 
         public IActionResult IndexVisualizar(int id)
         {
-            Models.Distribuidor distribuidor = new Models.Distribuidor();
+            Models.Distribuidor distribuidor;
             CamadaNegocio.DistribuidorCamadaNegocio dcn = new CamadaNegocio.DistribuidorCamadaNegocio();
             CamadaNegocio.CidadeCamadaNegocio ccn = new CamadaNegocio.CidadeCamadaNegocio();
             distribuidor = dcn.Obter(id);
@@ -141,6 +143,72 @@ namespace sistemarastreamento.Controllers
             {
                 distribuidor,
                 perfil
+            });
+        }
+
+        public IActionResult IndexEmail(string emaildist)
+        {
+            ViewBag.emaildist = emaildist;
+            ViewBag.emailindust = HttpContext.User.Claims.ToList()[4].Value;
+            return View();
+        }
+
+        public IActionResult IndexSMS(string telldist)
+        {
+            ViewBag.telldist = telldist;
+            return View();
+        }
+
+        public IActionResult EnviarEmail([FromBody] Dictionary<string, string> dados)
+        {
+            string destino = dados["destino"];
+            string origem = dados["origem"];
+            string assunto = dados["assunto"];
+            string mensagem = dados["mensagem"];
+
+            MailMessage mm = new MailMessage();
+            mm.To.Add(destino);
+
+            mm.From = new MailAddress(origem);
+
+            mm.Subject = assunto;
+            mm.Body = mensagem;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.EnableSsl = true;
+            if (origem.Contains("hotmail") || origem.Contains("outlook"))
+            {
+                smtp.Host = "smtp.live.com";
+                smtp.Credentials = new System.Net.NetworkCredential(origem, "palmeiras159");
+            }
+            else if (origem.Contains("gmail"))
+            {
+                smtp.Host = "smtp.gmail.com";
+                smtp.Credentials = new System.Net.NetworkCredential(origem, "palmeiras159");
+            }
+
+            try
+            {
+                smtp.Send(mm);
+            }
+            catch (Exception e) { }
+
+            return Json(new
+            {
+                operacao = true
+            });
+        }
+
+        public IActionResult EnviarSMS([FromBody] Dictionary<string, string> dados)
+        {
+            string telefone = dados["telefone"];
+            string mensagem = dados["mensagem"];
+
+            return Json(new
+            {
+                operacao = true
             });
         }
 

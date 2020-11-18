@@ -39,6 +39,7 @@ nav ul li{
   display: inline-block;
   background: #4682B4;
   margin: 0 10px;
+  position: relative;
 }
 nav ul li a {
     color: white;
@@ -108,7 +109,7 @@ nav input {
     bottom: 2px;
 }
 
-.fa-home, .fa-folder-plus, .fa-rocket, .fa-newspaper, .fa-search-location, .fa-sign-out-alt, .fa-box, .fa-building, .fa-truck, .fa-sign-in-alt, .fa-user-tie, .fa-file {
+.fa-home, .fa-folder-plus, .fa-rocket, .fa-print, .fa-search-location, .fa-sign-out-alt, .fa-box, .fa-building, .fa-truck, .fa-sign-in-alt, .fa-user-tie, .fa-file {
     color: white;
     position: relative;
     margin-right: 5px;
