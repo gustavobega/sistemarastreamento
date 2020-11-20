@@ -10,46 +10,33 @@
         var lote = document.getElementById("lote").value;
         var saldo = document.getElementById("saldo").value;
 
-        var msgerror = document.getElementById("error");
-        var msgsucess = document.getElementById("sucess");
-
-        msgerror.innerHTML = "";
-        msgerror.style.display = "none";
-
-        msgsucess.innerHTML = "";
-        msgsucess.style.display = "none";
-
         if (cod_ref.trim() == "") {
-            msgerror.innerHTML = "Preencha o Código de Referência";
-            document.getElementById("error2").style.display = "none";
-            if (msgsucess.style.display == "block")
-                msgsucess.style.display = "none";
-
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o Código de Referência!'
+            })
         }
         else if (codigo.trim() == "") {
-            msgerror.innerHTML = "Preencha a Descrição";
-            document.getElementById("error2").style.display = "none";
-            if (msgsucess.style.display == "block")
-                msgsucess.style.display = "none";
-
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Descrição!'
+            })
         }
         else if (lote.trim() == "") {
-            msgerror.innerHTML = "Preencha o Lote";
-            document.getElementById("error2").style.display = "none";
-            if (msgsucess.style.display == "block")
-                msgsucess.style.display = "none";
-
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o Lote!'
+            })
         }
         else if (saldo.trim() == "") {
-            msgerror.innerHTML = "Preencha o saldo";
-            document.getElementById("error2").style.display = "none";
-            if (msgsucess.style.display == "block")
-                msgsucess.style.display = "none";
-
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o saldo!'
+            })
         }
         else {
             var dados = {
@@ -76,20 +63,22 @@
                 .then(function (dadosObj) {
                     if (dadosObj.operacao) {
                         if (id == 0) {
-                            msgsucess.innerHTML = "Cadastro Realizado!";
-                            if (msgerror.style.display == "block")
-                                msgerror.style.display = "none";
-                            msgsucess.style.display = "block";
-                            document.getElementById("sucess2").style.display = "none";
-                            document.getElementById("error").style.display = "none";
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Cadastro Realizado com Sucesso!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         }
                         else {
-                            msgsucess.innerHTML = "Alteração Realizado!";
-                            if (msgerror.style.display == "block")
-                                msgerror.style.display = "none";
-                            msgsucess.style.display = "block";
-
-                            window.location.href = "/CadastroProdDist/indexListar";
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Alteração Realizado com Sucesso!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         }
                         document.getElementById("cod_ref").value = "";
                         document.getElementById("codigo").value = "";
@@ -160,23 +149,20 @@
                 return obj;
             })
             .then(function (dadosObj) {
-                document.getElementById("error2").style.display = "none";
-                document.getElementById("error2").style.display = "none";
-                document.getElementById("sucess2").innerHTML = "Item Encontrado - " + dadosObj.prodemp.descricao;
-                document.getElementById("sucess2").style.display = "block";
+                document.getElementById("sucess").innerHTML = "Item Encontrado - " + dadosObj.prodemp.descricao;
+                document.getElementById("sucess").style.display = "block";
 
             })
             .catch(function () {
-                document.getElementById("sucess2").style.display = "none";
-                document.getElementById("error2").innerHTML = "Item Não Encontrado";
-                document.getElementById("error2").style.display = "block";
+                document.getElementById("sucess").innerHTML = "";
+                document.getElementById("sucess").style.display = "none";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Item Não Encontrado!'
+                })
             })
     },
-
-    limpaInfo: function () {
-        document.getElementById("sucess").style.display = 'none';
-    }
-
 }
 
 if (document.getElementById("hfIdEditar") != null) {

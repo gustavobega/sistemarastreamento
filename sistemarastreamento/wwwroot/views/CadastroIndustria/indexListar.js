@@ -17,27 +17,62 @@
 
     excluir: function (id) {
 
-        var config = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            credentials: 'include', //inclui cookies
-        };
+        const swalWithBootstrapButtons = Swal.mixin({
+            /*customClass: {
+                confirmButton: 'buttonSucess',
+                cancelButton: 'buttonDanger'
+            },*/
+            buttonsStyling: true
+        })
 
-        fetch("/CadastroIndustria/Excluir?id=" + id, config)
-            .then(function (dadosJson) {
-                var obj = dadosJson.json(); //deserializando
-                return obj;
-            })
-            .then(function (dadosObj) {
-                if (dadosObj.operacao) {
-                    document.getElementById(id).remove()
-                }
-            })
-            .catch(function () {
-                alert("Deu erro.")
-            })
+        swalWithBootstrapButtons.fire({
+            title: 'Confirmar Exclusão?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, Deletar!',
+            cancelButtonText: 'Não, Cancelar!',
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+
+                var config = {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    credentials: 'include', //inclui cookies
+                };
+
+                fetch("/CadastroIndustria/Excluir?id=" + id, config)
+                    .then(function (dadosJson) {
+                        var obj = dadosJson.json(); //deserializando
+                        return obj;
+                    })
+                    .then(function (dadosObj) {
+                        if (dadosObj.operacao) {
+                            document.getElementById(id).remove()
+                        }
+                    })
+                    .catch(function () {
+                        alert("Deu erro.")
+                    })
+
+                swalWithBootstrapButtons.fire(
+                    'Deletado!',
+                    'Indústria Deletado.',
+                    'success'
+                )
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'Nada Alterado :)',
+                    'error'
+                )
+            }
+        })    
     },
 
     alterar: function (id) {
@@ -153,7 +188,7 @@
                                     <div class="dropdown-content" id="acoesoption${dadosObj[i].id}" style="display: none;">
                                         <a data-fancybox data-type="iframe" data-src="/CadastroIndustria/IndexVisualizar?id=${dadosObj[i].id}" href="javascript:;"><i class='bx bx-show-alt'></i> Visualizar</a>
                                         <a href="/CadastroIndustria/Editar?id=${dadosObj[i].id}"><i class='bx bx-edit'></i> Editar</a>
-                                        <a href="javascript:indexListar.excluir(${dadosObj[i].id})" onclick="return confirm('Confirmar Exclusão?')"><i class='bx bxs-user-x'></i> Excluir</a>
+                                        <a href="javascript:indexListar.excluir(${dadosObj[i].id})"><i class='bx bxs-user-x'></i> Excluir</a>
                                   </div>
                                 </div>
                             </div>
@@ -162,7 +197,7 @@
    
                     linhas += template;
                 }
-
+                document.getElementById('retorno').innerHTML = 'Retorno - ' + dadosObj.length
                 if (dadosObj.length == 0) {
 
                     linhas = `

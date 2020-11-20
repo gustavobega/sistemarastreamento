@@ -40,6 +40,13 @@ namespace sistemarastreamento.Controllers
             });      
         }
 
+        public IActionResult geraGraficoGanho(string ano)
+        {
+            List<decimal> ganhos = GanhosMeses(ano);
+
+            return Json(ganhos);
+        }
+
         private List<int> QtdNotasMeses(string ano)
         {
             var tipo = HttpContext.User.Claims.ToList()[1].Value;
@@ -70,6 +77,18 @@ namespace sistemarastreamento.Controllers
             }
 
             return (produto, saldo);
+        }
+
+        private List<decimal> GanhosMeses(string ano)
+        {
+            var tipo = HttpContext.User.Claims.ToList()[1].Value;
+            var id = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
+            DAO.NotaDAO nbd = new DAO.NotaDAO();
+
+            if (tipo == "Indústria")
+                return nbd.getGanhoMesIndustria(id, ano);
+            else
+                return nbd.getGanhoMesDistribuidor(id, ano);
         }
     }
 }

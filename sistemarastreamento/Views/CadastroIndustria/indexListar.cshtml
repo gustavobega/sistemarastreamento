@@ -35,20 +35,29 @@
         <i class='bx bx-buildings'></i>
         <h1>Listagem de Indústrias</h1>
     </div>
-    <div class="wrapper">
-        <div class="search_box">
-            <div class="dropdown">
-                <div class="default_option">Nome</div>
-                <ul>
-                    <li>Nome</li>
-                    <li>CNPJ</li>
-                </ul>
-            </div>
-            <div class="search_field">
-                <input type="text" class="input" id="industria" placeholder="Buscar">
-                <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value))"></i>
+
+    <div class="pesquisa">
+
+        <div class="wrapper">
+            <div class="search_box">
+                <div class="dropdown">
+                    <div class="default_option">Nome</div>
+                    <ul>
+                        <li>Nome</li>
+                        <li>CNPJ</li>
+                    </ul>
+                </div>
+                <div class="search_field">
+                    <input type="text" class="input" id="industria" placeholder="Buscar">
+                    <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value))"></i>
+                </div>
             </div>
         </div>
+
+        <div class="retorno" id="retorno">
+            Retorno - 0
+        </div>
+
     </div>
 
     <div class="table-box" id="table">

@@ -8,28 +8,19 @@
         var cod_ref = document.getElementById("cod_ref").value;
         var descricao = document.getElementById("descricao").value;
 
-        var msgerror = document.getElementById("error");
-        var msgsucess = document.getElementById("sucess");
-
-        msgerror.innerHTML = "";
-        msgerror.style.display = "none";
-
-        msgsucess.innerHTML = "";
-        msgsucess.style.display = "none";
-
         if (cod_ref.trim() == "") {
-            msgerror.innerHTML = "Preencha o Código de Referência";
-            if (msgsucess.style.display == "block")
-                msgsucess.style.display = "none";
-
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o Código de Referência!'
+            })
         }
         else if (descricao.trim() == "") {
-            msgerror.innerHTML = "Preencha a Descrição";
-            if (msgsucess.style.display == "block")
-                msgsucess.style.display = "none";
-
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Descrição!'
+            })
         }
         else {
             var dados = {
@@ -54,18 +45,22 @@
                 .then(function (dadosObj) {
                     if (dadosObj.operacao) {
                         if (id == 0) {
-                            msgsucess.innerHTML = "Cadastro Realizado!";
-                            if (msgerror.style.display == "block")
-                                msgerror.style.display = "none";
-                            msgsucess.style.display = "block";
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Cadastro Realizado com Sucesso!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         }
                         else {
-                            msgsucess.innerHTML = "Alteração Realizado!";
-                            if (msgerror.style.display == "block")
-                                msgerror.style.display = "none";
-                            msgsucess.style.display = "block";
-
-                            window.location.href = "/CadastroProdIndust/indexListar";
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Alteração Realizado com Sucesso!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         }
                         document.getElementById("cod_ref").value = "";
                         document.getElementById("descricao").value = "";
@@ -104,9 +99,6 @@
                 alert("deu erro")
             })
 
-    },
-    limpaInfo: function () {
-        document.getElementById("sucess").style.display = 'none';
     }
 }
 

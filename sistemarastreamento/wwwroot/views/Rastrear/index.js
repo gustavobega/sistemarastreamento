@@ -4,22 +4,26 @@
         var codigo = document.getElementById('codigo').value
         var hospital = document.getElementById('hospital').value
 
-        var sucess = document.getElementById('sucess')
-        var error = document.getElementById('error')
-        sucess.style.display = 'none'
-        error.style.display = 'none'
-
         if (lote.trim() == "") {
-            error.innerHTML = "Informe o Lote!";
-            error.style.display = 'block'
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe o Lote!'
+            })
         }
         else if (codigo.trim() == "") {
-            error.innerHTML = "Informe o Código!";
-            error.style.display = 'block'
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe o Código!'
+            })
         }
         else if (hospital.trim() == "") {
-            error.innerHTML = "Informe o Hospital!";
-            error.style.display = 'block'
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe o Hospital!'
+            })
         }
         else {
             document.getElementById('btnbuscar').value = 'aguarde...'
@@ -48,8 +52,22 @@
                 })
                 .then(function (dadosObj) {
                     if (dadosObj.operacao) {
-                        sucess.innerHTML = 'Item encontrado com sucesso!'
-                        sucess.style.display = 'block'
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Item encontrado com sucesso!'
+                        })
                         //printa buscar
                         document.getElementById('dadosbusca').innerHTML = `
                             <div class="descricao">
@@ -80,8 +98,11 @@
                         `
                     }
                     else {
-                        error.innerHTML = 'Item não encontrado, reveja os campos!'
-                        error.style.display = 'block'
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Item não encontrado, reveja os campos!'
+                        })
                         document.getElementById('dadosbusca').innerHTML = '<h5>aguardando...</h5>'
                     }
                     document.getElementById('btnbuscar').value = 'Buscar'

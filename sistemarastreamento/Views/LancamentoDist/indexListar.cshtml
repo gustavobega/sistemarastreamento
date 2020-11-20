@@ -34,20 +34,29 @@
         <i class='bx bxs-rocket'></i>
         <h1>Listagem de Vendas</h1>
     </div>
-    <div class="wrapper">
-        <div class="search_box">
-            <div class="dropdown">
-                <div class="default_option">Número</div>
-                <ul>
-                    <li>Número</li>
-                    <li>Data</li>
-                </ul>
-            </div>
-            <div class="search_field">
-                <input type="text" class="input" id="numero" placeholder="Buscar">
-                <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value), @Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[3].Value))"></i>
+
+    <div class="pesquisa">
+
+        <div class="wrapper">
+            <div class="search_box">
+                <div class="dropdown">
+                    <div class="default_option">Número</div>
+                    <ul>
+                        <li>Número</li>
+                        <li>Data</li>
+                    </ul>
+                </div>
+                <div class="search_field">
+                    <input type="text" class="input" id="numero" placeholder="Buscar">
+                    <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value), @Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[3].Value))"></i>
+                </div>
             </div>
         </div>
+
+        <div class="retorno" id="retorno">
+            Retorno - 0
+        </div>
+
     </div>
 
     <div class="table-box" id="table">

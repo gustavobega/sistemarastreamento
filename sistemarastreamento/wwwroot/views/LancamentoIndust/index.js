@@ -2,13 +2,14 @@
 
     btnImportar: function () {
 
-        document.getElementById("error").style.display = 'none';
-
         var carrega = document.getElementById("carrega");
 
         if (document.getElementById("xml").files.length == 0) {
-            document.getElementById("error").innerHTML = "Selecione um Arquivo";
-            document.getElementById("error").style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Selecione um Arquivo!'
+            })
         }
         else {
             var file = document.getElementById("xml").files[0];
@@ -31,9 +32,13 @@
                 })
                 .then(function (dadosObj) {
                     if (dadosObj.operacao) {    
-                        document.getElementById("error").style.display = "none";
-                        document.getElementById("sucess").innerHTML = dadosObj.msg;
-                        document.getElementById("sucess").style.display = "block";
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: dadosObj.msg,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
 
                         //cadastro/altera no estoque também
                         var cnpjdist = dadosObj.cnpjdist;
@@ -62,16 +67,20 @@
                             })
                     }
                     else {
-                        document.getElementById("sucess").style.display = "none";
-                        document.getElementById("error").innerHTML = dadosObj.msg;
-                        document.getElementById("error").style.display = "block";
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: dadosObj.msg
+                        })
                     }
                     
                 })
                 .catch(function () {
-                    document.getElementById("sucess").style.display = "none";
-                    document.getElementById("error").innerHTML = "Algo deu Errado, Tente Novamente! </br>";
-                    document.getElementById("error").style.display = "block";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo deu Errado, Tente Novamente!'
+                    })
                 })
                 .finally(function () {
                     carrega.innerHTML = "";

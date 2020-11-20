@@ -41,88 +41,133 @@ var index = {
         var cidade = document.getElementById("selCidade").value;
         var perfilId = document.getElementById("hfperfilId").value;
 
-        var msgerro = document.getElementById("error");
-        var msgsucess = document.getElementById("sucess");
-
-        msgerro.innerHTML = "";
-        msgerro.style.display = "none";
-
-        msgsucess.innerHTML = "";
-        msgsucess.style.display = "none";
-
         var checkemail = index.validacaoEmail(email);
 
         if (cnpj.trim() == "") {
-            msgerro.innerHTML = "Preencha o CNPJ";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o CNPJ!'
+            })
         }
         else if (cnpj.length < 18) {
-            msgerro.innerHTML = "Preencha todos os numéros do CNPJ";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os numéros do CNPJ!'
+            })
         }
         else if (ie.trim() == "") {
-            msgerro.innerHTML = "Preencha a Inscrição Estadual </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Inscrição Estadual!'
+            })
         }
         else if (ie.length < 13) {
-            msgerro.innerHTML = "Preencha todos os numéros da Inscrição Estadual";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os numéros da Inscrição Estadual!'
+            })
         }
         else if (nome.trim() == "") {
-            msgerro.innerHTML = "Preencha o Nome </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o Nome!'
+            })
         }
         else if (representante.trim() == "") {
-            msgerro.innerHTML = "Preencha o representante </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o representante!'
+            })
         }
         else if (telefone.trim() == "") {
-            msgerro.innerHTML = "Preencha o telefone </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o telefone!'
+            })
         }
         else if (selUF.selectedIndex == 0) {
-            msgerro.innerHTML = "Preencha a UF </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a UF!'
+            })
         }
         else if (selCidade.selectedIndex == 0) {
-            msgerro.innerHTML = "Preencha a Cidade </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Cidade!'
+            })
         }
         else if (rua.trim() == "") {
-            msgerro.innerHTML = "Preencha a rua </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a rua!'
+            })
         }
         else if (numero.trim() == "") {
-            msgerro.innerHTML = "Preencha o número </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o número!'
+            })
         }
         else if (bairro.trim() == "") {
-            msgerro.innerHTML = "Preencha o bairro </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o bairro!'
+            })
         }
         else if (email.trim() == "") {
-            msgerro.innerHTML = "Preencha o E-mail </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o E-Mail!'
+            })
         }
         else if (!checkemail) {
-            msgerro.innerHTML = "E-mail inválido </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'E-mail inválido!'
+            })
         }
         else if (perfilId == 0) {
-            msgerro.innerHTML = "Preencha o perfil </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o perfil!'
+            })
         }
         else if (senha.trim() == "") {
-            msgerro.innerHTML = "Preencha a senha </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a senha!'
+            })
         }
         else if (senhaConf.trim() == "") {
-            msgerro.innerHTML = "Confirme a senha </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Confirme a senha!'
+            })
         }
         else if (senha.trim() != senhaConf.trim()) {
-            msgerro.innerHTML = "Senhas diferentes </br>";
-            msgerro.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Senhas diferentes!'
+            })
         }
         else {
             var dados = {
@@ -185,21 +230,28 @@ var index = {
                             })
                             .then(function (dadosObj) {
                                 if (dadosObj.operacao) {
-                                    msgsucess.innerHTML = "Cadastro Realizado!";
-                                    msgsucess.style.display = "block";
+                                    index.limpacampos();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Cadastro Realizado com Sucesso!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                 }
-
-                                window.location.href = "/Login";
                             })
                             .catch(function (e) {
                                 alert("deu erro");
                             })
                     }
                     else if (id > 0) {
-                        msgsucess.innerHTML = "Alteração Realizado!";
-                        msgsucess.style.display = "block";
-
-                        window.location.href = "/CadastroDistribuidor/indexListar";
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Alteração Realizado com Sucesso!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
   
                 })
@@ -338,6 +390,22 @@ var index = {
         document.getElementById("hfperfilId").value = id;
         document.getElementById("perfilNome").value = nome;
         $.fancybox.close();
+    },
+    limpacampos: function () {
+        document.getElementById("cnpj").value = "";
+        document.getElementById("nome").value = "";
+        document.getElementById("ie").value = "";
+        document.getElementById("representante").value = "";
+        document.getElementById("rua").value = "";
+        document.getElementById("numero").value = "";
+        document.getElementById("bairro").value = "";
+        document.getElementById("telefone").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("senha").value = "";
+        document.getElementById("senhaConf").value = "";
+        document.getElementById("perfilNome").value = "";
+        document.getElementById("selUF").selectedIndex = 26;
+        index.buscarCidades(26);
     }
 }
 

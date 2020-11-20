@@ -42,89 +42,133 @@ var index = {
         var cidade = document.getElementById("selCidade").value;
         var perfilId = document.getElementById("hfperfilId").value;
 
-        var msgerror = document.getElementById("error");
-        var msgsucess = document.getElementById("sucess");
-
-        msgerror.innerHTML = "";
-        msgsucess.innerHTML = "";
-
-        msgerror.style.display = "none";
-        msgsucess.style.display = "none";
-
         var checkemail = index.validacaoEmail(email);
 
         if (cnpj.trim() == "") {
-            msgerror.innerHTML = "Preencha o CNPJ";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o CNPJ!'
+            })
         }
         else if (cnpj.length < 18) {
-            msgerror.innerHTML = "Preencha todos os numéros do CNPJ";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os numéros do CNPJ!'
+            })
         }
         else if (ie.trim() == "") {
-            msgerror.innerHTML= "Preencha a Inscrição Estadual </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Inscrição Estadual!'
+            })
         }
         else if (ie.length < 13) {
-            msgerror.innerHTML = "Preencha todos os numéros da Inscrição Estadual";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os numéros da Inscrição Estadual!'
+            })
         }
         else if (nome.trim() == "") {
-            msgerror.innerHTML = "Preencha o Nome </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o Nome!'
+            })
         }
         else if (representante.trim() == "") {
-            msgerror.innerHTML = "Preencha o representante </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o representante!'
+            })
         }
         else if (telefone.trim() == "") {
-            msgerror.innerHTML = "Preencha o telefone </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o telefone!'
+            })
         }
-        else if (selUF.selectedIndex  == 0) {
-            msgerror.innerHTML = "Preencha a UF </br>";
-            msgerror.style.display = "block";
+        else if (selUF.selectedIndex == 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a UF!'
+            })
         }
         else if (selCidade.selectedIndex == 0) {
-            msgerror.innerHTML = "Preencha a Cidade </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Cidade!'
+            })
         }
         else if (rua.trim() == "") {
-            msgerror.innerHTML = "Preencha a rua </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a rua!'
+            })
         }
         else if (numero.trim() == "") {
-            msgerror.innerHTML = "Preencha o número </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o número!'
+            })
         }
         else if (bairro.trim() == "") {
-            msgerror.innerHTML = "Preencha o bairro </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o bairro!'
+            })
         }
         else if (email.trim() == "") {
-            msgerror.innerHTML = "Preencha o E-mail </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o E-Mail!'
+            })
         }
-        else if (!checkemail)
-        {
-            msgerror.innerHTML = "E-mail inválido </br>";
-            msgerror.style.display = "block";
+        else if (!checkemail) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'E-mail inválido!'
+            })
         }
         else if (perfilId == 0) {
-            msgerror.innerHTML = "Preencha o Perfil </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o perfil!'
+            })
         }
         else if (senha.trim() == "") {
-            msgerror.innerHTML = "Preencha a senha </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a senha!'
+            })
         }
         else if (senhaConf.trim() == "") {
-            msgerror.innerHTML = "Confirme a senha </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Confirme a senha!'
+            })
         }
         else if (senha.trim() != senhaConf.trim()) {
-            msgerror.innerHTML = "Senhas diferentes </br>";
-            msgerror.style.display = "block";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Senhas diferentes!'
+            })
         }
         else {
             var dados = {
@@ -152,7 +196,7 @@ var index = {
                 body: JSON.stringify(dados)  //serializa
             };
 
-            fetch("/CadastroIndustria/Criar?id="+id, config)
+            fetch("/CadastroIndustria/Criar?id=" + id, config)
                 .then(function (dadosJson) {
                     var obj = dadosJson.json(); //deserializando
                     return obj;
@@ -187,11 +231,14 @@ var index = {
                             })
                             .then(function (dadosObj) {
                                 if (dadosObj.operacao) {
-                                    msgsucess.innerHTML = "Cadastro Realizado!";
-                                    msgsucess.style.display = "block";
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Cadastro Realizado com Sucesso!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                 }
-
-                                window.location.href = "/Login";
                             })
                             .catch(function (e) {
                                 alert("deu erro");
@@ -221,17 +268,21 @@ var index = {
                             })
                             .then(function (dadosObj) {
                                 if (dadosObj.operacao) {
-                                    msgsucess.innerHTML = "Alteração Realizado!";
-                                    msgsucess.style.display = "block";
+                                    index.limpacampos();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Alteração Realizado com Sucesso!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                 }
-
-                                window.location.href = "/CadastroIndustria/indexListar";
                             })
                             .catch(function (e) {
                                 alert("deu erro");
-                            })    
+                            })
                     }
-                        
+
                 })
                 .catch(function (e) {
                     alert("deu erro");
@@ -366,6 +417,22 @@ var index = {
         document.getElementById("hfperfilId").value = id;
         document.getElementById("perfilNome").value = nome;
         $.fancybox.close();
+    },
+    limpacampos: function () {
+        document.getElementById("cnpj").value = "";
+        document.getElementById("nome").value = "";
+        document.getElementById("ie").value = "";
+        document.getElementById("representante").value = "";
+        document.getElementById("rua").value = "";
+        document.getElementById("numero").value = "";
+        document.getElementById("bairro").value = "";
+        document.getElementById("telefone").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("senha").value = "";
+        document.getElementById("senhaConf").value = "";
+        document.getElementById("perfilNome").value = "";
+        document.getElementById("selUF").selectedIndex = 26;
+        index.buscarCidades(26);
     }
 }
 

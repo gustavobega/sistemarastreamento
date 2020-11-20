@@ -10,10 +10,17 @@
 }
 
 .dados .info {
+    display: flex;
+    flex-direction: row;
     text-align: center;
-    padding-right: 120px;
+    justify-content: center;
+    align-items: center;
+    padding-right: 100px;
     color: #4682B4;
-    text-decoration: underline;
+}
+
+.dados i {
+    font-size: 25px;
 }
 
 .dados .ano {
@@ -52,12 +59,24 @@
     width: 156px;
 }
 
-.opcoes i{
-    color: #4682B4; 
+.item {
+    font-size: 17px;
+    padding-bottom: 10px;
 }
 
-.opcoes i:hover{
-    color: #38526f; 
+.item a {
+    text-decoration: none;
+    color: #4682B4;
+    padding: 5px;
+}
+
+.item a:hover {
+    color: #1f1e37;
+}
+
+.bx {
+    font-size: 20px;
+    margin-right: 5px;
 }
 
 .active {

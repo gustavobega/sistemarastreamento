@@ -96,7 +96,7 @@ namespace sistemarastreamento.DAO
 
             List<Models.NotaFiscal> notas = new List<Models.NotaFiscal>();
 
-            string select = "";
+            string select;
             numero = numero.Trim();
             var parametros = _bd.GerarParametros();
 
@@ -136,7 +136,7 @@ namespace sistemarastreamento.DAO
         {
 
             List<Models.NotaFiscal> notas = new List<Models.NotaFiscal>();
-            string select = "";
+            string select;
             numero = numero.Trim();
             var parametros = _bd.GerarParametros();
             if (tipo.ToUpper() == "NÚMERO")
@@ -179,12 +179,12 @@ namespace sistemarastreamento.DAO
         public List<int> getQtdNotaMesIndustria(int id_indust, string ano)
         {
             var qtdNotas = new List<int>();
-            string select = "";
+            string select;
 
             for (int i = 0; i < 12; i++)
                 qtdNotas.Add(0);
 
-            DataTable dt = null;
+            DataTable dt;
 
             select = "SELECT data FROM nota_fiscal WHERE Year(data) = " + ano + " and id_indust = " + id_indust;
             dt = _bd.ExecutarSelect(select);
@@ -203,7 +203,7 @@ namespace sistemarastreamento.DAO
         public List<int> getQtdNotaMesDistribuidor(int id_dist, string ano)
         {
             var qtdNotas = new List<int>();
-            string select = "";
+            string select;
 
             for (int i = 0; i < 12; i++)
                 qtdNotas.Add(0);
@@ -222,6 +222,54 @@ namespace sistemarastreamento.DAO
             }
 
             return qtdNotas;
+        }
+
+        public List<decimal> getGanhoMesIndustria(int id_indust, string ano)
+        {
+            var ganhos = new List<decimal>();
+            string select;
+
+            for (int i = 0; i < 12; i++)
+                ganhos.Add(0);
+
+            DataTable dt;
+
+            select = "SELECT data,valor_nf FROM nota_fiscal WHERE Year(data) = " + ano + " and id_indust = " + id_indust;
+            dt = _bd.ExecutarSelect(select);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                int mes = Convert.ToDateTime(dr["data"]).Month;
+
+                ganhos[mes - 1] += Convert.ToDecimal(dr["valor_nf"]);
+            }
+
+            return ganhos;
+        }
+
+        public List<decimal> getGanhoMesDistribuidor(int id_dist, string ano)
+        {
+            var ganhos = new List<decimal>();
+            string select = "";
+
+            for (int i = 0; i < 12; i++)
+                ganhos.Add(0);
+
+            DataTable dt = null;
+
+            select = "SELECT data,valor_nf FROM nota_fiscal WHERE Year(data) = " + ano + " and id_dist = " + id_dist;
+            dt = _bd.ExecutarSelect(select);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                int mes = Convert.ToDateTime(dr["data"]).Month;
+
+                ganhos[mes - 1] += Convert.ToDecimal(dr["valor_nf"]);
+            }
+
+            return ganhos;
         }
 
         public bool Excluir(int id)
