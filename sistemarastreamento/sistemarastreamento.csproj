@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
-    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
-    <Content Include="Rotativa\wkhtmltoimage.exe" />
-    <Content Include="Rotativa\wkhtmltopdf.exe" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\bug_report.md" />
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\feature_request.md" />
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\question.md" />
@@ -29,6 +22,10 @@
     <None Include="wwwroot\lib\fancybox-master\src\js\slideshow.js" />
     <None Include="wwwroot\lib\fancybox-master\src\js\thumbs.js" />
     <None Include="wwwroot\lib\fancybox-master\src\js\wheel.js" />
+    <None Include="wwwroot\Rotativa\help-wkhtmltoimage.txt" />
+    <None Include="wwwroot\Rotativa\help-wkhtmltopdf.txt" />
+    <None Include="wwwroot\Rotativa\wkhtmltoimage.exe" />
+    <None Include="wwwroot\Rotativa\wkhtmltopdf.exe" />
     <None Include="wwwroot\views\CadastroDistribuidor\index.js" />
     <None Include="wwwroot\views\CadastroDistribuidor\indexListar.js" />
     <None Include="wwwroot\views\CadastroIndustria\index.js" />

@@ -96,7 +96,7 @@ namespace sistemarastreamento
             app.UseAuthentication();
             app.UseAuthorization();
 
-            RotativaConfiguration.Setup(env2, "../Rotativa");
+            RotativaConfiguration.Setup(env2, "Rotativa");
 
             app.UseEndpoints(endpoints =>
             {
