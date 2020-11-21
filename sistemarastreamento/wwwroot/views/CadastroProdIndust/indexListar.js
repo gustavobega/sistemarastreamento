@@ -188,7 +188,7 @@
 
                     linhas += template;
                 }
-                document.getElementById('retorno').innerHTML = 'Retorno - ' + dadosObj.length
+                document.getElementById('retorno').innerHTML = dadosObj.length
                 if (dadosObj.length == 0) {
 
                     linhas = `

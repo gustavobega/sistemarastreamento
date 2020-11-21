@@ -131,7 +131,7 @@
             })
     },
     geraGraficoGanho: function () {
-        var ano = document.getElementById('ano').value;
+        var ano = document.getElementById('anoGanho').value;
 
         var config = {
             method: "GET",
@@ -197,6 +197,14 @@ document.getElementById("ano")
         event.preventDefault();
         if (event.keyCode === 13) {
             index.geraGraficoAno();
+        }
+    });
+
+document.getElementById("anoGanho")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            index.geraGraficoGanho();
         }
     });
 

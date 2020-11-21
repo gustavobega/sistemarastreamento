@@ -204,7 +204,7 @@
 
                     linhas += template;
                 }
-                document.getElementById('retorno').innerHTML = 'Retorno - ' + lista.length
+                document.getElementById('retorno').innerHTML = lista.length
                 if (lista.length == 0) {
 
                     linhas = `

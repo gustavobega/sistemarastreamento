@@ -65,6 +65,13 @@
                         document.getElementById("cod_ref").value = "";
                         document.getElementById("descricao").value = "";
                     }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Código já Existente!'
+                        })
+                    }
                 })
                 .catch(function (e) {
                     alert("deu erro");

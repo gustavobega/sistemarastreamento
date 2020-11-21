@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 //para uso da autenticação
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using System.IO;
 using Microsoft.AspNetCore.Http;
 using Rotativa.AspNetCore;
 
@@ -97,7 +96,7 @@ namespace sistemarastreamento
             app.UseAuthentication();
             app.UseAuthorization();
 
-            RotativaConfiguration.Setup(env2);
+            RotativaConfiguration.Setup(env2, "../Rotativa");
 
             app.UseEndpoints(endpoints =>
             {

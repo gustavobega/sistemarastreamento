@@ -4,18 +4,18 @@
         var codigo = document.getElementById('codigo').value
         var hospital = document.getElementById('hospital').value
 
-        if (lote.trim() == "") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Informe o Lote!'
-            })
-        }
-        else if (codigo.trim() == "") {
+        if (codigo.trim() == "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Informe o Código!'
+            })
+        }
+        else if (lote.trim() == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe o Lote!'
             })
         }
         else if (hospital.trim() == "") {

@@ -9,34 +9,52 @@ namespace sistemarastreamento.DAO
     public class ProdutoIndustDAO
     {
         MySqlPersistencia _bd = new MySqlPersistencia();
-        public bool Criar(Models.ProdutoIndust prodindust)
+
+        public bool verificaCodigo(Models.ProdutoIndust prodindust)
         {
-            var parametros = _bd.GerarParametros();
-            //ajustar
-            string sql;
+            string sql = @"select * from produto_industria where cod_ref = " + prodindust.Cod_ref;
 
-            if (prodindust.Id > 0)
-            {
-                sql = @"update produto_industria set cod_ref=@cod_ref, descricao=@descricao, id_indust=@id_indust where id=@id";
-
-                parametros.Add("@id", prodindust.Id);
-            }
-            else
-            {
-                sql = @"insert into produto_industria(cod_ref,descricao,id_indust) values(@cod_ref,@descricao,@id_indust)";
-            }
-
-            parametros.Add("@cod_ref", prodindust.Cod_ref);
-            parametros.Add("@descricao", prodindust.Descricao);
-            parametros.Add("@id_indust", prodindust.Id_indust);
-
-            int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
+            //é uma inserção
             if (prodindust.Id == 0)
             {
-                prodindust.Id = _bd.UltimoId;
+                DataTable dt = _bd.ExecutarSelect(sql);
+                return dt.Rows.Count > 0;
             }
 
-            return linhasAfetadas > 0;
+            return false;
+        }
+        public bool Criar(Models.ProdutoIndust prodindust)
+        {
+            //verifica se o código ja foi inserido
+            if (!verificaCodigo(prodindust))
+            {
+                var parametros = _bd.GerarParametros();
+                string sql;
+
+                if (prodindust.Id > 0)
+                {
+                    sql = @"update produto_industria set cod_ref=@cod_ref, descricao=@descricao, id_indust=@id_indust where id=@id";
+
+                    parametros.Add("@id", prodindust.Id);
+                }
+                else
+                {
+                    sql = @"insert into produto_industria(cod_ref,descricao,id_indust) values(@cod_ref,@descricao,@id_indust)";
+                }
+
+                parametros.Add("@cod_ref", prodindust.Cod_ref);
+                parametros.Add("@descricao", prodindust.Descricao);
+                parametros.Add("@id_indust", prodindust.Id_indust);
+
+                int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
+                if (prodindust.Id == 0)
+                {
+                    prodindust.Id = _bd.UltimoId;
+                }
+
+                return linhasAfetadas > 0;
+            }
+            return false;
         }
 
         public List<Models.ProdutoIndust> Pesquisar(string produto, int id_indust, string tipo)

@@ -10,33 +10,51 @@ namespace sistemarastreamento.DAO
     {
         MySqlPersistencia _bd = new MySqlPersistencia();
 
+        public bool verificaCodigo(Models.ProdutoDist proddist)
+        {
+            string sql = @"select * from produto_distribuidor where cod_ref = " + proddist.Cod_ref;
+
+            //é uma inserção
+            if (proddist.Id == 0)
+            {
+                DataTable dt = _bd.ExecutarSelect(sql);
+                return dt.Rows.Count > 0;
+            }
+
+            return false;
+        }
         public bool Criar(Models.ProdutoDist proddist)
         {
-            var parametros = _bd.GerarParametros();
-            string sql;
-
-            if (proddist.Id > 0)
+            if (!verificaCodigo(proddist))
             {
-                sql = @"update produto_distribuidor set cod_ref=@cod_ref, id_dist=@id_dist, cod_prod_dist=@cod_prod_dist where id=@id";
+                var parametros = _bd.GerarParametros();
+                string sql;
 
-                parametros.Add("@id", proddist.Id);
+                if (proddist.Id > 0)
+                {
+                    sql = @"update produto_distribuidor set cod_ref=@cod_ref, id_dist=@id_dist, cod_prod_dist=@cod_prod_dist where id=@id";
+
+                    parametros.Add("@id", proddist.Id);
+                }
+                else
+                {
+                    sql = @"insert into produto_distribuidor(cod_ref,id_dist,cod_prod_dist) values(@cod_ref,@id_dist,@cod_prod_dist)";
+                }
+
+                parametros.Add("@cod_ref", proddist.Cod_ref);
+                parametros.Add("@id_dist", proddist.Id_dist);
+                parametros.Add("@cod_prod_dist", proddist.Cod_prod_dist);
+
+                int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
+                if (proddist.Id == 0)
+                {
+                    proddist.Id = _bd.UltimoId;
+                }
+
+                return linhasAfetadas > 0;
             }
-            else
-            {
-                sql = @"insert into produto_distribuidor(cod_ref,id_dist,cod_prod_dist) values(@cod_ref,@id_dist,@cod_prod_dist)";
-            }
 
-            parametros.Add("@cod_ref", proddist.Cod_ref);
-            parametros.Add("@id_dist", proddist.Id_dist);
-            parametros.Add("@cod_prod_dist", proddist.Cod_prod_dist);
-
-            int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
-            if (proddist.Id == 0)
-            { 
-                proddist.Id = _bd.UltimoId;
-            }
-
-            return linhasAfetadas > 0;
+            return false;   
         }
 
         public DataTable Pesquisar(string descricao, int id_dist, string tipo)

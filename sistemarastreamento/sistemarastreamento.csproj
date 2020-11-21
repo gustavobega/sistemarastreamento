@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\bug_report.md" />
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\feature_request.md" />
     <None Include="wwwroot\lib\fancybox-master\.github\ISSUE_TEMPLATE\question.md" />

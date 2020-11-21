@@ -84,6 +84,14 @@
                         document.getElementById("codigo").value = "";
                         document.getElementById("lote").value = "";
                         document.getElementById("saldo").value = "";
+                        document.getElementById("sucess").style.display = "none";
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Código já Existente!'
+                        })
                     }
                 })
                 .catch(function (e) {
