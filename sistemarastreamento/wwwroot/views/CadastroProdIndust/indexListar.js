@@ -110,10 +110,10 @@
                                         <div class="table-cell">
                                             <p>Código de Referência</p>
                                         </div>
-                                        <div class="table-cell">
+                                        <div class="table-cell table-cell-descricao">
                                             <p>Descrição</p>
                                         </div>
-                                        <div class="table-cell last-cell">
+                                        <div class="table-cell last-cell headacoes">
                                             <p>Açoes</p>
                                         </div>
                                     </div>
@@ -151,10 +151,10 @@
                             <div class="table-cell">
                                 <p>Código de Referência</p>
                             </div>
-                            <div class="table-cell">
+                            <div class="table-cell table-cell-descricao">
                                 <p>Descrição</p>
                             </div>
-                            <div class="table-cell last-cell">
+                            <div class="table-cell last-cell headacoes">
                                 <p>Açoes</p>
                             </div>
                         </div>
@@ -171,10 +171,10 @@
                             <div class="table-cell">
                                 <p>${dadosObj[i].cod_ref}</p>
                             </div>
-                            <div class="table-cell">
+                            <div class="table-cell table-cell-descricao">
                                 <p>${dadosObj[i].descricao}</p>
                             </div>
-                            <div class="table-cell last-cell">
+                            <div class="table-cell last-cell acoes">
                                 <div class="dropdown" onclick="indexListar.block(${dadosObj[i].id})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
                                     <div class="dropdown-content" id="acoesoption${dadosObj[i].id}" style="display: none;">
@@ -199,10 +199,10 @@
                                 <div class="table-cell">
                                     <p>Código de Referência</p>
                                 </div>
-                                <div class="table-cell">
+                                <div class="table-cell table-cell-descricao">
                                     <p>Descrição</p>
                                 </div>
-                                <div class="table-cell last-cell">
+                                <div class="table-cell last-cell headacoes">
                                     <p>Açoes</p>
                                 </div>
                             </div>
