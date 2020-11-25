@@ -36,10 +36,10 @@ namespace sistemarastreamento.Models
         public string Estado { get => _estado; set => _estado = value; }
         public string Cep { get => _cep; set => _cep = value; }
 
-        public bool salvar(Dictionary<string,string> rastro)
+        public bool salvar(List<string> rastroCod, List<string> rastroLote)
         {
             DAO.RastroDAO rbd = new DAO.RastroDAO();
-            return rbd.Criar_Destino(rastro,this);
+            return rbd.Criar_Destino(rastroCod, rastroLote, this);
         }
     }
 }

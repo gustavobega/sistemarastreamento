@@ -12,7 +12,7 @@ namespace sistemarastreamento.DAO
 
         public bool verificaCodigo(Models.ProdutoIndust prodindust)
         {
-            string sql = @"select * from produto_industria where cod_ref = " + prodindust.Cod_ref;
+            string sql = @"select * from produto_industria where cod_ref = '" + prodindust.Cod_ref + "'";
 
             //é uma inserção
             if (prodindust.Id == 0)
@@ -97,7 +97,6 @@ namespace sistemarastreamento.DAO
             List<Models.ProdutoIndust> produtos = new List<Models.ProdutoIndust>();
             string select =  @"select * from produto_industria where id_indust = " + id_indust;
 
-            var parametros = _bd.GerarParametros();
             DataTable dt = _bd.ExecutarSelect(select);
 
             foreach (DataRow row in dt.Rows)

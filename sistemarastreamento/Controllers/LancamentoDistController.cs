@@ -52,7 +52,7 @@ namespace sistemarastreamento.Controllers
             string msg;
             int id_nota = 0;
             string infoadicionais = "";
-            string extension = System.IO.Path.GetExtension(xmlFile.FileName);
+            string extension = Path.GetExtension(xmlFile.FileName);
             CamadaNegocio.NotaCamadaNegocio ncn = new CamadaNegocio.NotaCamadaNegocio();
 
             if (extension != ".xml")
@@ -100,7 +100,7 @@ namespace sistemarastreamento.Controllers
         public IActionResult AlteraEstoque(int id_nota)
         {
             bool operacao = true;
-            int id_dist = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
+            //int id_dist = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
 
             List<Models.ItemNota> itens = new List<Models.ItemNota>();
             CamadaNegocio.ItemNotaCamadaNegocio icn = new CamadaNegocio.ItemNotaCamadaNegocio();
@@ -178,7 +178,9 @@ namespace sistemarastreamento.Controllers
             CamadaNegocio.EstoqueCamadaNegocio ecn = new CamadaNegocio.EstoqueCamadaNegocio();
 
             //dados para rastreamento
-            Dictionary<string, string> rastro = new Dictionary<string, string>();
+            List<string> rastroCod = new List<string>();
+            List<string> rastroLote = new List<string>();
+
             List<string> codProd = new List<string>();
 
             XmlNodeList xnList, xnList2;
@@ -315,7 +317,8 @@ namespace sistemarastreamento.Controllers
 
                         itemnota.Valor_unit = GetDouble(xnList[i]["vUnTrib"].InnerText, 0d);
 
-                        rastro.Add(codProd[i], itemnota.Lote);
+                        rastroCod.Add(codProd[i]);
+                        rastroLote.Add(itemnota.Lote);
                         operacao = incn.Criar(itemnota);
                     }
                 }
@@ -344,7 +347,7 @@ namespace sistemarastreamento.Controllers
                 destino.Estado = xnList[0]["UF"].InnerText;
                 destino.Cep = xnList[0]["CEP"].InnerText;
 
-                destino.salvar(rastro);
+                destino.salvar(rastroCod,rastroLote);
 
                 return (operacao, "Dados Importados!", notamodelo.Id, dadosadd);
             }

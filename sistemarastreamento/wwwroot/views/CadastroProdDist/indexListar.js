@@ -74,28 +74,6 @@
         }) 
     },
 
-    alterar: function (id) {
-        var config = {
-            method: "GET",
-            headers: {
-                
-            },
-            credentials: 'include', //inclui cookies
-        };
-
-        fetch("/CadastroProdDist/Editar?id=" + id, config)
-            .then(function (dadosJson) {
-                var obj = dadosJson.json(); //deserializando
-                return obj;
-            })
-            .then(function (dadosObj) {
-                
-            })
-            .catch(function () {
-                alert("Deu erro.")
-            })
-    },
-
     btnPesquisarOnClick: function (perfil) {
         document.getElementById("iconsearch").disabled = true;
 
@@ -103,7 +81,7 @@
         tbodyProdutos.innerHTML = `
                                    <div class="table-row table-head">
                                         <div class="table-cell first-cell">
-                                            <p>Id</p>
+                                            <p>Código de Referência</p>
                                         </div>
                                         <div class="table-cell">
                                             <p>Código</p>
@@ -150,7 +128,7 @@
                 var linhas = ` 
                         <div class="table-row table-head">
                             <div class="table-cell first-cell">
-                                <p>Id</p>
+                                <p>Código de Referência</p>
                             </div>
                             <div class="table-cell">
                                 <p>Código</p>
@@ -176,7 +154,7 @@
                         `
                         <div class="table-row" id="${lista[i]['id']}">
                             <div class="table-cell first-cell">
-                                <p>${lista[i]['id']}</p>
+                                <p>${lista[i]['cod_ref']}</p>
                             </div>
                             <div class="table-cell">
                                 <p>${lista[i]['codigo']}</p>
@@ -210,7 +188,7 @@
                     linhas = `
                             <div class="table-row table-head">
                                 <div class="table-cell first-cell">
-                                    <p>Id</p>
+                                    <p>Código de Referência</p>
                                 </div>
                                 <div class="table-cell">
                                     <p>Código</p>

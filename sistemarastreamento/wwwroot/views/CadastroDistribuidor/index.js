@@ -170,6 +170,11 @@ var index = {
             })
         }
         else {
+
+            document.getElementById('btnCadastrar').value = 'aguarde...'
+            document.getElementById('btnCadastrar').style.background = '#5092c8'
+            document.getElementById('gif-login').style.display = 'block'
+
             var dados = {
                 cnpj,
                 nome,
@@ -253,6 +258,9 @@ var index = {
                             timer: 1500
                         })
                     }
+                    document.getElementById('btnCadastrar').value = 'Cadastrar'
+                    document.getElementById('gif-login').style.display = 'none'
+                    document.getElementById('btnCadastrar').style.background = '#4682B4'
   
                 })
                 .catch(function (e) {

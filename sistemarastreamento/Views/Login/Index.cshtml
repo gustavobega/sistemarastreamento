@@ -17,10 +17,20 @@
             <div class="signin-signup">
                 <form class="sign-in-form">
                     <h2 class="title">Logar</h2>
-                    <select class="tipo" id="tipo">
-                        <option>Indústria</option>
-                        <option>Distribuidor</option>
-                    </select>
+                    
+                    <div class="radiobox">
+                        <label class="custom-radio-btn">
+                            <input type="radio" name="size" id="industria" checked="checked" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <p id="texto1">Indústria</p>
+                        <label class="custom-radio-btn">
+                            <input type="radio" name="size" id="distribuidor" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <p>Distribuidor</p>
+                    </div>
+                    
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" id="email" placeholder="E-mail" />
@@ -29,11 +39,10 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" id="senha" placeholder="Senha" />
                     </div>
-                    <div class="error" id="error" style="display: none;"></div>
                     <div class="botaoEntrar">
                         <input type="button" value="Entrar" class="btn solid" id="btnLogar" onclick="index.btnLogar()" />
-                        <img class="loading-login" id="gif-login" src="~/img/loading-login.gif" style="width: 50px; height: 45px; display: none;"/>
-                    </div>    
+                        <img class="loading-login" id="gif-login" src="~/img/loading-login.gif" style="width: 50px; height: 45px; display: none;" />
+                    </div>
                 </form>
                 <form action="#" class="sign-up-form">
                     <h2 class="title">Rastro+</h2>
@@ -75,5 +84,6 @@
     </div>
 
     <script src="~/views/Login/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>

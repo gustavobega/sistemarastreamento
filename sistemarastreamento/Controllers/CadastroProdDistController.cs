@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -37,6 +35,7 @@ namespace sistemarastreamento.Controllers
         public IActionResult Criar([FromBody] Dictionary<string, string> dados, int id)
         {
             bool operacao;
+            string msg;
 
             Models.ProdutoDist proddist = new Models.ProdutoDist();
             proddist.Id = id;
@@ -45,12 +44,12 @@ namespace sistemarastreamento.Controllers
             proddist.Cod_prod_dist = dados["codigo"];
 
             CamadaNegocio.ProdDistCamadaNegocio pcn = new CamadaNegocio.ProdDistCamadaNegocio();
-            operacao = pcn.Criar(proddist);
+            (operacao, msg) = pcn.Criar(proddist, dados["lote"]);
 
             if (operacao)
             {
                 //cadastro no estoque
-                Models.ProdutoIndust pi = new Models.ProdutoIndust();
+                Models.ProdutoIndust pi;
                 CamadaNegocio.ProdIndustCamadaNegocio picn = new CamadaNegocio.ProdIndustCamadaNegocio();
                 pi = picn.ObterProd(proddist.Cod_ref);
 
@@ -66,7 +65,8 @@ namespace sistemarastreamento.Controllers
             
             return Json(new
             {
-                operacao
+                operacao,
+                msg
             });
         }
 
@@ -98,6 +98,7 @@ namespace sistemarastreamento.Controllers
                     var produtoLimpo = new
                     {
                         id = dr["id"],
+                        cod_ref = dr["cod_ref"],
                         codigo = dr["cod_prod_dist"],
                         descricao = dr["descricao"],
                         lote = dr["lote"],

@@ -1,0 +1,50 @@
+﻿@model System.Data.DataTable
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Relatório</title>
+
+    <link href="~/css/style-relatorio.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Relatório de Estoque</h1>
+    <hr />
+    <div style="padding-top: 40px;"></div>
+    <table>
+        <tr>
+
+            <th>Código de Referência</th>
+
+            <th>Código</th>
+
+            <th>Descrição</th>
+
+            <th>Lote</th>
+
+            <th>Saldo </th>
+
+        </tr>
+
+        @{
+            int j = 0;
+            while (j < Model.Rows.Count)
+            {
+                System.Data.DataRow dr = Model.Rows[j];
+                <tr>
+                    <td>@dr["cod_ref"]</td>
+                    <td>@dr["cod_prod_dist"]</td>
+                    <td class="descricao">@dr["descricao"]</td>
+                    <td>@dr["lote"]</td>
+                    <td>@dr["saldo"]</td>
+                </tr>
+                j++;
+            }
+        }
+
+    </table>
+    <div class="espaco"></div>
+
+</body>
+</html>

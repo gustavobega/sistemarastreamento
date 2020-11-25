@@ -34,7 +34,7 @@ namespace sistemarastreamento.Controllers
             string msg;
             int id_nota = 0;
             string cnpjdist = "";
-            string extension = System.IO.Path.GetExtension(xmlFile.FileName);
+            string extension = Path.GetExtension(xmlFile.FileName);
             CamadaNegocio.NotaCamadaNegocio ncn = new CamadaNegocio.NotaCamadaNegocio();
 
             if (extension != ".xml")
@@ -154,7 +154,8 @@ namespace sistemarastreamento.Controllers
             Models.ItemNota itemnota;
 
             //dados para rastreamento
-            Dictionary<int, string> rastro = new Dictionary<int, string>();
+            List<int> rastroCod = new List<int>();
+            List<string> rastroLote = new List<string>();
 
             XmlNodeList xnList, xnList2;
 
@@ -219,7 +220,8 @@ namespace sistemarastreamento.Controllers
 
                         itemnota.Valor_unit = GetDouble(xnList[i]["vUnTrib"].InnerText, 0d);
 
-                        rastro.Add(itemnota.Id_prod, itemnota.Lote);
+                        rastroCod.Add(itemnota.Id_prod);
+                        rastroLote.Add(itemnota.Lote);
                         operacao = incn.Criar(itemnota);
                     }
                 }
@@ -237,7 +239,7 @@ namespace sistemarastreamento.Controllers
 
                 //salvar o rastreio
                 CamadaNegocio.RastroCamadaNegocio rcn = new CamadaNegocio.RastroCamadaNegocio();
-                rcn.Criar(rastro, cnpjdist, notamodelo.Cod_indust);
+                rcn.Criar(rastroCod, rastroLote, cnpjdist, notamodelo.Cod_indust);
 
                 return (operacao, "Dados Importados!", notamodelo.Id, cnpjdist);
             }    

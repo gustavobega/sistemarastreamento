@@ -17,7 +17,7 @@ namespace sistemarastreamento.DAO
             string sql,sql2;
 
             sql2 = @"select * from estoque " +
-                       "where id_prod = " + estoque.Id_prod;
+                       "where id_prod = " + estoque.Id_prod + " and lote = '" + estoque.Lote + "'";
 
             DataTable dt = _bd.ExecutarSelect(sql2);
 

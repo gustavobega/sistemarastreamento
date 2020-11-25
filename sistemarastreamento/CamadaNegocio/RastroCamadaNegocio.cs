@@ -8,10 +8,10 @@ namespace sistemarastreamento.CamadaNegocio
 {
     public class RastroCamadaNegocio
     {
-        public void Criar(Dictionary<int,string> rastro, string cnpjdist, int id_indust)
+        public void Criar(List<int> rastroCod, List<string> rastroLote, string cnpjdist, int id_indust)
         {
             DAO.RastroDAO rbd = new DAO.RastroDAO();
-            rbd.Criar_rastro(rastro, id_indust, cnpjdist);
+            rbd.Criar_rastro(rastroCod, rastroLote, id_indust, cnpjdist);
         }
 
         public DataTable Buscar(string lote, string codigo, string hospital)

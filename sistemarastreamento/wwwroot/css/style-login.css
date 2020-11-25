@@ -73,19 +73,61 @@ form.sign-in-form {
 }
 
 .title {
-  font-size: 2.2rem;
-  color: #444;
-  margin-bottom: 10px;
+    font-size: 2.2rem;
+    color: #444;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #444;
 }
 
-.tipo {
-    width: 160px;
-    height: 45px;
-    border-radius: 10px;
-    padding: 5px 5px 5px 10px;
-    font-weight: 600;
-    font-size: 1.1rem;
+.radiobox {
+    width: 75%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
 }
+
+.radiobox p {
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+#texto1 {
+    margin-right: 20px;
+}
+
+.custom-radio-btn {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #444;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.custom-radio-btn input {
+  display: none;
+}
+
+.custom-radio-btn .checkmark {
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border-radius: 50%;
+  background: #ddd;
+  opacity: 0;
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+.custom-radio-btn input:checked + span.checkmark {
+  opacity: 1;
+  background-color: #4682B4;
+}
+
 
 .input-field {
     max-width: 380px;

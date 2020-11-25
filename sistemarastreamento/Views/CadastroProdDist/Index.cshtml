@@ -27,7 +27,7 @@
         <div class="form">
             <div class="inputfield">
                 <label>Código de Referência</label>
-                <input type="text" id="cod_ref" class="input" onfocus="index.limpaInfo()">
+                <input type="text" id="cod_ref" class="input">
                 <a class="pesquisarPerfil" href="javascript:index.buscaProdIndustria()">
                     <i class="fas fa-search"></i>
                 </a>
@@ -48,8 +48,9 @@
                 <input type="text" id="saldo" class="input">
             </div>
 
-            <div class="inputfield">
+            <div class="inputfield botaoCadastrar">
                 <input type="submit" value="Cadastrar" class="btn" id="btnCadastrar" onclick="index.btnCadastrar()">
+                <img class="loading-login" id="gif-login" src="~/img/loading-login.gif" style="width: 35px; height: 30px; display: none" />
             </div>
         </div>
     </div>

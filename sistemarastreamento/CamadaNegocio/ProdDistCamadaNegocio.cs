@@ -8,14 +8,15 @@ namespace sistemarastreamento.CamadaNegocio
 {
     public class ProdDistCamadaNegocio
     {
-        public bool Criar(Models.ProdutoDist prodemp)
+        public (bool, string) Criar(Models.ProdutoDist prodemp, string lote)
         {
             bool operacao;
+            string msg;
 
             DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
-            operacao = pbd.Criar(prodemp);
+            (operacao, msg) = pbd.Criar(prodemp, lote);
 
-            return operacao;
+            return (operacao, msg);
         }
 
         public DataTable Pesquisar(string descricao, int id_dist, string tipo)

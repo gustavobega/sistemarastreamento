@@ -63,6 +63,11 @@
     width: 156px;
 }
 
+.bx {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
 .item {
     font-size: 17px;
     padding-bottom: 10px;
@@ -76,11 +81,6 @@
 
 .item a:hover {
     color: #1f1e37;
-}
-
-.bx {
-    font-size: 20px;
-    margin-right: 5px;
 }
 
 .active {

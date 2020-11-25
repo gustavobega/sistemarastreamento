@@ -38,23 +38,36 @@ var index = {
 
         var email = document.getElementById("email").value;
         var senha = document.getElementById("senha").value;
-        var tipo = document.getElementById("tipo").value;
+        var industria = document.getElementById("industria");
+        var tipo = ""
 
-        var error = document.getElementById('error')
+        if (industria.checked)
+            tipo = 'Indústria'
+        else
+            tipo = 'Distribuidor'
 
         var checkemail = index.validacaoEmail(email);
 
         if (email.trim() == "") {
-            error.innerHTML = "Preencha o E-mail"
-            error.style.display = 'block'
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o E-Mail!'
+            })
         }
         else if (!checkemail) {
-            error.innerHTML = "E-mail inválido"
-            error.style.display = 'block'
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha o E-Mail inválido!'
+            })
         }
         else if (senha.trim() == "") {
-            error.innerHTML = "Preencha a Senha"
-            error.style.display = 'block'
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha a Senha!'
+            })
         }
         else {
 
@@ -86,16 +99,22 @@ var index = {
                         window.location.href = "/Default";
                     }
                     else {
-                        error.innerHTML = "Sessão Inválida!"
-                        error.style.display = 'block'
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Sessão Inválida!'
+                        })
                         document.getElementById("btnLogar").disabled = "";
                         document.getElementById("gif-login").style.display = 'none';
                     }
 
                 })
                 .catch(function (e) {
-                    error.innerHTML = "Algo deu Errado, Tente Novamente!"
-                    error.style.display = 'block'
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo deu Errado, Tente Novamente!'
+                    })
                     document.getElementById("gif-login").style.display = 'none';
                 })
                 .finally(function () {

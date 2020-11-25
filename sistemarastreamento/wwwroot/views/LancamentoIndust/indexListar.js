@@ -194,7 +194,7 @@
                             <div class="table-cell">
                                 <p>${dadosObj[i].valor_nf}</p>
                             </div>
-                            <div class="table-cell last-cell">
+                            <div class="table-cell last-cell acoes">
                                 <div class="dropdown" onclick="indexListar.block(${dadosObj[i].id})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
                                     <div class="dropdown-content" id="acoesoption${dadosObj[i].id}" style="display: none;">

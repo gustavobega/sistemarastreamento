@@ -17,11 +17,19 @@
                 text: 'Preencha o Código de Referência!'
             })
         }
+        else if ($("#sucess").is(":hidden"))
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Encontre o Código de referência do Produto!'
+            })
+        }
         else if (codigo.trim() == "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Preencha a Descrição!'
+                text: 'Preencha o Código!'
             })
         }
         else if (lote.trim() == "") {
@@ -39,6 +47,10 @@
             })
         }
         else {
+            document.getElementById('btnCadastrar').value = 'aguarde...'
+            document.getElementById('btnCadastrar').style.background = '#5092c8'
+            document.getElementById('gif-login').style.display = 'block'
+
             var dados = {
                 cod_ref,
                 codigo,
@@ -79,6 +91,8 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
+                            document.getElementById("saldo").removeAttribute("disabled");
+                            document.getElementById('hfIdEditar').value = "";
                         }
                         document.getElementById("cod_ref").value = "";
                         document.getElementById("codigo").value = "";
@@ -90,9 +104,13 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Código já Existente!'
+                            text: dadosObj.msg
                         })
                     }
+
+                    document.getElementById('btnCadastrar').value = 'Cadastrar'
+                    document.getElementById('gif-login').style.display = 'none'
+                    document.getElementById('btnCadastrar').style.background = '#4682B4'
                 })
                 .catch(function (e) {
                     alert("deu erro");
@@ -122,6 +140,7 @@
                 document.getElementById("codigo").value = dadosObj.proddist.cod_prod_dist;
                 document.getElementById("lote").value = dadosObj.estoque.lote
                 document.getElementById("saldo").value = dadosObj.estoque.saldo
+
                 document.getElementById("saldo").setAttribute("disabled", "disabled");
 
                 index.buscaProdIndustria();

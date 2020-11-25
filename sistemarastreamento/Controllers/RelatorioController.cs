@@ -10,9 +10,10 @@ namespace sistemarastreamento.Controllers
 {
     public class RelatorioController : Controller
     {
-        public IActionResult ReportVendaIndust()
+        [HttpPost]
+        public IActionResult ReportVendaIndust([FromBody] Dictionary<string, string> datas)
         {
-            var dados = relVendaIndust();
+            var dados = relVendaIndust(Convert.ToDateTime(datas["datainicio"]),Convert.ToDateTime(datas["datafim"]));
             var pdfResult = new ViewAsPdf("ReportVendaIndust", dados)
             {
                 CustomSwitches = "--footer-center \"  Data: " + DateTime.Now.Date.ToString("dd/MM/yyyy") + "  Página: [page]/[toPage]\"" + " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\""
@@ -21,9 +22,10 @@ namespace sistemarastreamento.Controllers
             return pdfResult;
         }
 
-        public IActionResult ReportVendaDist()
+        [HttpPost]
+        public IActionResult ReportVendaDist([FromBody] Dictionary<string, string> datas)
         {
-            var dados = relVendaDist();
+            var dados = relVendaDist(Convert.ToDateTime(datas["datainicio"]), Convert.ToDateTime(datas["datafim"]));
             var pdfResult = new ViewAsPdf("ReportVendaDist", dados)
             {
                 CustomSwitches = "--footer-center \"  Data: " + DateTime.Now.Date.ToString("dd/MM/yyyy") + "  Página: [page]/[toPage]\"" + " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\""    
@@ -54,6 +56,19 @@ namespace sistemarastreamento.Controllers
             return pdfResult;
         }
 
+        public IActionResult ReportProdDist([FromBody] Dictionary<string, string> info)
+        {
+            string lote = info["lote"];
+            var dados = relProdDist(lote);
+
+            var pdfResult = new ViewAsPdf("ReportProdDist", dados)
+            {
+                CustomSwitches = "--footer-center \"  Data: " + DateTime.Now.Date.ToString("dd/MM/yyyy") + "  Página: [page]/[toPage]\"" + " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\""
+            };
+
+            return pdfResult;
+        }
+
         public IActionResult ReportDistribuidor()
         {
             var dados = relDistribuidor();
@@ -65,21 +80,21 @@ namespace sistemarastreamento.Controllers
             return pdfResult;
         }
 
-        public DataTable relVendaIndust()
+        public DataTable relVendaIndust(DateTime datainicio, DateTime datafim)
         {
             var id_indust = HttpContext.User.Claims.ToList()[3].Value;
             DAO.RelatorioDAO rbd = new DAO.RelatorioDAO();
-            DataTable dt = rbd.PesquisarVendaIndust(id_indust);
+            DataTable dt = rbd.PesquisarVendaIndust(id_indust, datainicio, datafim);
 
             return dt;
            
         }
 
-        public DataTable relVendaDist()
+        public DataTable relVendaDist(DateTime datainicio, DateTime datafim)
         {
             var id_dist = HttpContext.User.Claims.ToList()[3].Value;
             DAO.RelatorioDAO rbd = new DAO.RelatorioDAO();
-            DataTable dt = rbd.PesquisarVendaDist(id_dist);
+            DataTable dt = rbd.PesquisarVendaDist(id_dist, datainicio, datafim);
 
             return dt;
 
@@ -102,6 +117,14 @@ namespace sistemarastreamento.Controllers
             List<Models.ProdutoIndust> produtos = pibd.getProdutos(id_indust);
 
             return produtos;
+        }
+
+        public DataTable relProdDist(string lote)
+        {
+            var id_dist = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
+            DAO.ProdutoDistDAO pdbd = new DAO.ProdutoDistDAO();
+
+            return pdbd.getProdutos(id_dist, lote);
         }
 
         public List<Models.Distribuidor> relDistribuidor()

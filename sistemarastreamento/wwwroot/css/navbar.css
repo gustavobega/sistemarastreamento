@@ -14,6 +14,57 @@ body {
     display: grid;
 }
 
+.info-gerais {
+    width: 100%;
+    height: 40px;
+    background: #5092c8;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.info-contato {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-contato a {
+    text-decoration: none;
+    color: white;
+    padding: 3px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-contato a:last-child {
+    margin-left: 30px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+}
+
+.formulario a {
+    text-decoration: none;
+    color: white;
+}
+
+.info-gerais a i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
 nav {
     background: #4682B4;
 }
@@ -129,13 +180,20 @@ nav input {
     bottom: 2px;
 }
 
-.fa-home, .fa-folder-plus, .fa-rocket, .fa-print, .fa-search-location, .fa-sign-out-alt, .fa-box, .fa-building, .fa-truck, .fa-sign-in-alt, .fa-user-tie, .fa-file {
+.fa-home, .fa-folder-plus, .fa-rocket, .fa-print, .fa-search-location, .fa-sign-out-alt, .fa-box, .fa-building, .fa-truck, .fa-sign-in-alt, .fa-user-tie, .fa-file-pdf {
     color: white;
     position: relative;
     margin-right: 5px;
 }
 
+.fa-file-pdf {
+    font-size: 22px;
+}
+
 @media all and (max-width: 968px) {
+    .info-gerais {
+        display: none;
+    }
     nav ul {
         margin-right: 0px;
         float: left;
@@ -181,7 +239,7 @@ nav input {
         color: white;
         position: absolute;
         top: 0;
-        right: 40px;
+        right: 30px;
         line-height: 70px;
         cursor: pointer;
         font-size: 25px;
