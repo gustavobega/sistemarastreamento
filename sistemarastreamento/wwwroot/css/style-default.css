@@ -83,7 +83,7 @@
     color: #1f1e37;
 }
 
-.active {
+.selecionado {
     text-decoration: underline;
 }
 
@@ -93,6 +93,9 @@
     }
     .dados .info {
         font-size: 11px;
+    }
+    .opcoes {
+        display: none;
     }
 }
 

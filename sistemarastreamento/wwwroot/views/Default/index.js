@@ -25,12 +25,12 @@
                 document.getElementById('graficoGanho').style.display = 'none'
                 document.getElementById('dadosGanho').style.display = 'none'
 
-                document.getElementById('notas').classList.add("active")
+                document.getElementById('notas').classList.add("selecionado")
                 var estoque = document.getElementById('estoque');
                 if (estoque != null) {
-                    estoque.classList.remove("active")
+                    estoque.classList.remove("selecionado")
                 }
-                document.getElementById('ganho').classList.remove("active");
+                document.getElementById('ganho').classList.remove("selecionado");
 
                 var ctx = document.getElementById('graficoAno')
                 new Chart(ctx, {
@@ -86,9 +86,9 @@
                 document.getElementById('graficoEstoque').style.display = 'block'
                 document.getElementById('dadosEstoque').style.display = 'block'
            
-                document.getElementById('estoque').classList.add("active")
-                document.getElementById('notas').classList.remove("active")
-                document.getElementById('ganho').classList.remove("active");
+                document.getElementById('estoque').classList.add("selecionado")
+                document.getElementById('notas').classList.remove("selecionado")
+                document.getElementById('ganho').classList.remove("actselecionadoive");
                 var ctx = document.getElementById('graficoEstoque')
 
                 new Chart(ctx, {
@@ -159,10 +159,10 @@
 
                 var estoque = document.getElementById('estoque');
                 if (estoque != null) {
-                    estoque.classList.remove("active")
+                    estoque.classList.remove("selecionado")
                 }
-                document.getElementById('notas').classList.remove("active");
-                document.getElementById('ganho').classList.add("active")
+                document.getElementById('notas').classList.remove("selecionado");
+                document.getElementById('ganho').classList.add("selecionado")
 
                 var ctx = document.getElementById('graficoGanho')
                 new Chart(ctx, {

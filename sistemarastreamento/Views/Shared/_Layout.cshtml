@@ -18,6 +18,7 @@
 
 </head>
 <body>
+
     <div class="info-gerais">
         <div class="info-contato">
             <a href="#">
@@ -39,90 +40,111 @@
         </div>
 
     </div>
-    <nav>
-        <div class="logo">
-            <a href="/Default">
-                <img src="~/img/logo.png" alt="" />
-                Rastro+
+
+    <div id="navbar">
+        <div class="menu-responsivo">
+            <a href="#" class="menu-bars" id="show-menu">
+                <i class="fas fa-bars"></i>
             </a>
-
+            <a href="/Default"><h1><img src="~/img/logo.png" alt="" />Rastro+</h1></a>
         </div>
-        <label for="btn" class="icon">
-            <span class="fa fa-bars"></span>
-        </label>
-        <input type="checkbox" id="btn">
-        <ul>
-            <li><a href="/Default"><i class="fas fa-home"></i>Home</a></li>
-            <li onclick="openmenu();">
-                <label for="btn-1" class="show"><i class="fas fa-folder-plus"></i>Cadastros<i class="fas fa-sort-down"></i></label>
-                <a href="#"><i class="fas fa-folder-plus"></i>Cadastros<i class="fas fa-sort-down"></i></a>
-                <input type="checkbox" id="btn-1">
-                <ul id="habilitaCad">
-                    @{
-                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                        {
-                            <li><a href="/CadastroProdIndust"><i class="fas fa-box"></i>Produto</a></li>
-                            <li><a href="/CadastroIndustria"><i class="far fa-building"></i>Indústria</a></li>
-                            <li><a href="/CadastroDistribuidor"><i class="fas fa-truck"></i>Distribuidor</a></li>
 
-                        }
-                        else
-                        {
-                            <li><a href="/CadastroProdDist"><i class="fas fa-box"></i>Produto</a></li>
-                        }
-                    }
+        <nav id="nav-principal">
 
-                </ul>
-            </li>
-
+            <a href="/Default">
+                <i class="fas fa-home nav-icon"></i>
+                <p>Inicio</p>
+            </a>
             @{
                 if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
                 {
-                    <li><a href="/LancamentoIndust"><i class="fas fa-rocket"></i>Lançamentos</a></li>
-                    <li><a href="/Rastrear"><i class="fas fa-search-location"></i>Rastrear</a></li>
-                    <li onclick="openRel();">
-                        <label for="btn-2" class="show"><i class="fas fa-print"></i>Relatórios <i class="fas fa-sort-down"></i></label>
-                        <a href="#"><i class="fas fa-print"></i>Relatórios <i class="fas fa-sort-down"></i></a>
-                        <input type="checkbox" id="btn-2">
-                        <ul id="habilitaRel">
-                            <li><a target="_blank" href="/Relatorio/ReportDistribuidor"><i class="far fa-file-pdf"></i>Distribuidor</a></li>
-                            <li><a target="_blank" href="/Relatorio/ReportProdIndust"><i class="far fa-file-pdf"></i>Produtos</a></li>
-                            <li><a href="javascript:btnReportVendaIndust()"><i class="far fa-file-pdf"></i>Vendas</a></li>
-                        </ul>
-                    </li>
+                    <a href="/LancamentoIndust">
+                        <i class="fas fa-rocket nav-icon"></i>
+                        <p>Lançamentos</p>
+                    </a>
+                    <a href="/Rastrear">
+                        <i class="fas fa-search-location nav-icon"></i>
+                        <p>Rastrear</p>
+                    </a>
+
                 }
                 else
                 {
-                    <li><a href="/LancamentoDist"><i class="fas fa-rocket"></i>Lançamentos</a></li>
-                    <li><a href="/Rastrear"><i class="fas fa-search-location"></i>Rastrear</a></li>
-                    <li onclick="openRel();">
-                        <label for="btn-2" class="show"><i class="fas fa-print"></i>Relatórios <i class="fas fa-sort-down"></i></label>
-                        <a href="#"><i class="fas fa-print"></i>Relatórios <i class="fas fa-sort-down"></i></a>
-                        <input type="checkbox" id="btn-2">
-                        <ul id="habilitaRel">
-                            <li><a href="javascript:btnReportProdIndust()"><i class="far fa-file-pdf"></i>Produtos</a></li>
-                            <li><a href="javascript:btnReportVendaDist()"><i class="far fa-file-pdf"></i>Vendas</a></li>
-                            <li><a target="_blank" href="/Relatorio/ReportEstoqueDist"><i class="far fa-file-pdf"></i>Estoque</a></li>
-                        </ul>
-                    </li>
+                    <a href="/LancamentoDist">
+                        <i class="fas fa-rocket nav-icon"></i>
+                        <p>Lançamentos</p>
+                    </a>
+                    <a href="/Rastrear">
+                        <i class="fas fa-search-location nav-icon"></i>
+                        <p>Rastrear</p>
+                    </a>
+                }
+            }
+            <a href="/Login/Sair">
+                <i class="fas fa-sign-out-alt nav-icon"></i>
+                <p>Sair</p>
+            </a>
+            
+        </nav>
+    </div>
+
+    <nav id="nav-menu">
+        <ul class="nav-menu-items">
+            <div id="navbar-toggle">
+                <a href="#" class="menu-bars" id="hide-menu">
+                    <i class="fas fa-bars nav-icon"></i>
+                </a>
+                <a href="/Default"><h1><img src="~/img/logo.png" alt="" />Rastro+</h1></a>
+            </div>
+            <hr />
+            <div class="title-opcoes">
+                <a href="#"><h1><i class="fas fa-folder-plus"></i>Gerenciar</h1></a>
+            </div>
+            <hr />
+            <div class="nav-section">
+                @{
+                    if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
+                    {
+                        <li class="nav-text"><a href="/CadastroProdIndust"><i class="fas fa-box nav-icon"></i>Produto</a></li>
+                        <li class="nav-text"><a href="/CadastroIndustria"><i class="far fa-building nav-icon"></i>Indústria</a></li>
+                        <li class="nav-text"><a href="/CadastroDistribuidor"><i class="fas fa-truck nav-icon"></i>Distribuidor</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-text"><a href="/CadastroProdDist"><i class="fas fa-box nav-icon"></i>Produtos</a></li>
+                    }
                 }
 
-            }
+            </div>
+            <hr />
+            <div class="title-opcoes">
+                <a href="#"><h1><i class="fas fa-print"></i>Relatórios</h1></a>
+            </div>
+            <hr />
+            <div class="nav-section">
+                @{
+                    if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
+                    {
+                        <li class="nav-text"><a target="_blank" href="/Relatorio/ReportDistribuidor"><i class="far fa-file-pdf nav-icon"></i>Distribuidores</a></li>
+                        <li class="nav-text"><a target="_blank" href="/Relatorio/ReportProdIndust"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
+                        <li class="nav-text"><a href="javascript:btnReportVendaIndust()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
 
-            @{
-                <li onclick="openUser();">
-                    <label for="btn-3" class="show"><i class="fas fa-user-tie"></i>@httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value <i class="fas fa-sort-down"></i></label>
-                    <a href="#"><i class="fas fa-user-tie"></i>@httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value<i class="fas fa-sort-down"></i></a>
-                    <input type="checkbox" id="btn-3">
-                    <ul id="habilitaUser">
-                        <li><a href="/Login/Sair"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
-                    </ul>
-                </li>
+                    }
+                    else
+                    {
+                        <li class="nav-text"><a href="javascript:btnReportProdIndust()"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
+                        <li class="nav-text"><a href="javascript:btnReportVendaDist()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
+                        <li class="nav-text"><a target="_blank" href="/Relatorio/ReportEstoqueDist"><i class="far fa-file-pdf nav-icon"></i>Estoque</a></li>
+                    }
+                }
 
-            }
-
+            </div>
         </ul>
     </nav>
+
+
+
+
 
     <section id="introSimples"></section>
 
@@ -189,14 +211,11 @@
         </div>
     </footer>
 
+
     <script src="~/views/Shared/index.js"></script>
-    <script>
-        $('.icon').click(function () {
-            $('span').toggleClass("cancel");
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="~/views/Relatorio/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     @RenderSection("Scripts", required: false)
     @RenderSection("js", false)
 
