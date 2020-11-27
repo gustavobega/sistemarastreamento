@@ -33,24 +33,20 @@
         <h1>Listagem de Produtos</h1>
     </div>
 
-    <div class="pesquisa">
-
-        <div class="wrapper">
-            <div class="search_box">
-                <div class="dropdown">
-                    <div class="default_option">Descrição</div>
-                    <ul>
-                        <li>Descrição</li>
-                        <li>Código</li>
-                    </ul>
-                </div>
-                <div class="search_field">
-                    <input type="text" class="input" id="produto" placeholder="Buscar">
-                    <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value))"></i>
-                </div>
+    <div class="wrapper">
+        <div class="search_box">
+            <div class="dropdown">
+                <div class="default_option">Descrição</div>
+                <ul>
+                    <li>Descrição</li>
+                    <li>Código</li>
+                </ul>
+            </div>
+            <div class="search_field">
+                <input type="text" class="input" id="produto" placeholder="Buscar">
+                <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value))"></i>
             </div>
         </div>
-
     </div>
 
     <div class="retorno">

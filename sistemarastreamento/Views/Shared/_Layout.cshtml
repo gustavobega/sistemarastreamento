@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     <link href="~/css/navbar.css" rel="stylesheet" />
@@ -96,48 +96,50 @@
                 </a>
                 <a href="/Default"><h1><img src="~/img/logo.png" alt="" />Rastro+</h1></a>
             </div>
-            <hr />
-            <div class="title-opcoes">
-                <a href="#"><h1><i class="fas fa-folder-plus"></i>Gerenciar</h1></a>
-            </div>
-            <hr />
-            <div class="nav-section">
-                @{
-                    if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                    {
-                        <li class="nav-text"><a href="/CadastroProdIndust"><i class="fas fa-box nav-icon"></i>Produto</a></li>
-                        <li class="nav-text"><a href="/CadastroIndustria"><i class="far fa-building nav-icon"></i>Indústria</a></li>
-                        <li class="nav-text"><a href="/CadastroDistribuidor"><i class="fas fa-truck nav-icon"></i>Distribuidor</a></li>
+            <div class="rolagem">
+                <hr />
+                <div class="title-opcoes">
+                    <a href="#"><h1><i class="fas fa-folder-plus"></i>Gerenciar</h1></a>
+                </div>
+                <hr />
+                <div class="nav-section">
+                    @{
+                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
+                        {
+                            <li class="nav-text"><a href="/CadastroProdIndust"><i class="fas fa-box nav-icon"></i>Produto</a></li>
+                            <li class="nav-text"><a href="/CadastroIndustria"><i class="far fa-building nav-icon"></i>Indústria</a></li>
+                            <li class="nav-text"><a href="/CadastroDistribuidor"><i class="fas fa-truck nav-icon"></i>Distribuidor</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-text"><a href="/CadastroProdDist"><i class="fas fa-box nav-icon"></i>Produtos</a></li>
+                        }
                     }
-                    else
-                    {
-                        <li class="nav-text"><a href="/CadastroProdDist"><i class="fas fa-box nav-icon"></i>Produtos</a></li>
-                    }
-                }
 
-            </div>
-            <hr />
-            <div class="title-opcoes">
-                <a href="#"><h1><i class="fas fa-print"></i>Relatórios</h1></a>
-            </div>
-            <hr />
-            <div class="nav-section">
-                @{
-                    if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
-                    {
-                        <li class="nav-text"><a target="_blank" href="/Relatorio/ReportDistribuidor"><i class="far fa-file-pdf nav-icon"></i>Distribuidores</a></li>
-                        <li class="nav-text"><a target="_blank" href="/Relatorio/ReportProdIndust"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
-                        <li class="nav-text"><a href="javascript:btnReportVendaIndust()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
+                </div>
+                <hr />
+                <div class="title-opcoes">
+                    <a href="#"><h1><i class="fas fa-print"></i>Relatórios</h1></a>
+                </div>
+                <hr />
+                <div class="nav-section">
+                    @{
+                        if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
+                        {
+                            <li class="nav-text"><a target="_blank" href="/Relatorio/ReportDistribuidor"><i class="far fa-file-pdf nav-icon"></i>Distribuidores</a></li>
+                            <li class="nav-text"><a target="_blank" href="/Relatorio/ReportProdIndust"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
+                            <li class="nav-text"><a href="javascript:btnReportVendaIndust()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
 
+                        }
+                        else
+                        {
+                            <li class="nav-text"><a href="javascript:btnReportProdIndust()"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
+                            <li class="nav-text"><a href="javascript:btnReportVendaDist()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
+                            <li class="nav-text"><a target="_blank" href="/Relatorio/ReportEstoqueDist"><i class="far fa-file-pdf nav-icon"></i>Estoque</a></li>
+                        }
                     }
-                    else
-                    {
-                        <li class="nav-text"><a href="javascript:btnReportProdIndust()"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
-                        <li class="nav-text"><a href="javascript:btnReportVendaDist()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
-                        <li class="nav-text"><a target="_blank" href="/Relatorio/ReportEstoqueDist"><i class="far fa-file-pdf nav-icon"></i>Estoque</a></li>
-                    }
-                }
 
+                </div>
             </div>
         </ul>
     </nav>

@@ -26,13 +26,6 @@
     font-size: 31px;
 }
 
-.pesquisa {
-    display: flex;
-    flex-direction: row;
-    max-width: 80%;
-    margin: 0 auto;  
-}
-
 .retorno {
     width: 80%;
     margin: 0 auto;
@@ -63,12 +56,13 @@
 }
 
 .wrapper {
+    width: 80%;
+    margin: 0 auto;
     height: 18vh;
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    width: 50%;
 }
 
 .wrapper .search_box{
@@ -239,6 +233,10 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+    .wrapper {
+        width: 100%;
+        justify-content: center;
+    }
     .wrapper .search_box {
         width: 300px;
         height: 40px;
@@ -247,11 +245,11 @@ a {
     }
 
     .wrapper .search_box .dropdown{
-        width: 210px;
+        width: 210px; 
     }
 
     .wrapper .search_box .dropdown .default_option{
-      padding: 8px 11px;
+      padding: 6px 9px;
       font-size: 12px;
     }
 
@@ -275,11 +273,6 @@ a {
     #iconsearch {
         font-size: 15px;
         padding-top: 3px;
-    }
-    .pesquisa {
-        width: 100%;
-        padding: 0;
-        margin: 0 auto;
     }
     .title h1 {
         font-size: 20px;

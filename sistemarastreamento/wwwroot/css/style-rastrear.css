@@ -151,18 +151,6 @@ h5 {
     text-align: center;
 }
 
-.error {
-    height: 35px;
-    padding: 5px;
-    margin-top: 30px;
-    background: #ffbfaa;
-    color: black;
-    text-align: center;
-    border: 1px solid #cccccc;
-    border-radius: 2px;
-    box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
-}
-
 .sucess {
     height: 35px;
     padding: 5px;
@@ -173,4 +161,43 @@ h5 {
     justify-content: center;
     border: 1px solid #cccccc;
     box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
+}
+
+@media only screen and (max-width: 600px) {
+    section {
+        margin-top: 5px;
+    }
+    .title {
+        font-size: 11px;
+    }
+    .title i {
+        font-size: 18px;
+    }
+    .flexbox {
+        margin: 0;
+        padding: 0;
+    }
+    .area-principal h1 {
+        font-size: 18px;
+    }
+    .area-principal {
+        width: 300px;
+        height: 270px;
+        margin-top: 10px;
+    }
+    .input-hospital {
+        margin: 0;
+        width: 220px;
+    }
+    .area-principal .botaoBuscar {
+        margin-top: 10px;
+    }
+    .area-principal .botaoBuscar .btn {
+        width: 220px;
+    }
+    .area-dados {
+        width: 300px;
+        height: 100%;
+        margin-top: 20px;
+    }
 }
