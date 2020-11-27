@@ -275,19 +275,6 @@ form.sign-in-form {
   font-size: 0.8rem;
 }
 
-.botaoEntrar {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.loading-login {
-    position: absolute;
-    margin-right: 105px;
-}
-
 .right-panel .image,
 .right-panel .content {
     transform: translateX(800px);

@@ -26,10 +26,8 @@
             })
         }
         else {
-            document.getElementById('btnbuscar').value = 'aguarde...'
-            document.getElementById('btnbuscar').style.background = '#5092c8'
-            document.getElementById('gif-login').style.display = 'block'
-            document.getElementById('dadosbusca').innerHTML = ''
+            document.getElementById('btnbuscar').classList.add('button-loading')
+            document.getElementById("btnbuscar").disabled = true;
             var dados = {
                 lote,
                 codigo,
@@ -105,9 +103,8 @@
                         })
                         document.getElementById('dadosbusca').innerHTML = '<h5>aguardando...</h5>'
                     }
-                    document.getElementById('btnbuscar').value = 'Buscar'
-                    document.getElementById('gif-login').style.display = 'none'
-                    document.getElementById('btnbuscar').style.background = '#4682B4'
+                    document.getElementById('btnbuscar').classList.remove('button-loading')
+                    document.getElementById("btnbuscar").disabled = "";
 
                 });
         } 

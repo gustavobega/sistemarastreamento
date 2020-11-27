@@ -208,7 +208,7 @@ namespace sistemarastreamento.DAO
             for (int i = 0; i < 12; i++)
                 qtdNotas.Add(0);
 
-            DataTable dt = null;
+            DataTable dt;
 
             select = "SELECT data FROM nota_fiscal WHERE Year(data) = " + ano + " and id_dist = " + id_dist;
             dt = _bd.ExecutarSelect(select);
@@ -256,7 +256,7 @@ namespace sistemarastreamento.DAO
             for (int i = 0; i < 12; i++)
                 ganhos.Add(0);
 
-            DataTable dt = null;
+            DataTable dt;
 
             select = "SELECT data,valor_nf FROM nota_fiscal WHERE Year(data) = " + ano + " and id_dist = " + id_dist;
             dt = _bd.ExecutarSelect(select);

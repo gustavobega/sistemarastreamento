@@ -171,9 +171,8 @@ var index = {
         }
         else {
 
-            document.getElementById('btnCadastrar').value = 'aguarde...'
-            document.getElementById('btnCadastrar').style.background = '#5092c8'
-            document.getElementById('gif-login').style.display = 'block'
+            document.getElementById('btnCadastrar').classList.add('button-loading')
+            document.getElementById("btnCadastrar").disabled = true;
 
             var dados = {
                 cnpj,
@@ -258,10 +257,8 @@ var index = {
                             timer: 1500
                         })
                     }
-                    document.getElementById('btnCadastrar').value = 'Cadastrar'
-                    document.getElementById('gif-login').style.display = 'none'
-                    document.getElementById('btnCadastrar').style.background = '#4682B4'
-  
+                    document.getElementById('btnCadastrar').classList.remove('button-loading')
+                    document.getElementById("btnCadastrar").disabled = "";
                 })
                 .catch(function (e) {
                     alert("deu erro");

@@ -29,8 +29,8 @@
             text: "Você não poderá reverter isso!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Sim, Deletar!',
-            cancelButtonText: 'Não, Cancelar!',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
             reverseButtons: true
         })
         .then((result) => {

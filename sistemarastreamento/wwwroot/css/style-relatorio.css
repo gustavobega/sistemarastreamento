@@ -66,3 +66,8 @@ tr:nth-child(even) {
     width: 100%;
     padding-bottom: 100px;
 }
+
+.espacoDist {
+    width: 100%;
+    padding-bottom: 270px;
+}

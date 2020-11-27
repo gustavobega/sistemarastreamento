@@ -34,8 +34,6 @@ var index = {
 
     btnLogar: function () {
 
-        document.getElementById("btnLogar").style.background = "#5092c8";
-
         var email = document.getElementById("email").value;
         var senha = document.getElementById("senha").value;
         var industria = document.getElementById("industria");
@@ -70,7 +68,7 @@ var index = {
             })
         }
         else {
-
+            document.getElementById("btnLogar").value = 'aguarde...';
             document.getElementById("btnLogar").disabled = true;
 
             var dados = {
@@ -78,8 +76,6 @@ var index = {
                 senha,
                 tipo
             }
-
-            document.getElementById("gif-login").style.display = 'block';
             var config = {
                 method: "POST",
                 headers: {
@@ -105,7 +101,7 @@ var index = {
                             text: 'Sessão Inválida!'
                         })
                         document.getElementById("btnLogar").disabled = "";
-                        document.getElementById("gif-login").style.display = 'none';
+                        document.getElementById("btnLogar").value = 'Entrar';
                     }
 
                 })
@@ -115,11 +111,7 @@ var index = {
                         title: 'Oops...',
                         text: 'Algo deu Errado, Tente Novamente!'
                     })
-                    document.getElementById("gif-login").style.display = 'none';
                 })
-                .finally(function () {
-                    document.getElementById("btnLogar").disabled = false;
-                });
 
         }
        

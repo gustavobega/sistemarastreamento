@@ -171,6 +171,10 @@ var index = {
             })
         }
         else {
+
+            document.getElementById('btnCadastrar').classList.add('button-loading')
+            document.getElementById("btnCadastrar").disabled = true;
+
             var dados = {
                 cnpj,
                 nome,
@@ -282,6 +286,8 @@ var index = {
                                 alert("deu erro");
                             })
                     }
+                    document.getElementById('btnCadastrar').classList.remove('button-loading')
+                    document.getElementById("btnCadastrar").disabled = "";
 
                 })
                 .catch(function (e) {

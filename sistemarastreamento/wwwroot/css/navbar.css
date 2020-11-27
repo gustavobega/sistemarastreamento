@@ -129,11 +129,41 @@ hr {
     margin-left: 40px;
     font-size: 1.2rem;
     padding: 8px;
+    position: relative;
 }
 
-#nav-principal a:hover {
-    background-color: rgba(80,146,200,1);
-    border-radius: 8px;
+#nav-principal a:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 70%;
+    width: 0%;
+    background: #fff;
+    height: 3px;
+    transition: all 0.5s linear;
+    margin: 7px 0;
+}
+
+#nav-principal a:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 70%;
+    width: 0%;
+    background: #fff;
+    height: 3px;
+    transition: all 0.5s linear;
+    margin: 7px 0;
+}
+
+#nav-principal a:hover::before {
+    width: 100%;
+    background-color: #00ffdd;
+}
+
+#nav-principal a:hover::after {
+    width: 100%;
+    background-color: #00ffdd;
 }
 
 #nav-principal a i {
@@ -236,6 +266,7 @@ hr {
 
 .rolagem {
     overflow-y: scroll;
+    max-height: 720px;
 }
 
 .rolagem::-webkit-scrollbar {
@@ -284,6 +315,9 @@ hr {
     #navbar-toggle a {
         font-size: 20px;
         margin-left: 15px;
+    }
+    #navbar-toggle a i {
+        padding: 0;
     }
     #nav-principal a:nth-child(1) {
         display: none;
