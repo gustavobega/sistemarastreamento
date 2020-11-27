@@ -1,4 +1,4 @@
-﻿#info-grafico {
+﻿#section {
     max-width: 1200px;
     margin: 0 auto;
     padding-left: 120px;
@@ -88,14 +88,25 @@
 }
 
 @media screen and (max-width: 968px) {
-    #info-grafico {
-        padding-left: 0;
+    #section {
+        padding: 0;
+        width: 98%;
+        margin: 0 auto; 
     }
-    .dados .info {
-        font-size: 11px;
+    .dados .info h1{
+        font-size: 13px;
+    }
+    .dados .info i {
+        font-size: 18px;
+        margin-bottom: 5px;
     }
     .opcoes {
         display: none;
+    }
+    .dados .ano{
+        width: 60%;
+        text-align: right;
+        margin: 0 auto;
     }
 }
 

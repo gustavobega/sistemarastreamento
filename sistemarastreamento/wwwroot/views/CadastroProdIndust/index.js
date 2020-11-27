@@ -50,7 +50,7 @@
                     if (dadosObj.operacao) {
                         if (id == 0) {
                             Swal.fire({
-                                position: 'top-end',
+                                position: 'center',
                                 icon: 'success',
                                 title: 'Cadastro Realizado com Sucesso!',
                                 showConfirmButton: false,
@@ -59,7 +59,7 @@
                         }
                         else {
                             Swal.fire({
-                                position: 'top-end',
+                                position: 'center',
                                 icon: 'success',
                                 title: 'Alteração Realizado com Sucesso!',
                                 showConfirmButton: false,

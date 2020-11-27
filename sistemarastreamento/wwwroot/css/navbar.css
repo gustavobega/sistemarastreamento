@@ -161,11 +161,13 @@ hr {
     left: -100%; /*sumir com as opções*/
     transition: 850ms;
     z-index: 1;
+    
 }
 
 #nav-menu.active {
     left: 0;
     transition: 350ms;
+   
 }
 
 .nav-text {
@@ -240,13 +242,15 @@ hr {
         display: none;
     }
     .menu-responsivo{
-        width: 170px; 
+        width: 160px; 
     }
     .menu-responsivo a {
         font-size: 20px;
+        margin-left: 15px;
     }
     .menu-responsivo a h1 {
         font-size: 20px;
+
     }
     #nav-principal a p {
         display: none;
@@ -266,6 +270,7 @@ hr {
     }
     #navbar-toggle a {
         font-size: 20px;
+        margin-left: 15px;
     }
     #nav-principal a:nth-child(1) {
         display: none;

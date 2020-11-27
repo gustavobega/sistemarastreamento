@@ -30,18 +30,17 @@
     display: flex;
     flex-direction: row;
     max-width: 80%;
-    margin: 0 auto;
-    
+    margin: 0 auto;  
 }
 
 .retorno {
-    width: 50%;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     text-align: center;
     justify-content: flex-end;
     align-items: center;
-    margin: 80px 10px 0;
     color: #4682B4;
     font-size: 18px;
     font-weight: 600;
@@ -169,47 +168,6 @@
   color: #9fa3b1;
 }
 
-@media only screen and (max-width: 600px) {
-    /*.wrapper .search_box{
-      width: 300px;
-      height: 40px;
-      display: flex;
-      padding: 5px;
-    }
-
-    .wrapper .search_box .dropdown{
-        width: 210px;
-    }
-
-    .wrapper .search_box .dropdown .default_option{
-      padding: 8px 11px;
-      font-size: 12px;
-    }
-
-    .wrapper .search_box .dropdown ul{
-      top: 50px;
-    }
-
-    .wrapper .search_box .dropdown ul li{
-      padding-bottom: 20px;
-    }
-
-    .wrapper .search_box .dropdown:before{
-      top: 13px;
-      right: 10px;
-    }
-
-    .wrapper .search_box .search_field .fas{
-      top: 5px;
-    }
-
-    #iconsearch {
-        font-size: 15px;
-        padding-top: 3px;
-    }
-    */
-}
-
 /*table*/
 
 .table-box {
@@ -281,8 +239,57 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+    .wrapper .search_box {
+        width: 300px;
+        height: 40px;
+        display: flex;
+        padding: 5px;
+    }
+
+    .wrapper .search_box .dropdown{
+        width: 210px;
+    }
+
+    .wrapper .search_box .dropdown .default_option{
+      padding: 8px 11px;
+      font-size: 12px;
+    }
+
+    .wrapper .search_box .dropdown ul{
+      top: 50px;
+    }
+
+    .wrapper .search_box .dropdown ul li{
+      padding-bottom: 20px;
+    }
+
+    .wrapper .search_box .dropdown:before{
+      top: 13px;
+      right: 10px;
+    }
+
+    .wrapper .search_box .search_field .fas{
+      top: 5px;
+    }
+
+    #iconsearch {
+        font-size: 15px;
+        padding-top: 3px;
+    }
+    .pesquisa {
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+    .title h1 {
+        font-size: 20px;
+    }
     .table-row {
         font-size: 11px;
+        width: 100%;
+    }
+    .retorno {
+        width: 100%;
     }
 }
 
