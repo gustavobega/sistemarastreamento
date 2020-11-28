@@ -1,16 +1,4 @@
-﻿const sign_in_btn = document.querySelector("#sign-in-btn");
-const sign_up_btn = document.querySelector("#sign-up-btn");
-const container = document.querySelector(".container");
-
-sign_up_btn.addEventListener("click", () => {
-    container.classList.add("sign-up-mode");
-});
-
-sign_in_btn.addEventListener("click", () => {
-    container.classList.remove("sign-up-mode");
-});
-
-var index = {
+﻿var index = {
 
     validacaoEmail: function (field) {
         usuario = field.substring(0, field.indexOf("@"));
@@ -57,7 +45,7 @@ var index = {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Preencha o E-Mail inválido!'
+                text: 'Preencha um E-Mail inválido!'
             })
         }
         else if (senha.trim() == "") {
@@ -68,7 +56,7 @@ var index = {
             })
         }
         else {
-            document.getElementById("btnLogar").value = 'aguarde...';
+            document.getElementById('btnLogar').classList.add('button-loading')
             document.getElementById("btnLogar").disabled = true;
 
             var dados = {
@@ -100,7 +88,7 @@ var index = {
                             title: 'Oops...',
                             text: 'Sessão Inválida!'
                         })
-                        document.getElementById("btnLogar").disabled = "";
+                        document.getElementById('btnLogar').classList.remove('button-loading')
                         document.getElementById("btnLogar").value = 'Entrar';
                     }
 

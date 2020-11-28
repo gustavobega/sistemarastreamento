@@ -158,12 +158,12 @@ hr {
 
 #nav-principal a:hover::before {
     width: 100%;
-    background-color: #00ffdd;
+    background-color: #fff;
 }
 
 #nav-principal a:hover::after {
     width: 100%;
-    background-color: #00ffdd;
+    background-color: #fff;
 }
 
 #nav-principal a i {
