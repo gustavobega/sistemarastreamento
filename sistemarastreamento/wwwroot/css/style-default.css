@@ -120,5 +120,8 @@
         text-align: right;
         margin: 0 auto;
     }
+    .dados .ganho {
+        margin-right: 6px;
+    }
 }
 
