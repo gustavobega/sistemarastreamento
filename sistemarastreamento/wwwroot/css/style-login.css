@@ -216,7 +216,4 @@ button:hover{
         display: flex;
         padding: 0 15px 0 15px;
     }
-    .login-form {
-        margin-top: 5px;
-    }
 }
