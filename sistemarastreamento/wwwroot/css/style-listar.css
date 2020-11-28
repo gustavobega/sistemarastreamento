@@ -37,6 +37,7 @@
     color: #4682B4;
     font-size: 18px;
     font-weight: 600;
+    padding-bottom: 3px;
 }
 
 .retorno p {
@@ -265,14 +266,15 @@ a {
       top: 13px;
       right: 10px;
     }
-
+    .wrapper .search_box .search_field .fas {
+        right: 5px;
+    }
     .wrapper .search_box .search_field .fas{
       top: 5px;
     }
 
     #iconsearch {
-        font-size: 15px;
-        padding-top: 3px;
+        font-size: 19px;
     }
     .title h1 {
         font-size: 20px;
