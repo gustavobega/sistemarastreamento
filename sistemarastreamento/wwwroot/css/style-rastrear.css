@@ -183,18 +183,6 @@ h5 {
     text-align: center;
 }
 
-.sucess {
-    height: 35px;
-    padding: 5px;
-    margin-top: 30px;
-    background: #98fb98;
-    color: black;
-    text-align: center;
-    justify-content: center;
-    border: 1px solid #cccccc;
-    box-shadow: rgba(0,0,0,0.2) 10px 10px initial;
-}
-
 @media only screen and (max-width: 600px) {
     section {
         margin-top: 5px;

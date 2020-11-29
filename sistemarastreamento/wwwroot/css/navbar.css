@@ -66,7 +66,7 @@ body {
 
 .menu-responsivo {
     height: 60px;
-    width: 195px;
+    width: 188px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -76,6 +76,13 @@ body {
 .menu-responsivo a {
     text-decoration: none;
     color: white;
+}
+
+.menu-responsivo a i {
+    font-size: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
 }
 
 .menu-responsivo a h1 {
@@ -175,7 +182,7 @@ hr {
 }
 
 .menu-bars {
-    margin-left: 2rem;
+    margin-left: 1rem;
     font-size: 1.5rem;
     color: #fff;
 }
@@ -257,6 +264,13 @@ hr {
     text-decoration: none;
 }
 
+#navbar-toggle a i {
+    font-size: 25px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 .fa-bars {
     color: #fff;
 }
@@ -291,7 +305,7 @@ hr {
         display: none;
     }
     .menu-responsivo{
-        width: 160px; 
+        width: 180px; 
     }
     .menu-responsivo a {
         font-size: 20px;
@@ -299,7 +313,6 @@ hr {
     }
     .menu-responsivo a h1 {
         font-size: 20px;
-
     }
     #nav-principal a p {
         display: none;
@@ -319,16 +332,13 @@ hr {
     }
     #navbar-toggle a {
         font-size: 20px;
-        margin-left: 15px;
-    }
-    #navbar-toggle a i {
-        padding: 0;
     }
     #nav-principal a:nth-child(1) {
         display: none;
     }
     #navbar-toggle a h1 {
         font-size: 20px;
+        margin-left: 8px;
     }
     .nav-text a {
         font-size: 18px;
