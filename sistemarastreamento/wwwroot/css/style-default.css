@@ -70,13 +70,23 @@
 
 .item {
     font-size: 17px;
-    padding-bottom: 10px;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 3px 3px #5092c8;
+    width: 85px;
+    border-radius: 5px;
+    padding: 5px 0 0 5px;
+    margin-bottom: 7px;
 }
 
 .item a {
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
     color: #4682B4;
-    padding: 5px;
+}
+
+.item a i {
+    margin-bottom: 8px;
 }
 
 .item a:hover {
@@ -103,7 +113,11 @@
     .tudo {
         flex-wrap: wrap;
     }
-    .item a{
+    .item {
+        margin-bottom: 0;
+        margin-right: 7px;
+    }
+    .item a {
         font-size: 15px;
     }
     .item a i{

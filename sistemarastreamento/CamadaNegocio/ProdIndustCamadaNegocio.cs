@@ -42,6 +42,12 @@ namespace sistemarastreamento.CamadaNegocio
             return pbd.ObterProd(cod_ref);
         }
 
+        public (bool, string, string) ObterProdDist(string codigo)
+        {
+            DAO.ProdutoIndustDAO pbd = new DAO.ProdutoIndustDAO();
+            return pbd.ObterProdDist(codigo);
+        }
+
         public bool Excluir(int id)
         {
             DAO.ProdutoIndustDAO pbd = new DAO.ProdutoIndustDAO();

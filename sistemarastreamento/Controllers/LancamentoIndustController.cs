@@ -79,15 +79,15 @@ namespace sistemarastreamento.Controllers
             });
         }
 
-        public IActionResult CriarEstoque([FromBody] Dictionary<string, string> dados, int id_nota)
+        public IActionResult AlterarEstoque([FromBody] Dictionary<string, string> dados, int id_nota)
         {
             bool operacao = true;
-            Models.Distribuidor dist = new Models.Distribuidor();
+            Models.Distribuidor dist;
             CamadaNegocio.DistribuidorCamadaNegocio dcn = new CamadaNegocio.DistribuidorCamadaNegocio();
             string cnpjdist = Convert.ToInt64(dados["cnpjdist"]).ToString(@"00\.000\.000\/0000\-00");
             dist = dcn.ObterCnpj(cnpjdist);
 
-            List<Models.ItemNota> itens = new List<Models.ItemNota>();
+            List<Models.ItemNota> itens;
             CamadaNegocio.ItemNotaCamadaNegocio icn = new CamadaNegocio.ItemNotaCamadaNegocio();
             itens = icn.Pesquisa(id_nota);
 
@@ -100,7 +100,7 @@ namespace sistemarastreamento.Controllers
                 estoque.Lote = itens[i].Lote;
                 estoque.Saldo = itens[i].Qtde;
 
-                operacao = ecn.CriarEstoque(estoque);
+                operacao = ecn.AlterarEstoque(estoque);
             }
 
             return Json(new

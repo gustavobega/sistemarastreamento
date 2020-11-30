@@ -9,74 +9,91 @@ namespace sistemarastreamento.DAO
     public class EstoqueDAO
     {
         MySqlPersistencia _bd = new MySqlPersistencia();
-
-
-        public bool Criar(Models.Estoque estoque)
+        
+        //adiciona no estoque do distribuidor
+        public bool AtualizaEstoque(Models.Estoque estoque)
         {
             var parametros = _bd.GerarParametros();
             string sql,sql2;
-
-            sql2 = @"select * from estoque " +
-                       "where id_prod = " + estoque.Id_prod + " and lote = '" + estoque.Lote + "'";
+            int saldoAtual = 0;
+            int id_prod = 0;
+            sql2 = @"select pd.id, saldo from produto_industria as pi inner join produto_distribuidor as pd on pi.id = " + estoque.Id_prod + " and pd.cod_ref = pi.cod_ref inner join estoque as e on e.id_prod = pd.id and e.lote = '" + estoque.Lote + "'";
 
             DataTable dt = _bd.ExecutarSelect(sql2);
 
             if (dt.Rows.Count > 0)
             {
-                sql = @"update estoque set id_prod = @id_prod,lote = @lote where id_prod = @id_prod";
+                sql = @"update estoque set saldo = @saldo where id_prod = @id_prod and lote = @lote";
+                DataRow dr = dt.Rows[0];
+                saldoAtual = Convert.ToInt32(dr["saldo"]);
+                id_prod = Convert.ToInt32(dr["id"]);
             }
             else
             {
                 sql = @"insert into estoque(id_dist,id_prod,lote,saldo)" +
-                       "values(@id_dist,@id_prod,@lote,@saldo)";
+                    "values(@id_dist,@id_prod,@lote,@saldo)";
 
-                parametros.Add("@id_dist", estoque.Id_dist);
-                parametros.Add("@saldo", estoque.Saldo);
+                parametros.Add("@id_dist", estoque.Id_dist) ;
             }
-
-            parametros.Add("@id_prod", estoque.Id_prod);
+            
+   
+            parametros.Add("@id_prod", id_prod);
             parametros.Add("@lote", estoque.Lote);
+            parametros.Add("@saldo", saldoAtual + estoque.Saldo);
 
             int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
 
-            estoque.Id = _bd.UltimoId;
-            
             return linhasAfetadas > 0;
-
         }
 
-        public bool AlteraEstoque(int qtde, int id_prod)
+        //retira do estoque do distribuidor
+        public bool AtualizaEstoque(int id_prod, string lote, int qtde)
         {
             var parametros = _bd.GerarParametros();
-            string sql,sql2;
-
-            sql2 = @"select * from estoque " +
-                       "where id_prod = " + id_prod;
+            string sql, sql2;
+            sql = "";
+            int saldoAtual = 0;
+            sql2 = @"select * from estoque where id_prod = " + id_prod + " and lote = '" + lote + "'";
 
             DataTable dt = _bd.ExecutarSelect(sql2);
 
+            if (dt.Rows.Count > 0)
+            {
+                sql = @"update estoque set saldo = @saldo where id_prod = @id_prod and lote = @lote";
+                DataRow dr = dt.Rows[0];
+                saldoAtual = Convert.ToInt32(dr["saldo"]);
+            }
 
-            sql = @"update estoque set saldo = @saldo where id_prod = @id_prod";
-
-            DataRow dr = dt.Rows[0];
-            int saldoatual = Convert.ToInt32(dr["saldo"]);
-                
             parametros.Add("@id_prod", id_prod);
-            parametros.Add("@saldo", saldoatual - qtde);
+            parametros.Add("@lote", lote);
+            parametros.Add("@saldo", saldoAtual - qtde);
 
             int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
 
             return linhasAfetadas > 0;
-
         }
 
-        public Models.Estoque Obter(int id_prod)
+        public bool UpdateEstoque(int id, string lote)
+        {
+            string sql = @"update estoque set id_prod = @id_prod, lote = @lote where id_prod = @id_prod";
+            var parametros = _bd.GerarParametros();
+
+
+            parametros.Add("@id_prod", id);
+            parametros.Add("@lote", lote);
+
+            int linhasAfetadas = _bd.ExecutarNonQuery(sql, parametros);
+
+            return linhasAfetadas > 0;
+        }
+
+        public Models.Estoque Obter(int id)
         {
             Models.Estoque estoque = null;
 
             string select = @"select * 
                               from estoque 
-                              where id_prod = " + id_prod;
+                              where id = " + id;
 
             DataTable dt = _bd.ExecutarSelect(select);
 
@@ -90,11 +107,20 @@ namespace sistemarastreamento.DAO
 
         }
 
+        public int ObterTodosEstoque(int id_prod)
+        {
+            string select = @"select * 
+                              from estoque 
+                              where id_prod = " + id_prod;
+
+            DataTable dt = _bd.ExecutarSelect(select);
+
+            return dt.Rows.Count;
+        }
+
         public bool VerificaEstoque(string id_prod, int qtde)
         {
-            string select = @"SELECT saldo FROM produto_distribuidor as pd inner join produto_industria as pi 
-                                on pd.cod_ref = pi.cod_ref and pd.cod_prod_dist = '" + id_prod + "' inner join estoque as e" +
-                                " on pi.id = e.id_prod;";
+            string select = @"SELECT saldo FROM produto_distribuidor as pd inner join estoque as e on pd.cod_prod_dist = '" + id_prod + "' and pd.id = e.id_prod";
 
             DataTable dt = _bd.ExecutarSelect(select);
             int saldo = 0;
@@ -108,11 +134,26 @@ namespace sistemarastreamento.DAO
             return saldo >= qtde;
         }
 
-        public bool Excluir(int id_prod)
+        public Models.Estoque ObterEstoque(int id_estoque)
+        {
+            string select = @"SELECT * FROM estoque where id = " + id_estoque;
+
+            DataTable dt = _bd.ExecutarSelect(select);
+            Models.Estoque estoque = new Models.Estoque();
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                estoque = Map(row);
+            }
+
+            return estoque;
+        }
+
+        public bool Excluir(int id)
         {
             string select = @"delete  
                               from estoque 
-                              where id_prod = " + id_prod;
+                              where id = " + id;
 
             return _bd.ExecutarNonQuery(select) > 0;
         }

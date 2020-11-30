@@ -10,25 +10,31 @@ namespace sistemarastreamento.DAO
     {
         MySqlPersistencia _bd = new MySqlPersistencia();
 
-        public bool verificaCodigo(Models.ProdutoDist proddist)
+        public bool verificaCodigo(Models.ProdutoDist proddist, int id_estoque)
         {
-            string sql;
-
-            sql = @"select * from produto_distribuidor where cod_prod_dist = '" + proddist.Cod_prod_dist + "'";
-            DataTable dt = _bd.ExecutarSelect(sql);
-            
-            if (dt.Rows.Count > 0)
+            if (id_estoque == 0)
             {
-                proddist.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                string sql;
+
+                sql = @"select * from produto_distribuidor where cod_prod_dist = '" + proddist.Cod_prod_dist + "'";
+                DataTable dt = _bd.ExecutarSelect(sql);
+
+                if (dt.Rows.Count > 0)
+                {
+                    proddist.Id = Convert.ToInt32(dt.Rows[0]["Id"]);
+                }
+                return (dt.Rows.Count > 0);
             }
-            return (dt.Rows.Count > 0);  
+
+            return false;
+             
         }
-        public (bool,string) verificaCodigoLote(Models.ProdutoDist proddist, string lote)
+        public (bool,string) verificaCodigoLote(Models.ProdutoDist proddist, string lote, int id_estoque)
         {
             //é uma inserção
-            if (proddist.Id == 0)
+            if (id_estoque == 0)
             {
-                string sql = @"select * from produto_industria as pi inner join produto_distribuidor as pd on pi.cod_ref = pd.cod_ref and pi.cod_ref = '" + proddist.Cod_ref + "' inner join estoque as e on pi.id = e.id_prod and e.lote = '" + lote + "'";
+                string sql = @"select * from produto_distribuidor as pd inner join estoque as e on pd.id = e.id_prod and e.lote = '" + lote + "' and pd.cod_ref = '" + proddist.Cod_ref + "'";
 
                 DataTable dt = _bd.ExecutarSelect(sql);
 
@@ -37,24 +43,29 @@ namespace sistemarastreamento.DAO
 
             return (false, "");
         }
-        public (bool,string) Criar(Models.ProdutoDist proddist, string lote)
+        public (bool,string) Criar(Models.ProdutoDist proddist, string lote, int id_estoque)
         {
             bool operacao;
             string msg;
 
-            (operacao, msg) = verificaCodigoLote(proddist, lote);
+            (operacao, msg) = verificaCodigoLote(proddist, lote, id_estoque);
             if (!operacao)
             {
-                if (!verificaCodigo(proddist))
+                if (!verificaCodigo(proddist, id_estoque))
                 {
                     var parametros = _bd.GerarParametros();
                     string sql;
 
-                    if (proddist.Id > 0)
+                    if (id_estoque > 0)
                     {
+                        EstoqueDAO ebd = new EstoqueDAO();
+                        Models.Estoque estoque = ebd.ObterEstoque(id_estoque); 
+
+                        ebd.UpdateEstoque(estoque.Id_prod, lote);
+
                         sql = @"update produto_distribuidor set cod_ref=@cod_ref, id_dist=@id_dist, cod_prod_dist=@cod_prod_dist where id=@id";
 
-                        parametros.Add("@id", proddist.Id);
+                        parametros.Add("@id", estoque.Id_prod);
                     }
                     else
                     {
@@ -70,8 +81,10 @@ namespace sistemarastreamento.DAO
                     {
                         proddist.Id = _bd.UltimoId;
                     }
-
-                    return (linhasAfetadas > 0, msg);
+                    if (id_estoque == 0)
+                        return (linhasAfetadas > 0, msg);
+                    else
+                        return (true, "");
                 }
                 else
                     return (true, msg);
@@ -86,19 +99,19 @@ namespace sistemarastreamento.DAO
             string select;
             if (tipo.ToUpper() == "LOTE")
             {
-                select = @"SELECT d.id,d.cod_ref,cod_prod_dist,descricao,lote,saldo 
-                                FROM produto_distribuidor as d INNER JOIN produto_industria as i 
-                                ON d.cod_ref = i.cod_ref and d.id_dist = @id_dist
-                                INNER JOIN estoque as e on e.id_prod = i.id
+                select = @"SELECT * 
+                                FROM estoque as e INNER JOIN produto_distribuidor as pd 
+                                ON e.id_prod = pd.id INNER JOIN produto_industria as pi
+                                on pi.cod_ref = pd.cod_ref and pd.id_dist = @id_dist
                                 AND e.lote like @descricao AND e.id_dist = @id_dist";
             }
             else
             {
-                select = @"SELECT d.id,d.cod_ref,cod_prod_dist,descricao,lote,saldo 
-                                FROM produto_distribuidor as d INNER JOIN produto_industria as i 
-                                ON d.cod_ref = i.cod_ref and d.id_dist = @id_dist
-                                AND d.cod_prod_dist like @descricao INNER JOIN estoque as e on e.id_prod = i.id
-                                AND e.id_dist = @id_dist";
+                select = @"SELECT * 
+                                FROM estoque as e INNER JOIN produto_distribuidor as pd 
+                                ON e.id_prod = pd.id INNER JOIN produto_industria as pi
+                                on pi.cod_ref = pd.cod_ref and pd.id_dist = @id_dist
+                                AND pd.cod_prod_dist like @descricao AND e.id_dist = @id_dist";
             }
             
 
@@ -149,7 +162,7 @@ namespace sistemarastreamento.DAO
             return proddist;
 
         }
-
+        
         public Models.ProdutoDist ObterProd(string cod_dist_prod)
         {
             Models.ProdutoDist proddist = null;
@@ -167,14 +180,24 @@ namespace sistemarastreamento.DAO
             }
 
             return proddist;
-
         }
 
-        public bool Excluir(string cod_ref)
+        public DataTable ObterDadosProdDist(int id_estoque)
+        {
+            string select = @"SELECT * 
+                                FROM estoque as e inner join produto_distribuidor as pd on e.id_prod = pd.id
+                                and e.id = " + id_estoque + " inner join produto_industria as pi on pd.cod_ref = pi.cod_ref";
+
+            DataTable dt = _bd.ExecutarSelect(select);
+
+            return dt;
+        }
+
+        public bool Excluir(int id_prod)
         {
             string select = @"delete  
                               from produto_distribuidor 
-                              where cod_ref = '" + cod_ref + "'";
+                              where id = " + id_prod;
 
             return _bd.ExecutarNonQuery(select) > 0;
         }
@@ -196,7 +219,7 @@ namespace sistemarastreamento.DAO
             string select = @"SELECT cod_prod_dist, descricao, saldo FROM produto_distribuidor as pd INNER JOIN 
                                 produto_industria as pi ON pd.cod_ref = pi.cod_ref
                                 and id_dist = " + id_dist + " INNER JOIN estoque " +
-                                "as e ON pi.id = e.id_prod ORDER BY saldo LIMIT 5";
+                                "as e ON pd.id = e.id_prod ORDER BY saldo LIMIT 5";
 
             DataTable dt = _bd.ExecutarSelect(select);
 

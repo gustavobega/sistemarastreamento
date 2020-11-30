@@ -7,22 +7,22 @@ namespace sistemarastreamento.CamadaNegocio
 {
     public class EstoqueCamadaNegocio
     {
-        public bool CriarEstoque(Models.Estoque estoque)
+        public bool AlterarEstoque(Models.Estoque estoque)
         {
             bool operacao;
 
             DAO.EstoqueDAO ebd = new DAO.EstoqueDAO();
-            operacao = ebd.Criar(estoque);
+            operacao = ebd.AtualizaEstoque(estoque);
 
             return operacao;
         }
 
-        public bool AlteraEstoque(int qtde,int id_prod)
+        public bool AtualizaEstoque(int id_prod, string lote, int qtde)
         {
             bool operacao;
 
             DAO.EstoqueDAO ebd = new DAO.EstoqueDAO();
-            operacao = ebd.AlteraEstoque(qtde, id_prod);
+            operacao = ebd.AtualizaEstoque(id_prod, lote, qtde);
 
             return operacao;
         }
@@ -33,10 +33,16 @@ namespace sistemarastreamento.CamadaNegocio
             return ebd.Obter(id_prod);
         }
 
-        public bool Excluir(int id_prod)
+        public int ObterTodosEstoque(int id_prod)
         {
             DAO.EstoqueDAO ebd = new DAO.EstoqueDAO();
-            return ebd.Excluir(id_prod);
+            return ebd.ObterTodosEstoque(id_prod);
+        }
+
+        public bool Excluir(int id)
+        {
+            DAO.EstoqueDAO ebd = new DAO.EstoqueDAO();
+            return ebd.Excluir(id);
         }
 
         public bool VerificaEstoque(string id_prod, int qtde)

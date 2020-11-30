@@ -26,6 +26,21 @@ namespace sistemarastreamento.Controllers
             });
         }
 
+        public IActionResult ObterProdDist([FromBody] Dictionary<string, string> dados)
+        {
+            CamadaNegocio.ProdIndustCamadaNegocio pcn = new CamadaNegocio.ProdIndustCamadaNegocio();
+            string codigo = dados["codigo"];
+            bool operacao;
+            string cod_ref, descricao;
+            (operacao, cod_ref, descricao) = pcn.ObterProdDist(codigo);
+            return Json(new
+            {
+                operacao,
+                cod_ref,
+                descricao
+            });
+        }
+
         public IActionResult Editar(int id)
         {
             ViewBag.IdEditar = id;
@@ -38,29 +53,23 @@ namespace sistemarastreamento.Controllers
             string msg;
 
             Models.ProdutoDist proddist = new Models.ProdutoDist();
-            proddist.Id = id;
             proddist.Cod_ref = dados["cod_ref"];
             proddist.Id_dist = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
             proddist.Cod_prod_dist = dados["codigo"];
 
             CamadaNegocio.ProdDistCamadaNegocio pcn = new CamadaNegocio.ProdDistCamadaNegocio();
-            (operacao, msg) = pcn.Criar(proddist, dados["lote"]);
+            (operacao, msg) = pcn.Criar(proddist, dados["lote"], id);
 
-            if (operacao)
+            if (operacao && id == 0)
             {
-                //cadastro no estoque
-                Models.ProdutoIndust pi;
-                CamadaNegocio.ProdIndustCamadaNegocio picn = new CamadaNegocio.ProdIndustCamadaNegocio();
-                pi = picn.ObterProd(proddist.Cod_ref);
-
                 Models.Estoque estoque = new Models.Estoque();
                 estoque.Id_dist = proddist.Id_dist;
-                estoque.Id_prod = pi.Id;
+                estoque.Id_prod = proddist.Id;
                 estoque.Lote = dados["lote"];
                 estoque.Saldo = Convert.ToInt32(dados["saldo"]);
 
                 CamadaNegocio.EstoqueCamadaNegocio ecn = new CamadaNegocio.EstoqueCamadaNegocio();
-                operacao = ecn.CriarEstoque(estoque);
+                operacao = ecn.AlterarEstoque(estoque);
             }
             
             return Json(new
@@ -79,9 +88,6 @@ namespace sistemarastreamento.Controllers
         {
             CamadaNegocio.ProdDistCamadaNegocio pcn = new CamadaNegocio.ProdDistCamadaNegocio();
 
-            CamadaNegocio.ProdIndustCamadaNegocio picn = new CamadaNegocio.ProdIndustCamadaNegocio();
-            Models.ProdutoIndust pi = new Models.ProdutoIndust();
-
             var id_dist = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
 
             DataTable dt = pcn.Pesquisar(descricao, id_dist, tipo);
@@ -97,7 +103,8 @@ namespace sistemarastreamento.Controllers
                     dr = dt.Rows[i];
                     var produtoLimpo = new
                     {
-                        id = dr["id"],
+                        id = dr[10], //id do produto distribuidor
+                        id_estoque = dr[0], //id do estoque
                         cod_ref = dr["cod_ref"],
                         codigo = dr["cod_prod_dist"],
                         descricao = dr["descricao"],
@@ -117,22 +124,16 @@ namespace sistemarastreamento.Controllers
         public IActionResult Excluir(int id)
         {
             bool operacao;
-            CamadaNegocio.ProdDistCamadaNegocio pdcn = new CamadaNegocio.ProdDistCamadaNegocio();
-            Models.ProdutoDist pd = new Models.ProdutoDist();
-
-            pd = pdcn.Obter(id);
-
-            CamadaNegocio.ProdIndustCamadaNegocio picn = new CamadaNegocio.ProdIndustCamadaNegocio();
-            Models.ProdutoIndust pi = new Models.ProdutoIndust();
-            pi = picn.ObterProd(pd.Cod_ref);
-
             CamadaNegocio.EstoqueCamadaNegocio ecn = new CamadaNegocio.EstoqueCamadaNegocio();
-            operacao = ecn.Excluir(pi.Id);
+            Models.Estoque estoque = ecn.Obter(id);
+            operacao = ecn.Excluir(id);
 
-            if (operacao)
+            int qtd = ecn.ObterTodosEstoque(estoque.Id_prod);
+
+            if (operacao && qtd == 0)
             {
-                CamadaNegocio.ProdDistCamadaNegocio pcn = new CamadaNegocio.ProdDistCamadaNegocio();
-                operacao = pcn.Excluir(pd.Cod_ref);
+                CamadaNegocio.ProdDistCamadaNegocio pdcn = new CamadaNegocio.ProdDistCamadaNegocio();
+                pdcn.Excluir(estoque.Id_prod);
             }
 
             return Json(new
@@ -144,23 +145,34 @@ namespace sistemarastreamento.Controllers
         public IActionResult ObterEditar(int id)
         {
             CamadaNegocio.ProdDistCamadaNegocio pcn = new CamadaNegocio.ProdDistCamadaNegocio();
-            Models.ProdutoDist proddist = pcn.Obter(id);
+            DataTable dt = pcn.ObterDadosProdDist(id);
+            bool operacao = false;
+            object produtoLimpo = new object();
 
-            CamadaNegocio.ProdIndustCamadaNegocio picn = new CamadaNegocio.ProdIndustCamadaNegocio();
-            Models.ProdutoIndust pi = new Models.ProdutoIndust();
-
-            pi = picn.ObterProd(proddist.Cod_ref);
-
-            CamadaNegocio.EstoqueCamadaNegocio ecn = new CamadaNegocio.EstoqueCamadaNegocio();
-            Models.Estoque estoque = new Models.Estoque();
-
-            estoque = ecn.Obter(pi.Id);
+            if (dt.Rows.Count > 0)
+            {
+                operacao = true;
+                DataRow dr;
+                
+                dr = dt.Rows[0];
+                produtoLimpo = new
+                {
+                    id_estoque = dr[0],
+                    cod_ref = dr["cod_ref"],
+                    codigo = dr["cod_prod_dist"],
+                    descricao = dr["descricao"],
+                    lote = dr["lote"],
+                    saldo = dr["saldo"]
+                };
+                
+            }
 
             return Json(new
             {
-                proddist,
-                estoque
+                operacao,
+                produtoLimpo
             });
+
         }
     }
 }

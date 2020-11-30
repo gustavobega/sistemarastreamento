@@ -66,7 +66,7 @@ body {
 
 .menu-responsivo {
     height: 60px;
-    width: 188px;
+    width: 185px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -224,7 +224,7 @@ hr {
 }
 
 .nav-text a i{
-    margin-left: 1em;
+    margin-left: 1.5em;
     margin-top: 0.8em;
 }
 
@@ -304,12 +304,12 @@ hr {
     .info-gerais {
         display: none;
     }
-    .menu-responsivo{
-        width: 180px; 
+    .menu-responsivo {
+        width: 170px;
     }
     .menu-responsivo a {
         font-size: 20px;
-        margin-left: 15px;
+        padding-left: 0;  
     }
     .menu-responsivo a h1 {
         font-size: 20px;
@@ -328,7 +328,7 @@ hr {
         padding: 0;
     }
     #nav-principal a:last-child {
-        margin-right: 10px;
+        margin-right: 3px;
     }
     #navbar-toggle a {
         font-size: 20px;
@@ -338,7 +338,7 @@ hr {
     }
     #navbar-toggle a h1 {
         font-size: 20px;
-        margin-left: 8px;
+        margin-left: 3px;
     }
     .nav-text a {
         font-size: 18px;

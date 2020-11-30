@@ -236,7 +236,7 @@ var index = {
                             .then(function (dadosObj) {
                                 if (dadosObj.operacao) {
                                     Swal.fire({
-                                        position: 'top-end',
+                                        position: 'center',
                                         icon: 'success',
                                         title: 'Cadastro Realizado com Sucesso!',
                                         showConfirmButton: false,
@@ -274,7 +274,7 @@ var index = {
                                 if (dadosObj.operacao) {
                                     index.limpacampos();
                                     Swal.fire({
-                                        position: 'top-end',
+                                        position: 'center',
                                         icon: 'success',
                                         title: 'Alteração Realizado com Sucesso!',
                                         showConfirmButton: false,

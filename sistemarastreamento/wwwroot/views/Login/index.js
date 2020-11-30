@@ -45,7 +45,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Preencha um E-Mail inválido!'
+                text: 'Preencha um E-Mail Válido!'
             })
         }
         else if (senha.trim() == "") {

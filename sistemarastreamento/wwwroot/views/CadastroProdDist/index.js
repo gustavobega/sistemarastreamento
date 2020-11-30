@@ -75,7 +75,7 @@
                     if (dadosObj.operacao) {
                         if (id == 0) {
                             Swal.fire({
-                                position: 'top-end',
+                                position: 'center',
                                 icon: 'success',
                                 title: 'Cadastro Realizado com Sucesso!',
                                 showConfirmButton: false,
@@ -84,7 +84,7 @@
                         }
                         else {
                             Swal.fire({
-                                position: 'top-end',
+                                position: 'center',
                                 icon: 'success',
                                 title: 'Alteração Realizado com Sucesso!',
                                 showConfirmButton: false,
@@ -133,15 +133,17 @@
                 return obj;
             })
             .then(function (dadosObj) {
+                if (dadosObj.operacao) {
+                    document.getElementById("cod_ref").value = dadosObj.produtoLimpo.cod_ref;
+                    document.getElementById("codigo").value = dadosObj.produtoLimpo.codigo;
+                    document.getElementById("lote").value = dadosObj.produtoLimpo.lote
+                    document.getElementById("saldo").value = dadosObj.produtoLimpo.saldo
 
-                document.getElementById("cod_ref").value = dadosObj.proddist.cod_ref;
-                document.getElementById("codigo").value = dadosObj.proddist.cod_prod_dist;
-                document.getElementById("lote").value = dadosObj.estoque.lote
-                document.getElementById("saldo").value = dadosObj.estoque.saldo
+                    document.getElementById("saldo").setAttribute("disabled", "disabled");
 
-                document.getElementById("saldo").setAttribute("disabled", "disabled");
-
-                index.buscaProdIndustria();
+                    document.getElementById("sucess").innerHTML = "Item Encontrado - " + dadosObj.produtoLimpo.descricao;
+                    document.getElementById("sucess").style.display = "block";
+                }
 
             })
             .catch(function () {
@@ -176,7 +178,6 @@
             .then(function (dadosObj) {
                 document.getElementById("sucess").innerHTML = "Item Encontrado - " + dadosObj.prodemp.descricao;
                 document.getElementById("sucess").style.display = "block";
-
             })
             .catch(function () {
                 document.getElementById("sucess").innerHTML = "";
@@ -188,6 +189,55 @@
                 })
             })
     },
+    buscaProdDist: function () {
+
+        var codigo = document.getElementById("codigo").value;
+
+        var dados = {
+            codigo
+        }
+
+        var config = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            credentials: 'include', //inclui cookies
+            body: JSON.stringify(dados)  //serializa
+        };
+
+        fetch("/CadastroProdDist/ObterProdDist", config)
+            .then(function (dadosJson) {
+                var obj = dadosJson.json(); //deserializando
+                return obj;
+            })
+            .then(function (dadosObj) {
+                if (dadosObj.operacao) {
+                    document.getElementById('cod_ref').value = dadosObj.cod_ref
+                    document.getElementById("sucess").innerHTML = "Item Encontrado - " + dadosObj.descricao;
+                    document.getElementById("sucess").style.display = "block";
+                }
+                else {
+                    document.getElementById("sucess").innerHTML = "";
+                    document.getElementById("sucess").style.display = "none";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Item Não Encontrado!'
+                    })
+                }   
+
+            })
+            .catch(function () {
+                document.getElementById("sucess").innerHTML = "";
+                document.getElementById("sucess").style.display = "none";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Item Não Encontrado!'
+                })
+            })
+    }
 }
 
 if (document.getElementById("hfIdEditar") != null) {
@@ -201,5 +251,13 @@ document.getElementById("cod_ref")
         event.preventDefault();
         if (event.keyCode === 13) {
             index.buscaProdIndustria();
+        }
+    });
+
+document.getElementById("codigo")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            index.buscaProdDist();
         }
     });

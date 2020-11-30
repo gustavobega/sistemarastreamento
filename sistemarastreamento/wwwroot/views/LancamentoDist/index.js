@@ -37,14 +37,18 @@
                     if (dadosObj.operacao) { 
 
                         Swal.fire({
-                            position: 'top-end',
+                            position: 'center',
                             icon: 'success',
                             title: dadosObj.msg,
                             showConfirmButton: false,
                             timer: 1500
                         })
 
-                        document.getElementById("visualizador").innerHTML += `<a data-fancybox data-type="iframe" data-src="/LancamentoDist/IndexVisualizar?id=${dadosObj.id_nota}" href="javascript:;">Visualizar</a>`
+                        document.getElementById("visualizador").innerHTML = `
+                                    <button type="button" class="btnVisualizar" data-fancybox data-type="iframe" data-src="/LancamentoDist/IndexVisualizar?id=${dadosObj.id_nota}">
+                                        <span class="button-text">Visualizar</span>
+                                    </button>
+                                    `
                         document.getElementById("visualizador").style.display = 'block';
                         document.getElementById("info").innerHTML = dadosObj.infoadicionais;
 
@@ -54,7 +58,7 @@
                                 "Accept": "application/json",
                             },
                         };
-                        fetch("/LancamentoDist/AlteraEstoque?id_nota=" + dadosObj.id_nota, config)
+                        fetch("/LancamentoDist/RetiraEstoque?id_nota=" + dadosObj.id_nota, config)
                             .then(function (dadosJson) {
                                 var obj = dadosJson.json(); //deserializando
                                 return obj;

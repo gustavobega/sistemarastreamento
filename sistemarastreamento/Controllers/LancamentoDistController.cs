@@ -97,32 +97,25 @@ namespace sistemarastreamento.Controllers
             });
         }
 
-        public IActionResult AlteraEstoque(int id_nota)
+        public IActionResult RetiraEstoque(int id_nota)
         {
             bool operacao = true;
             //int id_dist = Convert.ToInt32(HttpContext.User.Claims.ToList()[3].Value);
 
-            List<Models.ItemNota> itens = new List<Models.ItemNota>();
+            List<Models.ItemNota> itens;
             CamadaNegocio.ItemNotaCamadaNegocio icn = new CamadaNegocio.ItemNotaCamadaNegocio();
             itens = icn.Pesquisa(id_nota);
 
-            CamadaNegocio.ProdDistCamadaNegocio pdcn = new CamadaNegocio.ProdDistCamadaNegocio();
-            Models.ProdutoDist pd = new Models.ProdutoDist();
-
-            CamadaNegocio.ProdIndustCamadaNegocio picn = new CamadaNegocio.ProdIndustCamadaNegocio();
-            Models.ProdutoIndust pi = new Models.ProdutoIndust();
-
             CamadaNegocio.EstoqueCamadaNegocio ecn = new CamadaNegocio.EstoqueCamadaNegocio();
             int qtde,id_prod;
+            string lote;
             for (int i = 0; i < itens.Count() && operacao; i++)
             {
-                pd = pdcn.Obter(itens[i].Id_prod);
-
-                pi = picn.ObterProd(pd.Cod_ref);
-                id_prod = pi.Id;
+                id_prod = itens[i].Id_prod;
+                lote = itens[i].Lote;
                 qtde = itens[i].Qtde;
 
-                operacao = ecn.AlteraEstoque(qtde, id_prod);
+                operacao = ecn.AtualizaEstoque(id_prod, lote, qtde);
             }
 
             return Json(new

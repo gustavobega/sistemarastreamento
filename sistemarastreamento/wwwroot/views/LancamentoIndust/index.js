@@ -33,7 +33,7 @@
                 .then(function (dadosObj) {
                     if (dadosObj.operacao) {    
                         Swal.fire({
-                            position: 'top-end',
+                            position: 'center',
                             icon: 'success',
                             title: dadosObj.msg,
                             showConfirmButton: false,
@@ -57,7 +57,7 @@
                             body: JSON.stringify(dados)  //serializa
                         };
 
-                        fetch("/LancamentoIndust/CriarEstoque?id_nota=" + id_nota, config2)
+                        fetch("/LancamentoIndust/AlterarEstoque?id_nota=" + id_nota, config2)
                             .then(function (dadosJson) {
                                 var obj = dadosJson.json();
                                 return obj;

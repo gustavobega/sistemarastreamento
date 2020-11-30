@@ -152,7 +152,7 @@
 
                     var template =
                         `
-                        <div class="table-row" id="${lista[i]['id']}">
+                        <div class="table-row" id="${lista[i]['id_estoque']}">
                             <div class="table-cell first-cell">
                                 <p>${lista[i]['cod_ref']}</p>
                             </div>
@@ -169,12 +169,12 @@
                                 <p>${lista[i]['saldo']}</p>
                             </div>
                             <div class="table-cell last-cell acoes">
-                                <div class="dropdown" onclick="indexListar.block(${lista[i]['id']})">
+                                <div class="dropdown" onclick="indexListar.block(${lista[i]['id_estoque']})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
-                                    <div class="dropdown-content" id="acoesoption${lista[i]['id']}" style="display: none;">
-                                        <a href="/CadastroProdDist/Editar?id=${lista[i]['id']}"><i class='bx bx-edit'></i> Editar</a>
-                                        <a href="javascript:indexListar.excluir(${lista[i]['id']})"><i class='bx bxs-user-x'></i> Excluir</a>
-                                  </div>
+                                    <div class="dropdown-content" id="acoesoption${lista[i]['id_estoque']}" style="display: none;">
+                                        <a href="/CadastroProdDist/Editar?id=${lista[i]['id_estoque']}"><i class='bx bx-edit'></i> Editar</a>
+                                        <a href="javascript:indexListar.excluir(${lista[i]['id_estoque']})"><i class='bx bxs-user-x'></i> Excluir</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                                 <div class="table-cell">
                                     <p>Saldo</p>
                                 </div>
-                                <div class="table-cell last-cell">
+                                <div class="table-cell last-cell headacoes">
                                     <p>Açoes</p>
                                 </div>
                             </div>

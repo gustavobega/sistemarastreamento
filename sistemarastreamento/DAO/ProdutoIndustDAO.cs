@@ -112,7 +112,7 @@ namespace sistemarastreamento.DAO
         {
             Models.ProdutoIndust prodindust = null;
 
-            string select = @"select * 
+            string select = @"select *  
                               from produto_industria 
                               where id = " + id;
 
@@ -145,6 +145,25 @@ namespace sistemarastreamento.DAO
             }
 
             return prodindust;
+
+        }
+
+        public (bool, string, string) ObterProdDist(string codigo)
+        {
+            string select = @"select * 
+                              from produto_industria as pi inner join produto_distribuidor as pd  
+                              on pi.cod_ref = pd.cod_ref 
+                              and cod_prod_dist = '" + codigo + "'";
+
+            DataTable dt = _bd.ExecutarSelect(select);
+
+            if (dt.Rows.Count == 1)
+            {
+                //ORM - Relacional -> Objeto
+                return (true, dt.Rows[0]["cod_ref"].ToString(), dt.Rows[0]["descricao"].ToString());
+            }
+
+            return (false, "", "");
 
         }
 

@@ -8,13 +8,13 @@ namespace sistemarastreamento.CamadaNegocio
 {
     public class ProdDistCamadaNegocio
     {
-        public (bool, string) Criar(Models.ProdutoDist prodemp, string lote)
+        public (bool, string) Criar(Models.ProdutoDist prodemp, string lote, int id_estoque)
         {
             bool operacao;
             string msg;
 
             DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
-            (operacao, msg) = pbd.Criar(prodemp, lote);
+            (operacao, msg) = pbd.Criar(prodemp, lote, id_estoque);
 
             return (operacao, msg);
         }
@@ -44,10 +44,16 @@ namespace sistemarastreamento.CamadaNegocio
             return pbd.ObterProd(cod_dist_prod);
         }
 
-        public bool Excluir(string cod_ref)
+        public DataTable ObterDadosProdDist(int id_estoque)
         {
             DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
-            return pbd.Excluir(cod_ref);
+            return pbd.ObterDadosProdDist(id_estoque);
+        }
+
+        public bool Excluir(int id_prod)
+        {
+            DAO.ProdutoDistDAO pbd = new DAO.ProdutoDistDAO();
+            return pbd.Excluir(id_prod);
         }
     }
 }
