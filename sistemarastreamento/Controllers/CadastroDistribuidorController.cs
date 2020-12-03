@@ -70,23 +70,28 @@ namespace sistemarastreamento.Controllers
             //objeto anônimo
             var distribuidoresLimpos = new List<object>();
 
-            foreach (var d in distribuidores)
+            if (distribuidores != null)
             {
-                var distribuidorLimpo = new
+                foreach (var d in distribuidores)
                 {
-                    id = d.Id,
-                    nome = d.Nome,
-                    cnpj = d.CNPJ,
-                    telefone = d.Telefone,
-                    representante = d.Representante,
-                    Email = d.Email
-                };
+                    var distribuidorLimpo = new
+                    {
+                        id = d.Id,
+                        nome = d.Nome,
+                        cnpj = d.CNPJ,
+                        telefone = d.Telefone,
+                        representante = d.Representante,
+                        email = d.Email
+                    };
 
-                distribuidoresLimpos.Add(distribuidorLimpo);
+                    distribuidoresLimpos.Add(distribuidorLimpo);
+                }
             }
 
-
-            return Json(distribuidoresLimpos);
+            return Json(new {
+                operacao = distribuidores != null,
+                distribuidoresLimpos
+            });
         }
         [HttpDelete]
         public IActionResult Excluir(int id)

@@ -127,10 +127,10 @@ namespace sistemarastreamento.DAO
         public DataTable getProdutos(int id_dist, string lote)
         {
 
-            string select = @"SELECT d.id,d.cod_ref,cod_prod_dist,descricao,lote,saldo 
-                                FROM produto_distribuidor as d INNER JOIN produto_industria as i 
-                                ON d.cod_ref = i.cod_ref and d.id_dist = @id_dist
-                                INNER JOIN estoque as e on e.id_prod = i.id
+            string select = @"SELECT pd.id,pd.cod_ref,cod_prod_dist,descricao,lote,saldo 
+                                FROM produto_distribuidor as pd INNER JOIN produto_industria as pi 
+                                ON pd.cod_ref = pi.cod_ref and pd.id_dist = @id_dist
+                                INNER JOIN estoque as e on e.id_prod = pd.id
                                 AND e.lote like @lote AND e.id_dist = @id_dist";
 
 

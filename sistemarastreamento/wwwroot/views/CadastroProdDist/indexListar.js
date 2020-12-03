@@ -76,9 +76,11 @@
 
     btnPesquisarOnClick: function (perfil) {
         document.getElementById("iconsearch").disabled = true;
-
+        var descricao = encodeURIComponent(document.getElementById("descricao").value);
         var tbodyProdutos = document.getElementById("table");
-        tbodyProdutos.innerHTML = `
+
+        if (descricao.trim().length > 3) {
+            tbodyProdutos.innerHTML = `
                                    <div class="table-row table-head">
                                         <div class="table-cell first-cell">
                                             <p>Código de Referência</p>
@@ -100,7 +102,7 @@
                                         </div>
                                     </div>
                                     `
-        tbodyProdutos.innerHTML += `
+            tbodyProdutos.innerHTML += `
                                     <div class="table-row">
                                         <div class="table-cell first-cell">
                                             <p><img src=\"/img/ajax-loader.gif"\/>carregando...</p>
@@ -108,24 +110,25 @@
                                     </div>
                                     `
 
-        var config = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            credentials: 'include', //inclui cookies
-        };
-        var tipo = $(".default_option").text();
-        var descricao = encodeURIComponent(document.getElementById("descricao").value);
+            var config = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                credentials: 'include', //inclui cookies
+            };
+            var tipo = $(".default_option").text();
 
-        fetch("/CadastroProdDist/Pesquisar?descricao=" + descricao + "&tipo=" + tipo, config)
-            .then(function (dadosJson) {
-                var obj = dadosJson.json(); //deserializando
-                return obj;
-            })
-            .then(function (dadosObj) {
+            fetch("/CadastroProdDist/Pesquisar?descricao=" + descricao + "&tipo=" + tipo, config)
+                .then(function (dadosJson) {
+                    var obj = dadosJson.json(); //deserializando
+                    return obj;
+                })
+                .then(function (dadosObj) {
 
-                var linhas = ` 
+                    if (dadosObj.operacao) {
+
+                        var linhas = ` 
                         <div class="table-row table-head">
                             <div class="table-cell first-cell">
                                 <p>Código de Referência</p>
@@ -147,11 +150,11 @@
                             </div>
                         </div>
                         `;
-                var lista = dadosObj.produtosLimpos;
-                for (var i = 0; i < lista.length; i++) {
+                        var lista = dadosObj.produtosLimpos;
+                        for (var i = 0; i < lista.length; i++) {
 
-                    var template =
-                        `
+                            var template =
+                                `
                         <div class="table-row" id="${lista[i]['id_estoque']}">
                             <div class="table-cell first-cell">
                                 <p>${lista[i]['cod_ref']}</p>
@@ -180,12 +183,12 @@
                         </div>
                         `
 
-                    linhas += template;
-                }
-                document.getElementById('retorno').innerHTML = lista.length
-                if (lista.length == 0) {
+                            linhas += template;
+                        }
+                        document.getElementById('retorno').innerHTML = lista.length
+                        if (lista.length == 0) {
 
-                    linhas = `
+                            linhas = `
                             <div class="table-row table-head">
                                 <div class="table-cell first-cell">
                                     <p>Código de Referência</p>
@@ -212,24 +215,41 @@
                                 </div>
                             </div>
                             `
-                }
+                        }
 
-                tbodyProdutos.innerHTML = linhas;
-            })
-            .catch(function () {
-                tbodyProdutos.innerHTML += `
+                        tbodyProdutos.innerHTML = linhas;
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Informe no minimo 4 caracteres!'
+                        })
+                    }
+
+                })
+                .catch(function () {
+                    tbodyProdutos.innerHTML += `
                                             <div class="table-row">
                                                 <div class="table-cell first-cell">
                                                         <p>deu erro.</p>
                                                 </div>
                                             </div>
                                             `
-            })
-            .finally(function () {
+                })
+                .finally(function () {
 
-                document.getElementById("iconsearch").disabled = false;
-            });
-        //<td><a href="javascript:indexListar.excluir(${dadosObj[i].id})">Excluir</a></td> 
+                    document.getElementById("iconsearch").disabled = false;
+                });
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe no minimo 4 caracteres!'
+            })
+        }
+
     }
 
 }

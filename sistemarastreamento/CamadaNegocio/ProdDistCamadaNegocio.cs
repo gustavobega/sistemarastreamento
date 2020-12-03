@@ -27,9 +27,10 @@ namespace sistemarastreamento.CamadaNegocio
             else
                 descricao = descricao.ToLower();
 
-            //if (nome.Length > 3)
-            return pbd.Pesquisar(descricao, id_dist, tipo);
-            //else return new List<Models.Empresa>();
+            if (descricao.Length > 3)
+                return pbd.Pesquisar(descricao, id_dist, tipo);
+            else 
+                return null;
         }
 
         public Models.ProdutoDist Obter(int id)

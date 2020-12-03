@@ -45,9 +45,10 @@ namespace sistemarastreamento.CamadaNegocio
             if (numero == null)
                 numero = "";
 
-            //if (nome.Length > 3)
-            return nbd.PesquisarIndust(numero, id_indust, tipo);
-            //else return new List<Models.Empresa>();
+            if (numero.Length > 3)
+                return nbd.PesquisarIndust(numero, id_indust, tipo);
+            else 
+                return null;
         }
 
         public List<Models.NotaFiscal> PesquisarDist(string numero, string id_dist, string tipo)
@@ -56,9 +57,10 @@ namespace sistemarastreamento.CamadaNegocio
             if (numero == null)
                 numero = "";
 
-            //if (nome.Length > 3)
-            return nbd.PesquisarDist(numero, id_dist, tipo);
-            //else return new List<Models.Empresa>();
+            if (numero.Length > 3)
+                return nbd.PesquisarDist(numero, id_dist, tipo);
+            else 
+                return null;
         }
 
         public bool Excluir(int id)

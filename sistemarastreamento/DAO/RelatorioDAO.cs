@@ -43,8 +43,8 @@ namespace sistemarastreamento.DAO
 
         public DataTable PesquisarEstoqueDist(string id_dist)
         {
-            string select = @"SELECT * FROM estoque as e INNER JOIN produto_industria 
-                                as pi ON e.id_prod = pi.id and id_dist = " + id_dist + " INNER JOIN produto_distribuidor as pd ON pd.cod_ref = pi.cod_ref;";
+            string select = @"SELECT * FROM estoque as e INNER JOIN produto_distribuidor 
+                                as pd ON e.id_prod = pd.id and pd.id_dist = " + id_dist + " INNER JOIN produto_industria as pi ON pd.cod_ref = pi.cod_ref;";
 
 
             DataTable dt = _bd.ExecutarSelect(select);

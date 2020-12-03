@@ -155,6 +155,13 @@ var index = {
                 text: 'Preencha a senha!'
             })
         }
+        else if (senha.trim().length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe uma senha mais forte!'
+            })
+        }
         else if (senhaConf.trim() == "") {
             Swal.fire({
                 icon: 'error',

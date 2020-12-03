@@ -59,13 +59,13 @@
 .wrapper {
     width: 80%;
     margin: 0 auto;
-    height: 18vh;
+    height: 8vh;
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: center;
+    margin-top: 15px;
 }
-
 .wrapper .search_box{
   width: 500px;
   background: #fff;
@@ -237,6 +237,7 @@ a {
     .wrapper {
         width: 100%;
         justify-content: center;
+        margin-bottom: 10px;
     }
     .wrapper .search_box {
         width: 300px;

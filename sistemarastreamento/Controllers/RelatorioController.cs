@@ -69,9 +69,10 @@ namespace sistemarastreamento.Controllers
             return pdfResult;
         }
 
-        public IActionResult ReportDistribuidor()
+        public IActionResult ReportDistribuidor([FromBody] Dictionary<string, string> info)
         {
-            var dados = relDistribuidor();
+            string cidade = info["cidade"];
+            var dados = relDistribuidor(cidade);
             var pdfResult = new ViewAsPdf("ReportDistribuidor", dados)
             {
                 CustomSwitches = "--footer-center \"  Data: " + DateTime.Now.Date.ToString("dd/MM/yyyy") + "  Página: [page]/[toPage]\"" + " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\""
@@ -127,10 +128,10 @@ namespace sistemarastreamento.Controllers
             return pdbd.getProdutos(id_dist, lote);
         }
 
-        public List<Models.Distribuidor> relDistribuidor()
+        public List<Models.Distribuidor> relDistribuidor(string cidade)
         {
             DAO.DistribuidorDAO dbd = new DAO.DistribuidorDAO();
-            List<Models.Distribuidor> distribuidores = dbd.getDistribuidores();
+            List<Models.Distribuidor> distribuidores = dbd.getDistribuidores(cidade);
 
             return distribuidores;
         }

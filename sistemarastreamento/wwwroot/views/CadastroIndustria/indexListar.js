@@ -101,7 +101,11 @@
     btnPesquisarOnClick: function (perfil) {
         document.getElementById("iconsearch").disabled = true;
         var tbodyIndustrias = document.getElementById("table");
-        tbodyIndustrias.innerHTML = `
+        var nome = encodeURIComponent(document.getElementById("industria").value);
+
+        if (nome.trim() != "") {
+
+            tbodyIndustrias.innerHTML = `
                                    <div class="table-row table-head">
                                         <div class="table-cell first-cell">
                                             <p>Id</p>
@@ -120,7 +124,7 @@
                                         </div>
                                     </div>
                                     `
-        tbodyIndustrias.innerHTML += `
+            tbodyIndustrias.innerHTML += `
                                     <div class="table-row">
                                         <div class="table-cell first-cell">
                                             <p><img src=\"/img/ajax-loader.gif"\/>carregando...</p>
@@ -128,24 +132,25 @@
                                     </div>
                                     `
 
-        var config = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            credentials: 'include', //inclui cookies
-        };
-        var tipo = $(".default_option").text();
-        var nome = encodeURIComponent(document.getElementById("industria").value);
+            var config = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                credentials: 'include', //inclui cookies
+            };
+            var tipo = $(".default_option").text();
 
-        fetch("/CadastroIndustria/Pesquisar?nome=" + nome + "&tipo=" + tipo, config)
-            .then(function (dadosJson) {
-                var obj = dadosJson.json(); //deserializando
-                return obj;
-            })
-            .then(function (dadosObj) {
+            fetch("/CadastroIndustria/Pesquisar?nome=" + nome + "&tipo=" + tipo, config)
+                .then(function (dadosJson) {
+                    var obj = dadosJson.json(); //deserializando
+                    return obj;
+                })
+                .then(function (dadosObj) {
 
-                var linhas =  ` 
+                    if (dadosObj.operacao) {
+
+                        var linhas = ` 
                         <div class="table-row table-head">
                             <div class="table-cell first-cell">
                                 <p>Id</p>
@@ -165,42 +170,42 @@
                         </div>
                         `;
 
-                for (var i = 0; i < dadosObj.length; i++) {
+                        for (var i = 0; i < dadosObj.industriasLimpos.length; i++) {
 
-                    var template =
-                        `
-                        <div class="table-row" id="${dadosObj[i].id}">
+                            var template =
+                                `
+                        <div class="table-row" id="${dadosObj.industriasLimpos[i].id}">
                             <div class="table-cell first-cell">
-                                <p>${dadosObj[i].id}</p>
+                                <p>${dadosObj.industriasLimpos[i].id}</p>
                             </div>
                             <div class="table-cell">
-                                <p>${dadosObj[i].nome}</p>
+                                <p>${dadosObj.industriasLimpos[i].nome}</p>
                             </div>
                             <div class="table-cell">
-                                <p>${dadosObj[i].cnpj}</p>
+                                <p>${dadosObj.industriasLimpos[i].cnpj}</p>
                             </div>
                             <div class="table-cell">
-                                <p>${dadosObj[i].telefone}</p>
+                                <p>${dadosObj.industriasLimpos[i].telefone}</p>
                             </div>
                             <div class="table-cell last-cell">
-                                <div class="dropdown" onclick="indexListar.block(${dadosObj[i].id})">
+                                <div class="dropdown" onclick="indexListar.block(${dadosObj.industriasLimpos[i].id})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
-                                    <div class="dropdown-content" id="acoesoption${dadosObj[i].id}" style="display: none;">
-                                        <a data-fancybox data-type="iframe" data-src="/CadastroIndustria/IndexVisualizar?id=${dadosObj[i].id}" href="javascript:;"><i class='bx bx-show-alt'></i> Visualizar</a>
-                                        <a href="/CadastroIndustria/Editar?id=${dadosObj[i].id}"><i class='bx bx-edit'></i> Editar</a>
-                                        <a href="javascript:indexListar.excluir(${dadosObj[i].id})"><i class='bx bxs-user-x'></i> Excluir</a>
+                                    <div class="dropdown-content" id="acoesoption${dadosObj.industriasLimpos[i].id}" style="display: none;">
+                                        <a data-fancybox data-type="iframe" data-src="/CadastroIndustria/IndexVisualizar?id=${dadosObj.industriasLimpos[i].id}" href="javascript:;"><i class='bx bx-show-alt'></i> Visualizar</a>
+                                        <a href="/CadastroIndustria/Editar?id=${dadosObj.industriasLimpos[i].id}"><i class='bx bx-edit'></i> Editar</a>
+                                        <a href="javascript:indexListar.excluir(${dadosObj.industriasLimpos[i].id})"><i class='bx bxs-user-x'></i> Excluir</a>
                                   </div>
                                 </div>
                             </div>
                         </div>
-                        ` 
-   
-                    linhas += template;
-                }
-                document.getElementById('retorno').innerHTML = dadosObj.length
-                if (dadosObj.length == 0) {
+                        `
 
-                    linhas = `
+                            linhas += template;
+                        }
+                        document.getElementById('retorno').innerHTML = dadosObj.industriasLimpos.length
+                        if (dadosObj.industriasLimpos.length == 0) {
+
+                            linhas = `
                             <div class="table-row table-head">
                                 <div class="table-cell first-cell">
                                     <p>Id</p>
@@ -224,23 +229,39 @@
                                 </div>
                             </div>
                             `
-                }
+                        }
 
-                tbodyIndustrias.innerHTML = linhas;
-            })
-            .catch(function () {
-                tbodyIndustrias.innerHTML = `
+                        tbodyIndustrias.innerHTML = linhas;
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Informe no minimo 4 caracteres!'
+                        })
+                    }
+
+                })
+                .catch(function () {
+                    tbodyIndustrias.innerHTML = `
                                             <div class="table-row">
                                                 <div class="table-cell first-cell">
                                                         <p>deu erro.</p>
                                                 </div>
                                             </div>
                                             `
+                })
+                .finally(function () {
+                    document.getElementById("iconsearch").disabled = false;
+                });
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe no minimo 4 caracteres!'
             })
-            .finally(function () {
-                document.getElementById("iconsearch").disabled = false;
-            });
-        //<td><a href="javascript:indexListar.excluir(${dadosObj[i].id})">Excluir</a></td> 
+        }
     }
 }
 

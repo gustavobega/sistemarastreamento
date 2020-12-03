@@ -1,8 +1,4 @@
-﻿using sistemarastreamento.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace sistemarastreamento.CamadaNegocio
 {
@@ -44,9 +40,10 @@ namespace sistemarastreamento.CamadaNegocio
             else
             nome = nome.ToLower();
 
-            //if (nome.Length > 3)
+            if (nome.Length > 3)
                 return ibd.Pesquisar(nome, tipo);
-            //else return new List<Models.Empresa>();
+            else 
+                return null;
         }
 
         public bool Excluir(int id)

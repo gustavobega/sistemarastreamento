@@ -239,3 +239,63 @@ async function btnReportProdIndust() {
             })
     }
 }
+
+async function btnReportVendaDistribuidor() {
+
+        const { value: cidade } = await Swal.fire({
+        title: 'Filtro por Cidade',
+        input: 'text',
+        inputLabel: 'Cidade',
+        inputPlaceholder: 'Cidade',
+        confirmButtonText: 'Gerar Relatório',
+        showCloseButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Informe a Cidade!'
+            }
+        }
+    })
+
+    if (cidade) {
+
+        Swal.fire({
+            title: 'Gerando o Relatório!',
+            html: 'aguarde!',
+            onOpen: () => {
+                Swal.showLoading()
+            }
+        })
+
+        var dados = {
+            cidade
+        }
+
+        var config = {
+            method: "POST",
+            headers: new Headers({
+                "Content-Type": "application/json"
+            }),
+            credentials: 'include', //inclui cookies
+            body: JSON.stringify(dados)
+        };
+
+        fetch("/Relatorio/ReportDistribuidor", config)
+            .then(function (retorno) {
+                retorno = retorno.blob();
+                return retorno;
+            })
+            .then(function (retorno) {
+                Swal.close()
+                var fileURL = URL.createObjectURL(retorno);
+                window.open(fileURL);
+            })
+            .catch(function () {
+                Swal.close()
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Erro, Tente Novamente!'
+                })
+            })
+    }
+}

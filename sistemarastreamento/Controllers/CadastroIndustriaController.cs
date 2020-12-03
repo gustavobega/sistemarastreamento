@@ -73,22 +73,27 @@ namespace sistemarastreamento.Controllers
             //objeto anônimo
             var industriasLimpos = new List<object>();
 
-            foreach (var i in industrias)
+            if (industrias != null)
             {
-                var industriaLimpo = new
+                foreach (var i in industrias)
                 {
-                    id = i.Id,
-                    nome = i.Nome,
-                    cnpj = i.CNPJ,
-                    telefone = i.Telefone,
-                    representante = i.Representante
-                };
+                    var industriaLimpo = new
+                    {
+                        id = i.Id,
+                        nome = i.Nome,
+                        cnpj = i.CNPJ,
+                        telefone = i.Telefone,
+                        representante = i.Representante
+                    };
 
-                industriasLimpos.Add(industriaLimpo);
+                    industriasLimpos.Add(industriaLimpo);
+                }
             }
 
-
-            return Json(industriasLimpos);
+            return Json(new {
+                operacao = industrias != null,
+                industriasLimpos
+            });
         }
         [HttpDelete]
         public IActionResult Excluir(int id)

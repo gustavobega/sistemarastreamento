@@ -49,9 +49,10 @@ namespace sistemarastreamento.CamadaNegocio
             else
                 nome = nome.ToLower();
 
-            //if (nome.Length > 3)
+            if (nome.Length > 3)
             return dbd.Pesquisar(nome,tipo);
-            //else return new List<Models.Empresa>();
+            else
+                return null;
         }
 
         public bool Excluir(int id)

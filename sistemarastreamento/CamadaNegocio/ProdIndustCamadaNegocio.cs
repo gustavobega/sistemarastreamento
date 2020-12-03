@@ -25,9 +25,10 @@ namespace sistemarastreamento.CamadaNegocio
             else
                 produto = produto.ToLower();
 
-            //if (nome.Length > 3)
+            if (produto.Length > 3)
             return pbd.Pesquisar(produto, id_indust, tipo);
-            //else return new List<Models.Empresa>();
+            else 
+                return null;
         }
 
         public Models.ProdutoIndust Obter(int id)

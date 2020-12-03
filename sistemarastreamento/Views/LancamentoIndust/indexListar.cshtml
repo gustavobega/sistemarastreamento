@@ -7,20 +7,7 @@
 @section js {
     <script src="~/views/LancamentoIndust/indexListar.js"></script>
     <script src="~/lib/fancybox-master/dist/jquery.fancybox.js"></script>
-    <script>
-        $(".dropdown").click(function () {
-            if ($(".dropdown ul").hasClass("active"))
-                $(".dropdown ul").removeClass("active");
-            else
-                $(".dropdown ul").addClass("active");
-        });
-
-        $(".dropdown ul li").click(function () {
-            var text = $(this).text();
-            $(".default_option").text(text);
-            $(".default_option ul").removeClass("active");
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 }
 
 @section css {
@@ -47,7 +34,7 @@
                     </ul>
                 </div>
                 <div class="search_field">
-                    <input type="text" class="input" id="numero" placeholder="Buscar">
+                    <input type="text" class="input" id="numero" placeholder="Buscar" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                     <i class="fas fa-search" id="iconsearch" onclick="indexListar.btnPesquisarOnClick(@Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[2].Value), @Html.Raw(httpContextaccessor.HttpContext.User.Claims.ToList()[3].Value))"></i>
                 </div>
             </div>

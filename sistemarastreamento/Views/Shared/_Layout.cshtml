@@ -51,7 +51,7 @@
 
         <nav id="nav-principal">
 
-            <a href="/Default">
+            <a href="/Default" >
                 <i class="fas fa-home nav-icon"></i>
                 <p>Inicio</p>
             </a>
@@ -125,7 +125,7 @@
                     @{
                         if (httpContextaccessor.HttpContext.User.Claims.ToList()[1].Value == "Indústria")
                         {
-                            <li class="nav-text"><a target="_blank" href="/Relatorio/ReportDistribuidor"><i class="far fa-file-pdf nav-icon"></i>Distribuidores</a></li>
+                            <li class="nav-text"><a href="javascript:btnReportVendaDistribuidor()"><i class="far fa-file-pdf nav-icon"></i>Distribuidores</a></li>
                             <li class="nav-text"><a target="_blank" href="/Relatorio/ReportProdIndust"><i class="far fa-file-pdf nav-icon"></i>Produtos</a></li>
                             <li class="nav-text"><a href="javascript:btnReportVendaIndust()"><i class="far fa-file-pdf nav-icon"></i>Vendas</a></li>
 

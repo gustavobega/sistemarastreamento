@@ -163,14 +163,18 @@ namespace sistemarastreamento.DAO
 
         }
 
-        public List<Models.Distribuidor> getDistribuidores()
+        //para o relatório filtro por cidade
+        public List<Models.Distribuidor> getDistribuidores(string cidade)
         {
 
             List<Models.Distribuidor> distribuidores = new List<Models.Distribuidor>();
 
-            string select = @"select * from distribuidor ";
+            string select = @"select * from distribuidor inner join cidade as c on cidade = c.id and c.nome like @cidade";
 
-            DataTable dt = _bd.ExecutarSelect(select);
+            var parametros = _bd.GerarParametros();
+            parametros.Add("@cidade", "%" + cidade + "%");
+
+            DataTable dt = _bd.ExecutarSelect(select, parametros);
 
             foreach (DataRow row in dt.Rows)
             {

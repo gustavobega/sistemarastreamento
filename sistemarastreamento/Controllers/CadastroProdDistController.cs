@@ -95,28 +95,32 @@ namespace sistemarastreamento.Controllers
             //objeto anônimo
             var produtosLimpos = new List<object>();
 
-            if (dt.Rows.Count > 0)
+            if (dt != null)
             {
-                DataRow dr;
-                for (int i = 0; i < dt.Rows.Count; i++)
+                if (dt.Rows.Count > 0)
                 {
-                    dr = dt.Rows[i];
-                    var produtoLimpo = new
+                    DataRow dr;
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        id = dr[10], //id do produto distribuidor
-                        id_estoque = dr[0], //id do estoque
-                        cod_ref = dr["cod_ref"],
-                        codigo = dr["cod_prod_dist"],
-                        descricao = dr["descricao"],
-                        lote = dr["lote"],
-                        saldo = dr["saldo"]
-                    };
-                    produtosLimpos.Add(produtoLimpo);
+                        dr = dt.Rows[i];
+                        var produtoLimpo = new
+                        {
+                            id = dr[10], //id do produto distribuidor
+                            id_estoque = dr[0], //id do estoque
+                            cod_ref = dr["cod_ref"],
+                            codigo = dr["cod_prod_dist"],
+                            descricao = dr["descricao"],
+                            lote = dr["lote"],
+                            saldo = dr["saldo"]
+                        };
+                        produtosLimpos.Add(produtoLimpo);
+                    }
                 }
             }
-
+            
             return Json(new
             {
+                operacao = dt != null,
                 produtosLimpos
             });
         }

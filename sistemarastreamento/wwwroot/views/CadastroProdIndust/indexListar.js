@@ -100,9 +100,12 @@
 
     btnPesquisarOnClick: function (perfil) {
         document.getElementById("iconsearch").disabled = true;
-
+        var produto = encodeURIComponent(document.getElementById("produto").value);
         var tbodyProdutos = document.getElementById("table");
-        tbodyProdutos.innerHTML = `
+
+        if (produto.trim().length > 3) {
+
+            tbodyProdutos.innerHTML = `
                                    <div class="table-row table-head">
                                         <div class="table-cell first-cell">
                                             <p>Id</p>
@@ -118,7 +121,7 @@
                                         </div>
                                     </div>
                                     `
-        tbodyProdutos.innerHTML += `
+            tbodyProdutos.innerHTML += `
                                     <div class="table-row">
                                         <div class="table-cell first-cell">
                                             <p><img src=\"/img/ajax-loader.gif"\/>carregando...</p>
@@ -126,24 +129,25 @@
                                     </div>
                                     `
 
-        var config = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            credentials: 'include', //inclui cookies
-        };
-        var tipo = $(".default_option").text();
-        var produto = encodeURIComponent(document.getElementById("produto").value);
+            var config = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                credentials: 'include', //inclui cookies
+            };
+            var tipo = $(".default_option").text();
 
-        fetch("/CadastroProdIndust/Pesquisar?produto=" + produto + "&tipo=" + tipo, config)
-            .then(function (dadosJson) {
-                var obj = dadosJson.json(); //deserializando
-                return obj;
-            })
-            .then(function (dadosObj) {
+            fetch("/CadastroProdIndust/Pesquisar?produto=" + produto + "&tipo=" + tipo, config)
+                .then(function (dadosJson) {
+                    var obj = dadosJson.json(); //deserializando
+                    return obj;
+                })
+                .then(function (dadosObj) {
 
-                var linhas = ` 
+                    if (dadosObj.operacao) {
+
+                        var linhas = ` 
                         <div class="table-row table-head">
                             <div class="table-cell first-cell">
                                 <p>Id</p>
@@ -160,38 +164,38 @@
                         </div>
                         `;
 
-                for (var i = 0; i < dadosObj.length; i++) {
+                        for (var i = 0; i < dadosObj.produtosLimpos.length; i++) {
 
-                    var template =
-                        `
-                        <div class="table-row" id="${dadosObj[i].id}">
+                            var template =
+                                `
+                        <div class="table-row" id="${dadosObj.produtosLimpos[i].id}">
                             <div class="table-cell first-cell">
-                                <p>${dadosObj[i].id}</p>
+                                <p>${dadosObj.produtosLimpos[i].id}</p>
                             </div>
                             <div class="table-cell">
-                                <p>${dadosObj[i].cod_ref}</p>
+                                <p>${dadosObj.produtosLimpos[i].cod_ref}</p>
                             </div>
                             <div class="table-cell table-cell-descricao">
-                                <p>${dadosObj[i].descricao}</p>
+                                <p>${dadosObj.produtosLimpos[i].descricao}</p>
                             </div>
                             <div class="table-cell last-cell acoes">
-                                <div class="dropdown" onclick="indexListar.block(${dadosObj[i].id})">
+                                <div class="dropdown" onclick="indexListar.block(${dadosObj.produtosLimpos[i].id})">
                                     <i class="dropbtn fa fa-fw fa-ellipsis-v"></i>
-                                    <div class="dropdown-content" id="acoesoption${dadosObj[i].id}" style="display: none;">
-                                        <a href="/CadastroProdIndust/Editar?id=${dadosObj[i].id}"><i class='bx bx-edit'></i> Editar</a>
-                                        <a href="javascript:indexListar.excluir(${dadosObj[i].id})"><i class='bx bxs-user-x'></i> Excluir</a>
+                                    <div class="dropdown-content" id="acoesoption${dadosObj.produtosLimpos[i].id}" style="display: none;">
+                                        <a href="/CadastroProdIndust/Editar?id=${dadosObj.produtosLimpos[i].id}"><i class='bx bx-edit'></i> Editar</a>
+                                        <a href="javascript:indexListar.excluir(${dadosObj.produtosLimpos[i].id})"><i class='bx bxs-user-x'></i> Excluir</a>
                                   </div>
                                 </div>
                             </div>
                         </div>
                         `
 
-                    linhas += template;
-                }
-                document.getElementById('retorno').innerHTML = dadosObj.length
-                if (dadosObj.length == 0) {
+                            linhas += template;
+                        }
+                        document.getElementById('retorno').innerHTML = dadosObj.produtosLimpos.length
+                        if (dadosObj.produtosLimpos.length == 0) {
 
-                    linhas = `
+                            linhas = `
                             <div class="table-row table-head">
                                 <div class="table-cell first-cell">
                                     <p>Id</p>
@@ -212,23 +216,39 @@
                                 </div>
                             </div>
                             `
-                }
+                        }
 
-                tbodyProdutos.innerHTML = linhas;
-            })
-            .catch(function () {
-                tbodyIndustrias.innerHTML = `
+                        tbodyProdutos.innerHTML = linhas;
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Informe no minimo 4 caracteres!'
+                        })
+                    }
+
+                })
+                .catch(function () {
+                    tbodyIndustrias.innerHTML = `
                                             <div class="table-row">
                                                 <div class="table-cell first-cell">
                                                         <p>deu erro.</p>
                                                 </div>
                                             </div>
                                             `
+                })
+                .finally(function () {
+                    document.getElementById("iconsearch").disabled = false;
+                });
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Informe no minimo 4 caracteres!'
             })
-            .finally(function () {
-                document.getElementById("iconsearch").disabled = false;
-            });
-        //<td><a href="javascript:indexListar.excluir(${dadosObj[i].id})">Excluir</a></td> 
+        }
     }
 
 }

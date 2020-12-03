@@ -389,23 +389,29 @@ namespace sistemarastreamento.Controllers
             //objeto anônimo
             var notasLimpos = new List<object>();
 
-            foreach (var n in notas)
+            if (notas != null)
             {
-                string dataNota = n.Data.ToString();
-
-                var notasLimpo = new
+                foreach (var n in notas)
                 {
-                    id = n.Id,
-                    data = dataNota,
-                    numero = n.Numero,
-                    serie = n.Serie,
-                    valor_nf = n.Valor_nf
-                };
+                    string dataNota = n.Data.ToString();
 
-                notasLimpos.Add(notasLimpo);
+                    var notasLimpo = new
+                    {
+                        id = n.Id,
+                        data = dataNota,
+                        numero = n.Numero,
+                        serie = n.Serie,
+                        valor_nf = n.Valor_nf
+                    };
+
+                    notasLimpos.Add(notasLimpo);
+                }
             }
-
-            return Json(notasLimpos);
+            
+            return Json(new {
+                operacao = notas != null,
+                notasLimpos
+            });
         }
 
         public IActionResult Excluir(int id)

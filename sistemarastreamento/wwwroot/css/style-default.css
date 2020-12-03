@@ -70,7 +70,7 @@
 
 .item {
     font-size: 17px;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.4);
     box-shadow: 3px 3px #5092c8;
     width: 85px;
     border-radius: 5px;
@@ -100,8 +100,15 @@
 @media screen and (max-width: 968px) {
     #section {
         padding: 0;
-        width: 98%;
-        margin: 0 auto; 
+        margin: 0 auto;
+        max-width: 314px;
+    }
+    .dados .info {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .dados .info:last-child {
+        margin-bottom: 0;
     }
     .dados .info h1{
         font-size: 13px;
@@ -130,12 +137,13 @@
         flex-direction: row;
     }
     .dados .ano{
-        width: 60%;
         text-align: right;
         margin: 0 auto;
+        display: flex;
+        margin-right: 3px;
     }
     .dados .ganho {
-        margin-right: 6px;
+        margin-right: 8px;
     }
 }
 

@@ -117,7 +117,7 @@ form button {
     color: #fff;
 }
 input:focus {
-    border-color: #4682B4;
+    border-right: 2px solid #4682B4;
 }
 
 button{

@@ -55,20 +55,25 @@ namespace sistemarastreamento.Controllers
             //objeto anônimo
             var produtosLimpos = new List<object>();
 
-            foreach (var p in prodindust)
+            if (prodindust != null)
             {
-                var produtoLimpo = new
+                foreach (var p in prodindust)
                 {
-                    id = p.Id,
-                    cod_ref = p.Cod_ref,
-                    descricao = p.Descricao,
-                };
+                    var produtoLimpo = new
+                    {
+                        id = p.Id,
+                        cod_ref = p.Cod_ref,
+                        descricao = p.Descricao,
+                    };
 
-                produtosLimpos.Add(produtoLimpo);
+                    produtosLimpos.Add(produtoLimpo);
+                }
             }
 
-
-            return Json(produtosLimpos);
+            return Json(new {
+                operacao = prodindust != null,
+                produtosLimpos
+            });
         }
 
         public IActionResult Excluir(int id)

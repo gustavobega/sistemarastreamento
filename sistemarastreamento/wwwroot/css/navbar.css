@@ -173,6 +173,7 @@ hr {
     background-color: #fff;
 }
 
+
 #nav-principal a i {
     margin-top: 4px;
 }
@@ -231,6 +232,7 @@ hr {
 .nav-text:hover {
     background-color: rgba(80,146,200,1);
     cursor: pointer;
+    border-left: 3px solid #fff;
 }
 
 .nav-menu-items {
