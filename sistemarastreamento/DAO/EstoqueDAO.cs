@@ -34,6 +34,7 @@ namespace sistemarastreamento.DAO
                     "values(@id_dist,@id_prod,@lote,@saldo)";
 
                 parametros.Add("@id_dist", estoque.Id_dist) ;
+                id_prod = estoque.Id_prod;
             }
             
    

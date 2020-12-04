@@ -100,6 +100,9 @@
                         text: 'Algo deu Errado, Tente Novamente!'
                     })
                 })
+                .finally(function (e) {
+                    document.getElementById("btnLogar").disabled = false;
+                })
 
         }
        
